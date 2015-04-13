@@ -16,6 +16,7 @@
         </div>
 
         <!-- Interface -->
+        <base href="http://54.149.64.181/public"
         <script src="/app/admin/js/plugins/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
         <script src="/app/admin/js/plugins/jquery-ui/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 
