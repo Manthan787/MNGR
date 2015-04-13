@@ -43,7 +43,7 @@
         <script src="app/Auth/Auth.js"></script>
         <script src="app/Auth/Authaid.js"></script>
         <script src="app/Auth/AuthService.js"></script>
-        <script src="app/Panel.directive.js"></script>
+        <script src="app/panel.directive.js"></script>
         <script src="app/HomeController.js"></script>
 
 
