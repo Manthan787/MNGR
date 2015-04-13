@@ -1,0 +1,33 @@
+<div class="login fixed">
+    <br>
+    <br>
+    <div class="container">
+        <div class="wrapper">
+            <div class="box">
+                <div class="header clearfix">
+                    <div class="pull-left"><i class="fa fa-sign-in"></i> Log In</div>
+                </div>
+                <form>
+                    <div class="alert alert-warning no-radius no-margin padding-sm" ng-show="msg"><i class="fa fa-info-circle"></i> {{msg}}</div>
+                    <div class="box-body padding-md">
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" placeholder="xyz@gmail.com" ng-model="email"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password" ng-model="password"/>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-success btn-block" ng-click="login()">Log in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="box-extra clearfix">
+                <a href="#" class="pull-left btn btn-xs">Forgotten Password?</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>

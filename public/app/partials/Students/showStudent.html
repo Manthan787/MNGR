@@ -1,0 +1,143 @@
+<div class="wrapper">
+    <panel></panel>
+    <div class="rightside">
+        <div class="content">
+            <div class="row">
+                <div class="container">
+                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                    <div align="center" ng-show="loading"><a class="btn btn-success">Loading Saved Data...</a>
+                        <br>
+                        <small><a href="" ng-click="refresh()">Refresh</a></small>
+                    </div>
+                    <br>
+                    <div class="box">
+                        <div class="box-title">
+                            <h3>Edit Student Details</h3>
+                        </div>
+                        <div class="box-body">
+                            <form  class="form-horizontal" autocomplete="off" >
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Address</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" ng-model="Student.address"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">City</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.city">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Birthdate</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" ng-model="Student.birthdate">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" ng-model="Student.email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Phone No.</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Parent Mobile No.</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.parent_mobile">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Student Mobile No.</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.student_mobile">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Standard</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" ng-model="Student.standard" ng-options="standard.division for standard in standards track by standard.id" ng-change="prepareStreams(Student.standard)">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="hasStreams">
+                                    <label class="col-sm-2 control-label">Stream</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" ng-model="Student.stream" ng-options="stream.stream for stream in streams track by stream.id" ng-change="prepareSubjectsByStream(Student.stream)" >
+                                            <option value="">Select Stream</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="showSubjects">
+                                    <label class="col-sm-2 control-label">Subjects</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" multiple="true" ng-model="Student.subjects" ng-options="subject.name for subject in subjects track by subject.id" ng-change="calculateFees()">
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Fees</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.fees">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Medium</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" ng-model="Student.medium" ng-options="medium.medium for medium in mediums track by medium.id">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">School</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="Student.school" ng-change="search()">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" ng-repeat="school in schools"><a href="" ng-click="approveSuggestion(school)">{{ school.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div align="center">
+                                        <input type="submit" value="Update" class="btn btn-success" ng-click="update()">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

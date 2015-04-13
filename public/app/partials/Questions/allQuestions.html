@@ -1,0 +1,34 @@
+<div class="wrapper">
+    <panel></panel>
+    <div class="rightside">
+        <div class="content">
+            <div class="row">
+                <div class="container">
+                    <section>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#Questions/all">All Questions</a></li>
+                            <li><a href="#Questions/add">Add Questions</a></li>
+                        </ul>
+                    </section>
+                    <ul class="list-group" ng-hide="fetchedQuestion">
+                        <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b>{{ Question.question }}</b>
+
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="Option in Question.options">{{ Option.option }}<span class="alert" ng-if="Option.answer">
+			Answer
+			</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p ng-show="fetchedQuestion">
+                        {{ fetchedQuestion.question }}
+                        <a href="" ng-click="fetchedQuestion=false">Back</a>
+                    </p>
+                    <span class="alert alert-warning" ng-show="error">{{ error }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

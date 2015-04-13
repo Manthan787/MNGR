@@ -1,0 +1,52 @@
+<!-- wrapper -->
+
+    <div class="leftside">
+        <div class="sidebar">
+            <div class="user-box">
+
+                <div class="details">
+                    <p>{{ user.name }}</p>
+                    <span class="position">{{ user.position }}</span>
+                </div>
+                <div>
+                   <button class="btn btn-circle btn-danger" ng-click="logout()"><i class="fa fa-power-off"></i></button>
+                </div>
+            </div>
+            <br>
+            <ul class="sidebar-menu">
+
+                <li>
+                    <a href="#dashboard">
+                        <i class="fa fa-home"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#Questions/all">
+                        <i class="fa fa-question"></i>
+                        <span>Questions</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#Students/search">
+                        <i class="fa fa-users"></i>
+                        <span>Students</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
+
+                <li ng-if="user.isAdmin">
+                    <a href="#Settings/setup">
+                        <i class="fa fa-cogs"></i>
+                        <span>Settings</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+
+<!-- /.wrapper -->

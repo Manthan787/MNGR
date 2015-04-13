@@ -1,0 +1,279 @@
+<div class="wrapper">
+    <panel></panel>
+    <div class="rightside">
+        <div class="content">
+            <div class="row">
+            <div class="container" ng-controller="SettingsController">
+            <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+            <div class="alert alert-success" ng-show="success">{{ success }}</div>
+            <div align="center" ng-show="loading"><a class="btn btn-success">Loading...</a></div>
+            <div class="row">
+            <div class="col-md-6">
+                <!--Subject Panel -->
+                <section>
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active">
+                            <a href="#Settings/setup">
+                                <i class="glyphicon glyphicon-wrench"></i>
+                                Set Up
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#Settings/staff">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Staff Management
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <div class="box">
+                    <div class="box-title">
+                        <h3>Standards</h3>
+                    </div>
+                    <div class="box-body">
+                        <!-- Subject Form -->
+                        <form  class="form-horizontal" autocomplete="off" ng-controller="StdFormController" >
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Standard</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="newStandard.division" placeholder="i.e. 10th, 12th, College">
+                                    <div class="help-block">Add a standard that you teach at your institute</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 align="center">Streams</h4>
+                                <div align="center">
+                                    Does this standard have any streams? i.e. Science, Commerce, Computer Engineering, etc? If so, click the (+) sign to add streams to this standard.
+                                </div>
+
+                            </div>
+                            <br>
+                            <div align="center">
+                                <button type="button" class="btn btn-success btn-circle" ng-click="newStream()">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <br>
+                            <div class="form-group" ng-repeat="stream in newStandard.streams">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" ng-model="stream.stream">
+                                </div>
+                                <button type="button" class="btn btn-danger btn-circle" ng-click="removeStream(stream)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </div>
+
+                            <br>
+                            <br>
+                            <div class="form-group" align="Center">
+                                <input type="submit" class="btn btn-primary" value="Done" ng-click="addStandard()">
+
+                            </div>
+
+                        </form>
+                        <!-- Subject Form Ends -->
+                        <!-- Subject Display -->
+                        <div class="alert alert-info" ng-show="noStandards">There are currently no standards added in your system.</div>
+
+                        <table class="table" ng-hide="noStandards">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Standard</th>
+                                    <th style="text-align:center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat='standard in standards'>
+                                    <td style="text-align:center" ng-hide="isEditable(standard.id)">
+                                        {{ standard.division }}
+                                    </td>
+                                    <td style="text-align:center" ng-show="isEditable(standard.id)">
+                                        <input type="text" ng-model="standard.division" value="{{ standard.division }}">
+                                        <button type="submit" class="btn btn-primary btn-circle" ng-click="edit(standard)">
+                                            <i class="fa fa-save"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-danger btn-circle" ng-click="disableEdit(standard)">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                    </td>
+                                    <td style="text-align:center">
+                                        <a class="btn btn-success btn-sm" ng-click="populateData(standard)">
+                                            <i class="fa fa-search "></i>
+                                        </a>
+                                        <a class="btn btn-info btn-sm" ng-click="enableEditStd(standard.id)">
+                                            <i class="fa fa-edit "></i>
+                                        </a>
+                                        <button type="button" class="btn btn-danger btn-sm" ng-click="removeStandard(standard)">
+                                            <i class="fa fa-trash-o "></i>
+                                            </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--Subject Display Ends -->
+                    </div>
+                </div>
+                <!-- Subject Panel Ends -->
+            </div>
+
+            <div class="col-md-6">
+                <!-- Stream Panel -->
+                <div class="box" ng-show="populator">
+                    <div class="box-title">
+                        <h3>Streams for standard {{ currentStd.division }}</h3>
+                    </div>
+                    <div class="box-body">
+                        <!-- Stream Form -->
+                        <form class="form-horizontal" autocomplete="off" ng-controller="StreamFormController">
+                            <h5 align="center">Add New Stream To Standard <i>{{ currentStd.division }}</i></h5>
+                            <div align="center">
+                                <button type="button" class="btn btn-success btn-circle" ng-click="addNewStream()">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <br>
+                            <div class="form-group" ng-repeat="stream in streams" style="text-align:center">
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" ng-model="stream.stream">
+                                </div>
+                                <button type="button" class="btn btn-danger btn-circle" ng-click="deleteStream(stream)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </div>
+                            <div class="form-group" ng-show="submittable()" align="center">
+                                <div class="col-sm-7">
+                                    <input type="submit" class="btn btn-primary" value="Done" ng-click="save()">
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Stream Form Ends -->
+                        <!-- Stream Display -->
+                        <div class="alert alert-info" ng-show="noStreams">This Standard does not seem to have any streams
+                        </div>
+                        <table class="table" ng-hide="noStreams" ng-controller="StreamsTableController">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center">Stream</th>
+                                <th style="text-align:center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="stream in currentStd.streams">
+                                <td style="text-align:center" ng-hide="streamIsEditable(stream.id)">{{ stream.stream }}</td>
+                                <td style="text-align:center" ng-show="streamIsEditable(stream.id)">
+                                    <input type="text" ng-model="stream.stream" value="{{ stream.stream }}">
+                                    <button type="submit" class="btn btn-primary btn-circle" ng-click="editStream(stream)">
+                                        <i class="fa fa-save"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-circle" ng-click="disableEditStream(standard)">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-info btn-sm" ng-click="enableEditStream(stream.id)">
+                                        <i class="fa fa-edit "></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" ng-click="removeStream(stream)">
+                                        <i class="fa fa-trash-o "></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- Stream Display Ends -->
+                    </div>
+                </div>
+                <!-- Stream Panel Ends -->
+                <!-- Subject Panel -->
+                <div class="box" ng-show="populator">
+                    <div class="box-title">
+                        <h3>Subjects for standard {{ currentStd.division }}</h3>
+                    </div>
+                    <div class="box-body">
+                        <!-- Subject Form -->
+                        <form class="form-horizontal" autocomplete="off" ng-controller="SubjectFormController">
+                            <h5 align="center">Add New Subject To This Standard</h5>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="newSubject.name" placeholder="i.e. Science, Maths, English ">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="!noStreams">
+                                <label class="col-sm-2 control-label" >Stream</label>
+                                <div class="col-sm-10" >
+                                    <select class="form-control"
+                                            ng-model="newSubject.stream"
+                                            ng-options="stream.id as stream.stream for stream in currentStd.streams">
+                                        <option value="">Select Stream</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Fees</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="newSubject.fees">
+                                    <div class="help-block">This is optional. It will help you speed up the student registration process.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" align="center" ng-if="!noStreams">
+                                <input type="submit" class="btn btn-primary" value="Done" ng-click="saveWithStream()">
+                            </div>
+                            <div class="form-group" align="center" ng-if="noStreams">
+                                <input type="submit" class="btn btn-primary" value="Done" ng-click="save()">
+                            </div>
+                        </form>
+                        <!-- Subject Form Ends -->
+                        <!-- Subject Display -->
+                        <div class="alert alert-info" ng-show="noSubjects">This Standard does not seem to have any subjects.
+                        </div>
+                        <table class="table" ng-hide="noSubjects" ng-controller="SubjectsTableController">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center">Subject</th>
+                                <th style="text-align:center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="subject in currentStd.subjects">
+                                <td style="text-align:center" ng-hide="subjectIsEditable(subject.id)">{{ subject.name }}
+                                </td>
+                                <td style="text-align:center" ng-show="subjectIsEditable(subject.id)">
+                                    <input type="text" ng-model="subject.name" value="{{ stream.name }}">
+                                    <select ng-hide="noStreams"  ng-model="subject.stream_id" ng-options="stream.id as stream.stream for stream in currentStd.streams" ng-selected="stream.id == subject.stream_id">
+                                    </select>
+                                    <input type="text" ng-model="subject.fees" value="{{ subject.fees }}">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary btn-circle" ng-click="editSubject(subject)">
+                                        <i class="fa fa-save"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-circle" ng-click="disableEditSub(subject)">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align:center">
+                                    <button class="btn btn-info btn-sm" ng-click="enableEditSub(subject.id)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" ng-click="delete(subject)">
+                                        <i class="fa fa-trash-o "></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- Subject Display Ends -->
+                    </div>
+                </div>
+                <!-- Subject Panel Ends -->
+            </div>
+            </div> <!-- Row -->
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
