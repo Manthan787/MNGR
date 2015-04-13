@@ -9,7 +9,7 @@
             controller: 'HomeController'
         })
         .when('/', {
-            templateUrl:'/public/app/partials/Auth/login.html',
+            templateUrl:'app/partials/Auth/login.html',
             controller:'LoginController'
         })
         .when('/Questions/all', {
