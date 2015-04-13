@@ -2,11 +2,11 @@
 <head>
         <meta charset="utf-8">
         <title>Admin</title>
-        <link rel="stylesheet" href="public/app/admin/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/app/admin/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="/app/admin/css/animate/animate.min.css" />
-        <link rel="stylesheet" href="/app/admin/css/iCheck/all.css" />
-        <link rel="stylesheet" href="/app/admin/css/style.css" />
+        <link rel="stylesheet" href="app/admin/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="app/admin/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="app/admin/css/animate/animate.min.css" />
+        <link rel="stylesheet" href="app/admin/css/iCheck/all.css" />
+        <link rel="stylesheet" href="app/admin/css/style.css" />
         
 </head>
 <body class="fixed">
