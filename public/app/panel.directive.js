@@ -3,7 +3,7 @@
 
         return{
             restrict: 'E',
-            templateUrl:'/app/partials/Directives/wrapper.html',
+            templateUrl:'app/partials/Directives/wrapper.html',
             controller:'PanelController'
         }
     });

@@ -5,33 +5,33 @@
 	app.config(function($routeProvider){
 		$routeProvider
         .when('/dashboard', {
-            templateUrl:'/app/home.html',
+            templateUrl:'app/home.html',
             controller: 'HomeController'
         })
         .when('/', {
-            templateUrl:'/app/partials/Auth/login.html',
+            templateUrl:'app/partials/Auth/login.html',
             controller:'LoginController'
         })
         .when('/Questions/all', {
-			templateUrl:'/app/partials/Questions/allQuestions.html',
+			templateUrl:'app/partials/Questions/allQuestions.html',
 			controller : 'QuestionsController'
 		})
 		.when('/Questions/add', {
-			templateUrl:'/app/partials/Questions/addQuestion.html',
+			templateUrl:'app/partials/Questions/addQuestion.html',
 			controller : 'QuestionsController'
 		})
 		.when('/Students/search', {
-			templateUrl:'/app/partials/Students/searchStudents.html',
+			templateUrl:'app/partials/Students/searchStudents.html',
 			controller:'StudentsController'
 
 		})
 		.when('/Students/add', {
-			templateUrl:'/app/partials/Students/addStudent.html',
+			templateUrl:'app/partials/Students/addStudent.html',
 			controller:'AddStudentController'
             })
 
         .when('/Students/:id', {
-                templateUrl:'/app/partials/Students/showStudent.html',
+                templateUrl:'app/partials/Students/showStudent.html',
                 controller:'StudentShowController'
             })
 		.when('/Settings/setup', {
@@ -39,7 +39,7 @@
 			controller:'SettingsController'
 		})
         .when('/Settings/staff', {
-            templateUrl:'/app/partials/Settings/staff.html',
+            templateUrl:'app/partials/Settings/staff.html',
             controller:'StaffController'
         })
 		.otherwise({
