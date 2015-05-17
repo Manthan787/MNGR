@@ -31,7 +31,7 @@
                         <h3>Standards</h3>
                     </div>
                     <div class="box-body">
-                        <!-- Subject Form -->
+                        <!-- Standard Form -->
                         <form  class="form-horizontal" autocomplete="off" ng-controller="StdFormController" >
 
                             <div class="form-group">
@@ -69,12 +69,11 @@
                             <br>
                             <div class="form-group" align="Center">
                                 <input type="submit" class="btn btn-primary" value="Done" ng-click="addStandard()">
-
                             </div>
 
                         </form>
-                        <!-- Subject Form Ends -->
-                        <!-- Subject Display -->
+                        <!-- Standard Form Ends -->
+                        <!-- Standard Display -->
                         <div class="alert alert-info" ng-show="noStandards">There are currently no standards added in your system.</div>
 
                         <table class="table" ng-hide="noStandards">
@@ -85,6 +84,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <div align="center" ng-show="loading">
+                                    <img src="app/admin/img/loader.gif" height="45" width="45">
+                                </div>
                                 <tr ng-repeat='standard in standards'>
                                     <td style="text-align:center" ng-hide="isEditable(standard.id)">
                                         {{ standard.division }}
@@ -113,10 +115,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!--Subject Display Ends -->
+                        <!--Standard Display Ends -->
                     </div>
                 </div>
-                <!-- Subject Panel Ends -->
+                <!-- Standard Panel Ends -->
             </div>
 
             <div class="col-md-6">

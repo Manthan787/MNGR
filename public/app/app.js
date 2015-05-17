@@ -18,7 +18,7 @@
 		})
 		.when('/Questions/add', {
 			templateUrl:'app/partials/Questions/addQuestion.html',
-			controller : 'QuestionsController'
+			controller : 'AddQuestionsController'
 		})
 		.when('/Students/search', {
 			templateUrl:'app/partials/Students/searchStudents.html',
