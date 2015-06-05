@@ -29,10 +29,8 @@
 
 		Question.prototype.add = function(){
 			var question = this;
-			return $http.post('api/Questions/add', question).then(function(response){
-				//var question.id = response.data.id;
-				console.log(response);
-				return question;
+			return $http.post('api/Questions/add', question).then(function(response) {
+				return response.data.msg;
 			});
 		}
 

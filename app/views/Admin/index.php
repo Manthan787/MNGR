@@ -45,6 +45,8 @@
         <script src="app/Auth/AuthService.js"></script>
         <script src="app/panel.directive.js"></script>
         <script src="app/HomeController.js"></script>
+        <script src="app/Chapters/Chapters.js"></script>
+        <script src="app/admin/ckeditor/ckeditor.js"></script>
 
 
         

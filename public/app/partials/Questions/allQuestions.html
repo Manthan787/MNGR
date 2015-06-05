@@ -14,9 +14,8 @@
                         <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b>{{ Question.question }}</b>
 
                             <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="Option in Question.options">{{ Option.option }}<span class="alert" ng-if="Option.answer">
-			Answer
-			</span>
+                                <li class="list-group-item" ng-repeat="Option in Question.options">{{ Option.option }} <a class="btn btn-success" ng-if="Option.answer">
+			Answer</a>
                                 </li>
                             </ul>
                         </li>

@@ -39,6 +39,7 @@ class QuestionController extends BaseController
 		//return Response::json(Input::get('options'));
 		$question = new Question();
 		$question->question = Input::get('question');
+        $question->chapter_id = Input::get('chapter_id');
 		$question->save();
 		$options = Input::get('options');
 		try{
@@ -48,12 +49,15 @@ class QuestionController extends BaseController
 				$o = new Option();
 				$o->option = $option['option'];
 				$o->question_id = $question->id;
+                $o->answer = $option['answer'];
 				$o->save();
 			}
 		}
 		catch (Exception $e){
 			return Response::json($e->getLine(),400);
 		}
+
+        return Response::json(['msg'=>'Question Successfully Added!'], 200);
 	}
 
  

@@ -5,6 +5,8 @@ Route::get('/', function()
 	return View::make('Admin.index');
 });
 
+Route::get('api/Chapters/all', 'ChapterController@getAll');
+Route::post('api/Chapters/add','ChapterController@postChapter');
 
 Route::post('form','UserController@store');
 
@@ -255,6 +257,22 @@ Route::get('/api/Standards/{stdID}/Subjects/all', function($stdID){
 
 });
 
+Route::get('/api/Chapters/all', function(){
+    return Chapter::all();
+});
+
+Route::get('/api/Subjects/{subjID}/Chapters', function($subID){
+   return Chapter::where('subject_id', $subID)->get();
+});
+
+Route::post('/api/Chapters/add', function(){
+    $chapter = new Chapter;
+    $chapter->title = Input::get('title');
+    $chapter->subject_id = Input::get('subject_id');
+    $chapter->save();
+
+    return Response::json(['msg'=>'Chapter Successfully Added.'],200);
+});
 
 Route::get('/api/schools/search/{searchTerm}',function($searchTerm){
 	$schools = School::where('name','LIKE','%'.$searchTerm.'%')->get();

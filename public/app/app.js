@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Auth','User','ngRoute']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','ngRoute']);
 	
 	app.config(function($routeProvider){
 		$routeProvider
@@ -41,6 +41,10 @@
         .when('/Settings/staff', {
             templateUrl:'app/partials/Settings/staff.html',
             controller:'StaffController'
+        })
+        .when('/Chapters', {
+                templateUrl:'app/partials/Chapters/all.html',
+                controller:'ChapterController'
         })
 		.otherwise({
 			redirectTo:'/'

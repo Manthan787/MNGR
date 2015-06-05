@@ -35,6 +35,13 @@
                     </a>
                 </li>
 
+                <li ng-if="user.isAdmin || user.isTeacher">
+                    <a href="#Chapters">
+                        <i class="fa fa-book"></i>
+                        <span>Chapters</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
                 <li ng-if="user.isAdmin">
                     <a href="#Settings/setup">
                         <i class="fa fa-cogs"></i>
