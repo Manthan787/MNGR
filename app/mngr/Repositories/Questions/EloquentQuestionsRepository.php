@@ -45,4 +45,16 @@ class EloquentQuestionsRepository implements QuestionsRepository
 	{
 		
 	}
+
+    public function delete($id)
+    {
+        if(! is_null($question = $this->findById($id)))
+        {
+            $question->deleteOptions();
+            $question->delete();
+            return true;
+        }
+
+        throw new QuestionNotFoundException("Error finding Question in EloquentQuestionsRepository at getById($id) ");
+    }
 }

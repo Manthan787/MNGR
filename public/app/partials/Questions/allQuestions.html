@@ -4,6 +4,11 @@
         <div class="content">
             <div class="row">
                 <div class="container">
+                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                    <div align="center" ng-show="loading">
+                        <img src="app/admin/img/loader.gif" height="45" width="45">
+                    </div>
                     <section>
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#Questions/all">All Questions</a></li>
@@ -12,7 +17,9 @@
                     </section>
                     <ul class="list-group" ng-hide="fetchedQuestion">
                         <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b>{{ Question.question }}</b>
-
+                            <span>
+                                <button class="btn btn-danger" ng-click="delete(Question)"><i class="fa fa-trash-o"></i></button>
+                            </span>
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="Option in Question.options">{{ Option.option }} <a class="btn btn-success" ng-if="Option.answer">
 			Answer</a>

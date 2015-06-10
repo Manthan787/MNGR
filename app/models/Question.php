@@ -23,4 +23,12 @@ class Question extends Eloquent
 		
 		}
 	}
+
+    public function deleteOptions()
+    {
+        foreach($this->options as $option)
+        {
+            $option->delete();
+        }
+    }
 }

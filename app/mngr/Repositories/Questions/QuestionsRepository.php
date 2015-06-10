@@ -6,6 +6,7 @@ interface QuestionsRepository{
 	public function getAll();
 	public function getById($id);
 	public function add(array $input);
+    public function delete($id);
 	/*
 	public function edit(array $input);
 	public function delete($id);

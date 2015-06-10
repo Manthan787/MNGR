@@ -6,7 +6,9 @@
             <div class="container" ng-controller="SettingsController">
             <div class="alert alert-danger" ng-show="error">{{ error }}</div>
             <div class="alert alert-success" ng-show="success">{{ success }}</div>
-            <div align="center" ng-show="loading"><a class="btn btn-success">Loading...</a></div>
+            <div align="center" ng-show="loading">
+                <img src="app/admin/img/loader.gif" height="45" width="45">
+            </div>
             <div class="row">
             <div class="col-md-6">
                 <!--Subject Panel -->

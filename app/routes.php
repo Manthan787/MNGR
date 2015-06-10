@@ -27,7 +27,9 @@ Route::group(['before'=>'teacher'],function(){
 	#Questions
 	Route::get('api/Questions/all','QuestionController@getAll');
 	Route::post('api/Questions/add','QuestionController@postQuestion');
+    Route::post('api/Questions/{id}/edit', 'QuestionController@editQuestion');
 	Route::get('api/Questions/{id}','QuestionController@getById');
+    Route::get('api/Questions/{id}/delete','QuestionController@delete');
 
 });
 

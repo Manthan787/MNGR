@@ -2,40 +2,46 @@
 
 	var app = angular.module('Questions');
 
-	app.factory('Question', function($http){
+	app.factory('Question', function($http) {
 
-		var Question = function(data){
-			
-			angular.extend(this, data);	
-		}
+        var Question = function (data) {
 
-		Question.get = function(id){
-			return $http.get('api/Questions/'+id).then(function(response){
-				return new Question(response.data);
-			});
-		}; 
+            angular.extend(this, data);
+        }
 
-		Question.getAll = function(){
-			return $http.get('api/Questions/all').then(function(response){
-				var Questions = [];
-				for(var i = 0; i<response.data.length; i++)
-				{
-					Questions.push(new Question(response.data[i]));
-				}
+        Question.get = function (id) {
+            return $http.get('api/Questions/' + id).then(function (response) {
+                return new Question(response.data);
+            });
+        };
 
-				return Questions;
-			});
-		};
+        Question.getAll = function () {
+            return $http.get('api/Questions/all').then(function (response) {
+                var Questions = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    Questions.push(new Question(response.data[i]));
+                }
 
-		Question.prototype.add = function(){
-			var question = this;
-			return $http.post('api/Questions/add', question).then(function(response) {
-				return response.data.msg;
-			});
-		}
+                return Questions;
+            });
+        };
 
-		return Question;
-	});
+        Question.prototype.add = function () {
+            var question = this;
+            return $http.post('api/Questions/add', question).then(function (response) {
+                return response.data.msg;
+            });
+        }
 
 
+
+        Question.prototype.delete = function () {
+            var question = this;
+
+            return $http.get('api/Questions/' + question.id + '/delete').then(function (response) {
+                return response.data.msg;
+            });
+        };
+        return Question;
+    });
 })();

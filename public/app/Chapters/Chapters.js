@@ -19,6 +19,7 @@
         });
 
         $scope.getStreams = function() {
+            $scope.$parent.loading = true;
             resetStates();
             $scope.streams = FormHelper.loadStreams($scope.selectedStandard);
             if($scope.streams)
@@ -31,9 +32,11 @@
                 $scope.subjects = FormHelper.getSubjectsByStd($scope.selectedStandard.id, $scope.standards);
                 $scope.hasSubjects = true;
             }
+            $scope.$parent.loading = false;
         };
 
         $scope.getSubjects = function(stream) {
+            $scope.$parent.loading = true;
             FormHelper.getSubjectsByStream(stream.id).then(function (subjects) {
                 $scope.subjects = subjects;
                 if ($scope.subjects[0] != undefined) {
@@ -44,6 +47,7 @@
                     $scope.hasSubjects = false;
                     $scope.subjectsError = true;
                 }
+                $scope.$parent.loading = false;
             });
         };
         $scope.showChapters = function(subjectID) {

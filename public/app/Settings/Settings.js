@@ -16,15 +16,18 @@
 		$scope.loadStandards = function(){
 			var stdPromise = Standard.getAll();
 			stdPromise.then(function(stds){
-				if(stds.length == 0)
-					$scope.noStandards = true;
-				else
-					$scope.noStandards = false;
-					$scope.standards = stds;
-
+				if(stds.length == 0) {
+                    $scope.noStandards = true;
+                    $scope.loading = false;
+                }
+				else {
+                    $scope.noStandards = false;
+                    $scope.standards = stds;
+                    $scope.loading = false;
+                }
 			});
 
-            $scope.loading = false;
+
 		}
 
 		$scope.loadStandards();
