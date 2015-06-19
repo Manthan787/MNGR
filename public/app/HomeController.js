@@ -19,6 +19,7 @@
 
             $scope.logout = function(){
                 AuthService.logout().then(function(response){
+                    console.log('HERE!');
                     delete sessionStorage.user;
                     delete sessionStorage.authenticated;
                     $scope.user = {};

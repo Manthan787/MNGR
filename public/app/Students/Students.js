@@ -46,50 +46,14 @@
         }
 
 	});
-/*
-    var FormController = function(scope, FormHelper){
-        this.FormHelper = FormHelper;
-        scope.value = "YES!";
-        scope.standards = [];
-        this.FormHelper.getStandards().then(function(standards){
-            scope.standards = standards;
-        });
-
-        this.FormHelper.getMediums().then(function(mediums){
-           scope.mediums = mediums;
-        });
-
-
-    }
-
-    FormController.prototype.prepareStreams = function(std){
-        console.log(scope);
-        var streams = this.FormHelper.loadStreams(std);
-        if(streams)
-        {
-            scope.streams = streams;
-            scope.subjects = null;
-            scope.showSubjects = false;
-            scope.hasStreams = true;
-        }
-        else
-        {
-            scope.hasStreams = false;
-            //scope.prepareSubjectsByStd(std);
-        }
-
-    }
-
-    FormController.$inject = ['$scope', 'FormHelper'];
-    app.controller('AddStudentController', FormController); */
-
 	app.controller('AddStudentController',function($scope,Student, SchoolFinder, FormHelper, $http){
 		
 		$scope.standards = [];
 		$scope.hasStreams = false;
 		$scope.loading = false;
 		$scope.newStudent =  new Student;
-
+        $scope.addUserForm;
+        $scope.submitted = false;
 		//Get all the available standards from the API
 		FormHelper.getStandards().then(function(standards){
 
@@ -179,22 +143,24 @@
 			$scope.schools = null;
 		}
 
-		$scope.addStudent = function(){
+		$scope.addStudent = function(isValid){
+            $scope.submitted = true;
+            if(isValid) {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                $scope.loading = true;
 
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
-            $scope.loading = true;
+                $scope.newStudent.add().then(function (msg) {
+                    $scope.loading = false;
+                    $scope.success = msg;
+                    reset();
+                }, function (response) {
+                    $scope.loading = false;
+                    $scope.error = response.data.msg;
+                    console.log(response.data.error);
+                });
 
-			$scope.newStudent.add().then(function(msg){
                 $scope.loading = false;
-				$scope.success = msg;
-				reset();
-			}, function(response){
-                $scope.loading = false;
-				$scope.error = response.data.msg;
-				console.log(response.data.error);
-			});
-
-			$scope.loading = false;
+            }
 
 		}
 
