@@ -46,7 +46,7 @@
         }
 
 	});
-	app.controller('AddStudentController',function($scope,Student, SchoolFinder, FormHelper, $http){
+	app.controller('AddStudentController',function($scope,Student, SchoolFinder, FormHelper, $http, $filter){
 		
 		$scope.standards = [];
 		$scope.hasStreams = false;
@@ -54,19 +54,18 @@
 		$scope.newStudent =  new Student;
         $scope.addUserForm;
         $scope.submitted = false;
+        $http.get('api/years/current').then(function(response){
+            $scope.currentYear = response.data;
+        });
+        $scope.newStudent.entry_date = new Date();
 		//Get all the available standards from the API
 		FormHelper.getStandards().then(function(standards){
-
 				$scope.standards = standards;
-
 		});
 
 		FormHelper.getMediums().then(function(mediums){
-
 				$scope.mediums = mediums;
-
 		});
-
         $scope.prepareStreams = function(std)
         {
             var streams = FormHelper.loadStreams(std);
@@ -142,13 +141,21 @@
 			//clear suggestions
 			$scope.schools = null;
 		}
-
+        var convert = function(date) {
+            return $filter('date')(date, 'yyyy-MM-dd');
+        }
+        var prepare = function() {
+            $scope.newStudent.year_id = $scope.currentYear.id;
+            $scope.newStudent.birthdate = $filter('date')($scope.newStudent.birthdate,'yyyy-MM-dd');
+            $scope.newStudent.entry_date = $filter('date')($scope.newStudent.entry_date,'yyyy-MM-dd');
+        }
 		$scope.addStudent = function(isValid){
             $scope.submitted = true;
             if(isValid) {
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
                 $scope.loading = true;
-
+                prepare();
+                console.log($scope.newStudent);
                 $scope.newStudent.add().then(function (msg) {
                     $scope.loading = false;
                     $scope.success = msg;
@@ -160,6 +167,8 @@
                 });
 
                 $scope.loading = false;
+                $scope.submitted = false;
+                $scope.addUserForm.$setPristine();
             }
 
 		}
@@ -167,6 +176,7 @@
 		var reset = function(){
 
 			$scope.newStudent = new Student;
+            $scope.newStudent.entry_date = new Date();
             $scope.showSubjects = false;
             $scope.fees = 0;
 

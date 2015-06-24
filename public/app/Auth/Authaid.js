@@ -2,7 +2,6 @@
     angular.module('adminApp')
         .service('Authaid', function(){
 
-
             this.getName = function(){
                 var user = JSON.parse(sessionStorage.user);
                 return user.firstname + " " + user.lastname;
@@ -46,6 +45,11 @@
                 return false;
             }
 
+            this.getStatus = function() {
+                var user = JSON.parse(sessionStorage.user);
+                return user.role_id;
+            }
+
             this.getPosition = function(){
                 var user = JSON.parse(sessionStorage.user);
                 var roleID = user.role_id;
@@ -62,7 +66,10 @@
                     case 4:
                         return 'Student';
                         break;
+                    default:
+                        return null;
                 }
+
             }
         });
 })();

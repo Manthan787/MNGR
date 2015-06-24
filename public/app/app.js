@@ -10,7 +10,8 @@
         })
         .when('/', {
             templateUrl:'app/partials/Auth/login.html',
-            controller:'LoginController'
+            controller:'LoginController',
+
         })
         .when('/Questions/all', {
 			templateUrl:'app/partials/Questions/allQuestions.html',
@@ -42,6 +43,10 @@
             templateUrl:'app/partials/Settings/staff.html',
             controller:'StaffController'
         })
+        .when('/Settings/financial-year', {
+            templateUrl:'app/partials/Settings/year.html',
+            controller:'YearController'
+        })
         .when('/Chapters', {
                 templateUrl:'app/partials/Chapters/all.html',
                 controller:'ChapterController'
@@ -69,10 +74,11 @@
             }
         }
     }])
-        .config(['$httpProvider',function($httpProvider) {
-            //Http Intercpetor to check auth failures for xhr requests
-            $httpProvider.interceptors.push('authHttpResponseInterceptor');
-        }]);
+    .config(['$httpProvider',function($httpProvider) {
+           //Http Intercpetor to check auth failures for xhr requests
+           $httpProvider.interceptors.push('authHttpResponseInterceptor');
+    }]);
+
 	
 
 

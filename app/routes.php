@@ -5,22 +5,28 @@ Route::get('/', function()
 	return View::make('Admin.index');
 });
 
-Route::get('api/Chapters/all', 'ChapterController@getAll');
-Route::post('api/Chapters/add','ChapterController@postChapter');
+Route::get('/date', function(){
+   echo "The date is ".date_default_timezone_get();
+});
+
+Route::group(['before'=>'teacher'], function() {
+    Route::get('api/Chapters/all', 'ChapterController@getAll');
+    Route::post('api/Chapters/add', 'ChapterController@postChapter');
+});
 
 Route::post('form','UserController@store');
-
-Route::get('/ang',function(){
-		return View::make('Admin.index');
-	});
-#Till the AUTH is in place, then this will be gone.
-//Auth::login(User::find(1));
-//Auth::logout();
 
 Route::post('api/auth/login', 'AuthController@login');
 Route::get('api/auth/logout','AuthController@logout');
 
+Route::group(['before'=>'admin'], function() {
+    Route::get('api/years/all', 'YearController@getAll');
+    Route::post('api/years/add', 'YearController@postAdd');
+    Route::get('api/years/{id}/delete', 'YearController@getDelete');
+    Route::post('api/years/{id}/edit', 'YearController@postEdit');
 
+});
+Route::get('api/years/current','YearController@getCurrent');
 #API ROUTES
 Route::group(['before'=>'teacher'],function(){
 

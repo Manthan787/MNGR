@@ -1,0 +1,138 @@
+<div class="wrapper">
+    <panel></panel>
+    <div class="rightside">
+        <div class="content">
+            <div class="row">
+                <div class="container">
+                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                    <div align="center" ng-show="loading">
+                        <img src="app/admin/img/loader.gif" height="45" width="45">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <section>
+                                <ul class="nav nav-tabs">
+                                    <li role="presentation">
+                                        <a href="#Settings/setup">
+                                            <i class="glyphicon glyphicon-wrench"></i>
+                                            Set Up
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#Settings/staff">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                            Staff Management
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="active">
+                                        <a href="#Settings/financial-year">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            Financial Year
+                                        </a>
+                                    </li>
+                                </ul>
+                            </section>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box">
+                                        <div class="box-title">
+                                            <h3>Add New Financial Year</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <form name="addYearForm" class="form-horizontal" novalidate>
+                                                <div class="form-group" ng-class="{'has-error': (submitted && addYearForm.year.$invalid) || (addYearForm.year.$invalid && addYearForm.year.$dirty) }">
+                                                    <label class="col-sm-2 control-label">Year</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="year" ng-model="newYear.year" class="form-control" required>
+                                                        <span class="help-block" ng-if="(submitted && addYearForm.year.$invalid) || (addYearForm.year.$invalid && addYearForm.year.$dirty)">This field is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-class="{'has-error' : (submitted && addYearForm.initialYear.$invalid) || (addYearForm.initialYear.$invalid && addYearForm.initialYear.$dirty)}">
+                                                    <label class="col-sm-2 control-label">Initial Year</label>
+                                                    <div class="col-sm-10">
+                                                        <select ng-model="selectedYear" name="initialYear" class="form-control" ng-options="year for year in years" ng-change="populateText(selectedYear)" required>
+                                                            <option value="">Select Initial Year</option>
+                                                        </select>
+                                                        <span class="help-block" ng-if="(submitted && addYearForm.initialYear.$invalid) || (addYearForm.initialYear.$invalid && addYearForm.initialYear.$dirty)">This field is required.</span>
+                                                        <label class="control-label" ng-if="selectedYear">From 01/04/{{ selectedYear }} To 31/03/{{ increment(selectedYear) }}</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Select as Current Financial Year</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="checkbox" class="form-control" ng-model="newYear.isCurrent" ng-change="showDialog()">
+                                                        <span class="help-block" ng-if="newYear.isCurrent"></span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group" align="center">
+                                                    <input type="submit" class="btn btn-success" ng-click="add(addYearForm.$valid)">
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box" >
+                                        <div class="box-title">
+                                            <h3>Existing Financial Years</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="alert alert-danger" ng-if="noYearsError">{{noYearsError}}</div>
+                                            <table ng-if="!noYearsError" class="table">
+                                                <thead>
+                                                    <th>Financial Year</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th></th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="year in existingYears">
+                                                        <td ng-if="!isEditableYear(year.id)">
+                                                            {{year.year}}
+                                                            <i ng-if="year.isCurrent" class="glyphicon glyphicon-ok"></i>
+                                                        </td>
+                                                        <td ng-if="isEditableYear(year.id)">
+                                                            <div class="col-sm-6">
+                                                                <input type="text" class="form-control" value="{{year.year}}" ng-model="year.year">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="checkbox" class="form-control" ng-true-value="1" ng-false-value="0" title="Set as Current Year?" ng-model="year.isCurrent">
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary btn-circle" ng-click="edit(year)">
+                                                                <i class="fa fa-save"></i>
+                                                            </button>
+                                                            <button type="submit" class="btn btn-danger btn-circle" ng-click="disableEdit(year.id)">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td>{{year.start_date}}</td>
+                                                        <td>{{year.end_date}}</td>
+                                                        <td>
+                                                            <button class="btn btn-info btn-sm" ng-click="enableEditableYear(year.id)">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-danger btn-sm" ng-click="delete(year)">
+                                                                <i class="fa fa-trash-o "></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div> <!-- Row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

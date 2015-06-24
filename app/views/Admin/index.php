@@ -38,6 +38,7 @@
         <script src="app/Settings/Settings.js"></script>
         <script src="app/Settings/StandardService.js"></script>
         <script src="app/Settings/StaffController.js"></script>
+        <script src="app/Settings/YearController.js"></script>
         <script src="app/User/User.js"></script>
         <script src="app/Students/FormHelper.js"></script>
         <script src="app/Auth/Auth.js"></script>

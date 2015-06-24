@@ -32,6 +32,16 @@
                         </div>
                         <div class="box-body">
                             <form  class="form-horizontal" name="addUserForm" autocomplete="off" novalidate>
+                                <div class="form-group" ng-class="{'has-error': (submitted && addUserForm.entry_date.$invalid) || (addUserForm.entry_date.$invalid && addUserForm.entry_date.$dirty)}">
+                                    <div class="col-sm-2 pull-right">
+                                        <input type="date" name="entry_date" ng-model="newStudent.entry_date" min="{{currentYear.start_date}}" max="{{currentYear.end_date}}" class="form-control" required>
+                                        <span class="help-block" ng-if="(submitted && (addUserForm.entry_date.$error.min||addUserForm.entry_date.$error.max)) || ((addUserForm.entry_date.$error.min||addUserForm.entry_date.$error.max) && addUserForm.entry_date.$dirty)">Entry Date of this form must be between the range of the current financial year {{currentYear.year}}</span>
+                                        <span class="help-block" ng-if="addUserForm.entry_date.$error.date && addUserForm.entry_date.$dirty">Entry Date must be a valid date.</span>
+                                        <span class="help-block" ng-if="addUserForm.entry_date.$error.required && addUserForm.entry_date.$dirty">This field is required.</span>
+                                    </div>
+                                    {{convert(newStudent.entry_date)}}
+                                </div>
+                                <br>
                                 <div class="form-group" ng-class="{'has-error' : (submitted && addUserForm.name.$invalid ) || (addUserForm.name.$invalid && !addUserForm.name.$pristine)}">
                                     <label class="col-sm-2 control-label">Name</label>
                                     <div class="col-sm-10">
@@ -91,11 +101,11 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" ng-class="{'has-error' :(submitted && addUserForm.student_mobile.$invalid) || (addUserForm.student_mobile.$invalid && !addUserForm.student_mobile.$pristine) }">
+                                <div class="form-group" ng-class="{'has-error' :(addUserForm.student_mobile.$invalid && !addUserForm.student_mobile.$pristine) }">
                                     <label class="col-sm-2 control-label">Student's Mobile No.</label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="student_mobile" class="form-control" ng-model="newStudent.student_mobile" ng-minlength="10" ng-maxlength="10" required>
-                                        <p ng-show="(submitted && addUserForm.parent_mobile.$error.required) || ((addUserForm.student_mobile.$error.number || addUserForm.student_mobile.$error.required) && !addUserForm.student_mobile.$pristine)" class="help-block">Enter a valid Mobile Number.</p>
+                                        <input type="number" name="student_mobile" class="form-control" ng-model="newStudent.student_mobile" ng-minlength="10" ng-maxlength="10">
+                                        <p ng-show="(submitted && addUserForm.parent_mobile.$error.number) || ((addUserForm.student_mobile.$error.number) && !addUserForm.student_mobile.$pristine)" class="help-block">Enter a valid Mobile Number.</p>
                                         <p ng-show="(addUserForm.student_mobile.$error.minlength || addUserForm.student_mobile.$error.maxlength) && !addUserForm.student_mobile.$pristine" class="help-block">Mobile Number must be 10 digits long.</p>
                                     </div>
                                 </div>
@@ -125,7 +135,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" name="subjects" multiple ng-multiple="true" ng-model="newStudent.subjects" ng-options="subject.name for subject in subjects" ng-change="calculateFees()" ng-required="showSubjects">
                                         </select>
-                                        <p class="help-block" ng-show="(submitted && addUserForm.subjects.$invalid) || (addUserForm.subjects.$invalid && !addUserForm.subjects.$pristine)">Select Subjects which will be studied by this student.</p>
+                                        <p class="help-block" ng-show="(submitted && addUserForm.subjects.$invalid) || (addUserForm.subjects.$invalid && !addUserForm.subjects.$pristine)">Select Subjects which will be studied by this student. Make sure you've added subjects in the <a href="/#/Settings/setup">Setup </a>section.</p>
                                     </div>
                                 </div>
 
@@ -134,6 +144,13 @@
                                     <div class="col-sm-10">
                                         <input type="number" name="fees" class="form-control" ng-model="newStudent.fees" value="{{ newStudent.fees }}">
                                         <p ng-show="addUserForm.fees.$error.number && !addUserForm.fees.$pristine" class="help-block">Not a valid number.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Financial Year</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="input-text-disabled" class="form-control" value="{{currentYear.year}}" disabled>
                                     </div>
                                 </div>
 

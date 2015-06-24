@@ -26,6 +26,12 @@
                                 Staff Management
                             </a>
                         </li>
+                        <li role="presentation">
+                            <a href="#Settings/financial-year">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                Financial Year
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <div class="box">
@@ -94,7 +100,9 @@
                                         {{ standard.division }}
                                     </td>
                                     <td style="text-align:center" ng-show="isEditable(standard.id)">
-                                        <input type="text" ng-model="standard.division" value="{{ standard.division }}">
+                                        <div class="col-sm-6">
+                                            <input type="text"  class="form-control" ng-model="standard.division" value="{{ standard.division }}">
+                                        </div>
                                         <button type="submit" class="btn btn-primary btn-circle" ng-click="edit(standard)">
                                             <i class="fa fa-save"></i>
                                         </button>
@@ -168,7 +176,8 @@
                             <tr ng-repeat="stream in currentStd.streams">
                                 <td style="text-align:center" ng-hide="streamIsEditable(stream.id)">{{ stream.stream }}</td>
                                 <td style="text-align:center" ng-show="streamIsEditable(stream.id)">
-                                    <input type="text" ng-model="stream.stream" value="{{ stream.stream }}">
+                                    <input type="text" class="form-control" ng-model="stream.stream" value="{{ stream.stream }}">
+                                    <br>
                                     <button type="submit" class="btn btn-primary btn-circle" ng-click="editStream(stream)">
                                         <i class="fa fa-save"></i>
                                     </button>
@@ -247,10 +256,10 @@
                                 <td style="text-align:center" ng-hide="subjectIsEditable(subject.id)">{{ subject.name }}
                                 </td>
                                 <td style="text-align:center" ng-show="subjectIsEditable(subject.id)">
-                                    <input type="text" ng-model="subject.name" value="{{ stream.name }}">
-                                    <select ng-hide="noStreams"  ng-model="subject.stream_id" ng-options="stream.id as stream.stream for stream in currentStd.streams" ng-selected="stream.id == subject.stream_id">
+                                    <input class="form-control" type="text" ng-model="subject.name" value="{{ stream.name }}">
+                                    <select ng-hide="noStreams" class="form-control"  ng-model="subject.stream_id" ng-options="stream.id as stream.stream for stream in currentStd.streams" ng-selected="stream.id == subject.stream_id">
                                     </select>
-                                    <input type="text" ng-model="subject.fees" value="{{ subject.fees }}">
+                                    <input type="text" class="form-control" ng-model="subject.fees" value="{{ subject.fees }}">
                                     <br>
                                     <button type="submit" class="btn btn-primary btn-circle" ng-click="editSubject(subject)">
                                         <i class="fa fa-save"></i>

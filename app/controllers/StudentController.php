@@ -24,6 +24,8 @@ class StudentController extends Controller
 		$student->student_mobile    = Input::get('student_mobile', false);
 		$student->medium_id         = Input::get('medium')['id'];
         $student->fees              = Input::get('fees');
+        $student->entry_date        = Input::get('entry_date');
+        $student->year_id           = Input::get('year_id');
 		$student->save();
         //Attaching Subjects To Student
         $subjects = $this->getSubjectsArray(Input::get('subjects'));
