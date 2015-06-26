@@ -10,7 +10,7 @@
         })
         .when('/', {
             templateUrl:'app/partials/Auth/login.html',
-            controller:'LoginController',
+            controller:'LoginController'
 
         })
         .when('/Questions/all', {

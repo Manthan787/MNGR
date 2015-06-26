@@ -1,7 +1,8 @@
 (function(){
     angular.module('adminApp')
-        .controller('HomeController', function($scope, $location){
+        .controller('HomeController', function($scope, $location, $window){
 
+            //$window.location.href="/login";
             if(!sessionStorage.authenticated)
             {
                 $location.path('/');
@@ -16,7 +17,6 @@
             $scope.user.isTeacher = Authaid.isTeacher();
             $scope.user.isAccountant = Authaid.isAccountant();
             $scope.user.isStudent = Authaid.isStudent();
-
             $scope.logout = function(){
                 AuthService.logout().then(function(response){
                     console.log('HERE!');

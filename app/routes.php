@@ -5,13 +5,17 @@ Route::get('/', function()
 	return View::make('Admin.index');
 });
 
-Route::get('/date', function(){
-   echo "The date is ".date_default_timezone_get();
+Route::get('/login', function() {
+    return View::make('Admin.login');
 });
 
+
+Route::get('/stats', 'DashboardController@getStats');
 Route::group(['before'=>'teacher'], function() {
     Route::get('api/Chapters/all', 'ChapterController@getAll');
     Route::post('api/Chapters/add', 'ChapterController@postChapter');
+    Route::get('api/Chapters/{id}/delete', 'ChapterController@getDelete');
+    Route::post('api/Chapters/{id}/edit', 'ChapterController@postEdit');
 });
 
 Route::post('form','UserController@store');

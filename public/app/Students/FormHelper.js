@@ -62,7 +62,7 @@
 
         this.loadStreams = function(std)
         {
-            if(typeof std != 'undefined')
+            if(std && std != 'null' && std != 'undefined')
             {
                 if(std!=null && std.streams[0])
                 {
@@ -72,6 +72,9 @@
                 {
                     return false;
                 }
+            }
+            else {
+                return null;
             }
 
         }
