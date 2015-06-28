@@ -1,16 +1,13 @@
 (function(){
 
 	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','ngRoute']);
-	
+
+
 	app.config(function($routeProvider){
 		$routeProvider
-        .when('/dashboard', {
+        .when('/', {
             templateUrl:'app/home.html',
             controller: 'HomeController'
-        })
-        .when('/', {
-            templateUrl:'app/partials/Auth/login.html',
-            controller:'LoginController'
 
         })
         .when('/Questions/all', {
@@ -79,7 +76,9 @@
            $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }]);
 
-	
+
+
+
 
 
 

@@ -2,14 +2,15 @@
     var app = angular.module('login',[]);
 
     app.controller('LoginController', function($scope,$http,$window){
+        if(sessionStorage.authenticated) {
+            $window.location.href = '/#/';
+        }
         $scope.login = function() {
             var credentials = {
                 'email' : $scope.email,
                 'password' : $scope.password
             };
             $http.post('api/auth/login', credentials).then(function (response) {
-                console.log(response);
-                sessionStorage.user = JSON.stringify(response.data.data);
                 sessionStorage.authenticated = true;
                 $window.location.href = '/';
             }, function (response) {
@@ -17,5 +18,7 @@
                 console.log($scope.msg);
             });
         }
+
+
     });
 })();

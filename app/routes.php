@@ -2,7 +2,8 @@
 
 Route::get('/', function()
 {
-	return View::make('Admin.index');
+	$user = Auth::user();
+    return View::make('Admin.index')->with('user',$user);
 });
 
 Route::get('/login', function() {

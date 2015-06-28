@@ -1,11 +1,9 @@
 (function(){
     angular.module('adminApp')
         .controller('HomeController', function($scope, $location, $window){
-
-            //$window.location.href="/login";
             if(!sessionStorage.authenticated)
             {
-                $location.path('/');
+                $window.location.href="/login";
             }
 
     })
