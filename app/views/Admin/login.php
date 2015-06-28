@@ -28,7 +28,7 @@
             <div class="pull-left"><i class="fa fa-sign-in"></i> Sign In</div>
 
         </div>
-        <form id="loginform"  ng-controller="LoginController">
+        <form ng-controller="LoginController" ng-submit="login()">
             <div class="alert alert-warning no-radius no-margin padding-sm"><i class="fa fa-info-circle"></i> Please sign in to maniac dashboard</div>
             <div class="box-body padding-md">
                 <div class="form-group">
@@ -41,7 +41,7 @@
                     <input type="checkbox" /> <small>Remember me</small>
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-success btn-block" ng-click="login()">Sign in</button>
+                    <button type="submit" class="btn btn-success btn-block">Sign in</button>
                 </div>
             </div>
         </form>

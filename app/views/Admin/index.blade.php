@@ -12,7 +12,7 @@
 <body class="fixed"  ng-controller="AppController">
                 <!-- Header -->
                 <header>
-        			<a href="/#/" class="logo"><i class="fa fa-bolt"></i> <span>EduFocus</span></a>
+        			<a href="/#/https://github.com/Manthan787/MNGR.git" class="logo"><i class="fa fa-bolt"></i> <span>EduFocus</span></a>
                     <nav class="navbar navbar-static-top">
                         <a href="#" class="navbar-btn sidebar-toggle">
                             <span class="sr-only">Toggle navigation</span>
