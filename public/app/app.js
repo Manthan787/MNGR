@@ -77,9 +77,13 @@
     }]);
 
 
-
-
-
-
+    app.run(function($rootScope, $window){
+        $rootScope.$on('$routeChangeStart', function(event){
+            if(!sessionStorage.authenticated) {
+                event.preventDefault();
+                $window.location.href = "/login";
+            }
+        });
+    });
 
 })();

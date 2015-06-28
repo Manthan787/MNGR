@@ -56,7 +56,7 @@
                         <br>
                         <ul class="sidebar-menu">
                             <li>
-                                <a href="#">
+                                <a href="/#/">
                                     <i class="fa fa-home"></i> <span>Dashboard</span>
                                 </a>
                             </li>
