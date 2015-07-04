@@ -311,30 +311,24 @@ Route::group(['before'=>'admin'], function(){
     Route::get('back/tests/{id}/show', 'TestController@show');
 });
 
-Route::get('api/batches/all', function(){
-    return Batch::all();
-});
+Route::get('api/batches/all', 'BatchController@getAll');
+Route::post('api/batches/add','BatchController@postAdd');
 
 
 Route::get('/ex',function(){
-   /*
+
     $batch = new Batch;
-    $batch->name = "First Batch";
+    $batch->name = "Second Batch";
     $batch->standard_id = 1;
     $batch->save();
-    $timing = new Timing;
-    $timing->day = "Monday";
-    $timing->from =date('H:i:s', strtotime('7:00 PM'));
-    $timing->to = date('H:i:s', strtotime('8:00 PM'));
-    $timing->batch_id = $batch->id;
-    $timing->save();
+
     $timing = new Timing;
     $timing->day = "Wednesday";
-    $timing->from =date('H:i:s', strtotime('7:00 PM'));
-    $timing->to = date('H:i:s', strtotime('8:00 PM'));
+    $timing->from =date('H:i', strtotime('7:00 PM'));
+    $timing->to = date('H:i', strtotime('8:00 PM'));
     $timing->batch_id = $batch->id;
     $timing->save();
-    */
+
     $batch = Batch::find(1)->with('timings')->get();
     return $batch;
 });

@@ -1,0 +1,100 @@
+
+<div class="rightside">
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                <div align="center" ng-show="loading">
+                    <img src="app/admin/img/loader.gif" height="45" width="45">
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <section>
+                            <ul class="nav nav-tabs">
+                                <li role="presentation">
+                                    <a href="#Settings/setup">
+                                        <i class="glyphicon glyphicon-wrench"></i>
+                                        Set Up
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#Settings/staff">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Staff Management
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#Settings/financial-year">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        Financial Year
+                                    </a>
+                                </li>
+                                <li role="presentation" class="active">
+                                    <a href="#Settings/batches">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        Batches
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <div class="box">
+                            <div class="box-title">
+                                <h3>Add New Batch</h3>
+                            </div>
+                            <div class="box-body">
+                                <form class="form-horizontal" name="addBatchForm" ng-controller="AddBatchController" ng-submit="add(addBatchForm.$valid)" autocomplete="off" novalidate>
+                                    <div class="form-group" ng-class="{'has-error':(submitted && addBatchForm.name.$invalid) || (addBatchForm.name.$invalid && addBatchForm.name.$dirty)}">
+                                        <label class="col-sm-2 control-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="name" class="form-control" ng-model="newBatch.name" required>
+                                            <p class="help-block" ng-if="(submitted && addBatchForm.name.$invalid) || (addBatchForm.name.$invalid && addBatchForm.name.$dirty)">This field is required.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{'has-error':(submitted && addBatchForm.standard.$invalid) || (addBatchForm.standard.$invalid && addBatchForm.standard.$dirty)}">
+                                        <label class="col-sm-2 control-label">Standard</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" name="standard" ng-model="newBatch.standard_id" ng-options="standard.id as standard.division for standard in standards" required>
+                                                <option value="">What Standard does this batch belong to?</option>
+                                            </select>
+                                            <p class="help-block" ng-if="(submitted && addBatchForm.standard.$invalid) || (addBatchForm.standard.$invalid && addBatchForm.standard.$dirty)">This field is required.</p>
+                                        </div>
+                                    </div>
+                                    <div align="center">
+                                        <h4>Timings</h4>
+                                        <p class="help-block">Write Time in this format -> "Hour : Min AM/PM". Example Shown Below.</p>
+                                    </div>
+                                    <div class="form-group" ng-repeat="timing in newBatch.timings">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" ng-model="timing.day" ng-options="day for day in days">
+                                                <option value="">Select Day</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" ng-model="timing.from" value="{{ timing.from }}">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" ng-model="timing.to" value="{{ timing.to }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div align="center">
+                                            <button type="button" class="btn btn-primary btn-circle" ng-click="addTiming()"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div align="center">
+                                            <input type="submit" class="btn btn-success" value="Add Batch">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Row -->
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -2,7 +2,6 @@
 
 	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','ngRoute']);
 
-
 	app.config(function($routeProvider){
 		$routeProvider
         .when('/', {
@@ -169,6 +168,25 @@
                         return deferred.promise;
                     }
                 }
+        })
+        .when('/Settings/batches', {
+            templateUrl : 'app/partials/Settings/batches.html',
+            controller: 'BatchController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+
         })
         .when('/Chapters', {
                 templateUrl:'app/partials/Chapters/all.html',

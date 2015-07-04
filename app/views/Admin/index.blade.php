@@ -110,6 +110,7 @@
                                     <li><a href="#/Settings/setup"><i class="glyphicon glyphicon-wrench"></i>Set Up</a></li>
                                     <li><a href="#/Settings/staff"><i class="glyphicon glyphicon-user"></i>Staff Management</a></li>
                                     <li><a href="#/Settings/financial-year"><i class="glyphicon glyphicon-calendar"></i>Financial Year</a></li>
+                                    <li><a href="#/Settings/batches"><i class="glyphicon glyphicon-bookmark"></i>Batches</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -147,6 +148,7 @@
         <script src="app/Settings/StandardService.js"></script>
         <script src="app/Settings/StaffController.js"></script>
         <script src="app/Settings/YearController.js"></script>
+        <script src="app/Settings/BatchController.js"></script>
         <script src="app/User/User.js"></script>
         <script src="app/Students/FormHelper.js"></script>
         <script src="app/Auth/Auth.js"></script>
