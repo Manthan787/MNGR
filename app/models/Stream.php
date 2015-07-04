@@ -19,6 +19,6 @@ class Stream extends Eloquent
 
 	public function subjects()
 	{
-		return $this->hasMany('Subject');
+		return $this->belongsToMany('Subject');
 	}
 }

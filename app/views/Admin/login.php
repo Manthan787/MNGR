@@ -22,14 +22,14 @@
 </head>
 <body class="login fixed">
 <div class="wrapper animated flipInY">
-    <div class="logo"><a href="#"><i class="fa fa-bolt"></i> <span>EduFocus</span></a></div>
+    <div class="logo"><a href="#"><i class="fa fa-bolt"></i> <span>Academyn</span></a></div>
     <div class="box">
         <div class="header clearfix">
             <div class="pull-left"><i class="fa fa-sign-in"></i> Sign In</div>
 
         </div>
         <form ng-controller="LoginController" ng-submit="login()">
-            <div class="alert alert-warning no-radius no-margin padding-sm"><i class="fa fa-info-circle"></i> Please sign in to maniac dashboard</div>
+            <div class="alert alert-warning no-radius no-margin padding-sm"><i class="fa fa-info-circle"></i> Please sign in to Academyn dashboard</div>
             <div class="box-body padding-md">
                 <div class="form-group">
                     <input type="text" name="username" ng-model="email" class="form-control" placeholder="Username"/>

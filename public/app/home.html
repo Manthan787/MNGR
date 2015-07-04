@@ -4,28 +4,28 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="custom-box palette-alizarin">
-                        <h3 class="timer" data-start="0" data-from="0" data-speed="1000" data-refresh-interval="10"></h3>
+                        <h3 class="timer" data-start="0" data-from="0" data-speed="1000" data-refresh-interval="10">0</h3>
                         <p>Students</p>
                         <i class="fa fa-child"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="custom-box palette-nephritis">
-                        <h3 class="timer" data-start="0" data-from="0" data-to="135" data-speed="1000" data-refresh-interval="10"></h3>
+                        <h3 class="timer" data-start="0" data-from="0" data-to="135" data-speed="1000" data-refresh-interval="10">0</h3>
                         <p>Staff Members</p>
                         <i class="fa fa-users"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="custom-box palette-peter-river">
-                        <h3 class="timer" data-start="0" data-from="0" data-to="stats.question_count" data-speed="3000" data-refresh-interval="10"></h3>
+                        <h3 class="timer" data-start="0" data-from="0" data-to="stats.question_count" data-speed="3000" data-refresh-interval="10">0</h3>
                         <p>Questions</p>
                         <i class="fa fa-question"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="custom-box palette-wet-asphalt">
-                        <h3 class="timer" data-start="0" data-from="0" data-to="45" data-speed="3000" data-refresh-interval="10"></h3>
+                        <h3 class="timer" data-start="0" data-from="0" data-to="45" data-speed="3000" data-refresh-interval="10">0</h3>
                         <p>Tests</p>
                         <i class="fa fa-pencil-square-o"></i>
                     </div>
@@ -114,13 +114,11 @@
         $.ajax(
                 {'url' : '/stats',
                  success : function(response) {
-                     console.log(response);
                      $('.palette-alizarin  > .timer').data('to', response.student_count);
                      $('.palette-nephritis  > .timer').data('to', response.staff_count);
                      $('.palette-peter-river  > .timer').data('to', response.question_count);
                      $('.palette-wet-asphalt  > .timer').data('to', response.test_count);
                      $('.timer').countTo();
-
                  }
         });
 

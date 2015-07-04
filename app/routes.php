@@ -59,7 +59,7 @@ Route::group(['before'=>'teacher'],function(){
     Route::post('api/Students/{studentID}/update', 'StudentController@update');
 
 });	
-
+//TODO Create repositories for Standards and Streams and move them to seperate Controllers. Also Create form services.
 Route::get('/api/Standards/all',function(){
 	$standards = Standard::with(['streams','subjects'])->get();
 
@@ -175,20 +175,21 @@ Route::post('/api/Streams/delete', function(){
 
 });
 
-Route::post('/api/Standards/{stdID}/Streams/{streamID}/Subjects/add', function($stdID, $streamID){
+Route::post('/api/Standards/{stdID}/Streams/Subjects/add', function($stdID){
 
-	if($std = Standard::find($stdID) && $stream = Stream::find($streamID))
+	if($std = Standard::find($stdID))
 	{
-
 		$subject = new Subject;
 		$subject->name = Input::get('name');
 		$subject->standard_id = $stdID;
-		$subject->stream_id = $streamID;
 		if(!is_null(Input::get('fees')))
 		{
 			$subject->fees = Input::get('fees');
 		}
 		$subject->save();
+        //Attach Streams to Subject
+        $streams = Input::get('streams');
+        $subject->streams()->attach($streams);
 		return Response::json(['msg'=>'Done!'],200);
 
 	}
@@ -206,7 +207,9 @@ Route::post('/api/Standards/{stdID}/Subjects/add', function($stdID){
 		$subject = new Subject;
 		$subject->name = Input::get('name');
 		$subject->standard_id = $stdID;
-		$subject->fees = Input::get('fees');
+        if(Input::get('fees')) {
+            $subject->fees = Input::get('fees');
+        }
 		$subject->save();
 		return Response::json(['msg'=>'Done!'], 200);
 	}
@@ -221,10 +224,12 @@ Route::post('/api/Subjects/delete', function(){
 	$subjectID = Input::get('id');
 	if($subject = Subject::find($subjectID))
 	{
-
+        if($subject->streams)
+        {
+            $subject->streams()->detach();
+        }
 		$subject->delete();
 		return Response::json(['msg' => 'Successfully Deleted The Subject.'],200);
-
 	}
 	else
 	{
@@ -233,7 +238,7 @@ Route::post('/api/Subjects/delete', function(){
 });
 
 Route::get('api/Subjects/all', function(){
-    return Subject::with('standard','stream')->get();
+    return Subject::with('standard','streams','chapters')->get();
 });
 
 Route::post('/api/Subjects/{id}/edit', function($id){
@@ -301,8 +306,35 @@ Route::get('/api/mediums', function(){
 
 Route::post('api/members/add', 'StaffController@add');
 
-Route::get('/ex',function(){
+Route::group(['before'=>'admin'], function(){
+    Route::post('api/tests/create','TestController@create');
+    Route::get('back/tests/{id}/show', 'TestController@show');
+});
 
-$user = User::find(1);
-   return Crypt::decrypt('eyJpdiI6IjJ2NHp0RWp0dlNESCtkcmw3Y1lhNFE9PSIsInZhbHVlIjoiVmNGVWJuMFF4dDVwdTlhRmkwRkc1QT09IiwibWFjIjoiM2E1ZmNmNDIxNWQ2ZTYxYzNmNTg2ZjI2ZjYyYjY3ZDY2ODc0MzJhMzAxN2U2ZTY2NzczZWM4NTk4NDgzZTViYSJ9');
+Route::get('api/batches/all', function(){
+    return Batch::all();
+});
+
+
+Route::get('/ex',function(){
+   /*
+    $batch = new Batch;
+    $batch->name = "First Batch";
+    $batch->standard_id = 1;
+    $batch->save();
+    $timing = new Timing;
+    $timing->day = "Monday";
+    $timing->from =date('H:i:s', strtotime('7:00 PM'));
+    $timing->to = date('H:i:s', strtotime('8:00 PM'));
+    $timing->batch_id = $batch->id;
+    $timing->save();
+    $timing = new Timing;
+    $timing->day = "Wednesday";
+    $timing->from =date('H:i:s', strtotime('7:00 PM'));
+    $timing->to = date('H:i:s', strtotime('8:00 PM'));
+    $timing->batch_id = $batch->id;
+    $timing->save();
+    */
+    $batch = Batch::find(1)->with('timings')->get();
+    return $batch;
 });

@@ -20,7 +20,7 @@ class EloquentQuestionsRepository implements QuestionsRepository
 	public function getAll()
 	{
 		//Fetch All Questions With Their Options
-		return $this->question->with('options')->get();
+		return $this->question->with('options','answer')->get();
 	
 		
 	}

@@ -16,12 +16,7 @@ class Question extends Eloquent
 
 	public function answer()
 	{
-		foreach($this->options as $option)
-		{
-			if ($option->answer)
-				return $option;
-		
-		}
+		return $this->hasOne('Answer');
 	}
 
     public function deleteOptions()

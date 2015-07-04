@@ -20,8 +20,9 @@
                                 <button class="btn btn-danger" ng-click="delete(Question)"><i class="fa fa-trash-o"></i></button>
                             </span>
                             <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="Option in Question.options">{{ Option.option }} <a class="btn btn-success" ng-if="Option.answer">
-			Answer</a>
+                                <li class="list-group-item" ng-repeat="Option in Question.options">
+                                    {{ Option.option }}
+                                    <i class="glyphicon glyphicon-ok" ng-if="Option.id == Question.answer.option_id"></i>
                                 </li>
                             </ul>
                         </li>

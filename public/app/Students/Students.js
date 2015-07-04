@@ -57,6 +57,9 @@
         $http.get('api/years/current').then(function(response){
             $scope.currentYear = response.data;
         });
+        $http.get('api/batches/all').then(function(response){
+           $scope.batches = response.data;
+        });
         $scope.newStudent.entry_date = new Date();
 		//Get all the available standards from the API
 		FormHelper.getStandards().then(function(standards){
@@ -146,8 +149,8 @@
         }
         var prepare = function() {
             $scope.newStudent.year_id = $scope.currentYear.id;
-            $scope.newStudent.birthdate = $filter('date')($scope.newStudent.birthdate,'yyyy-MM-dd');
-            $scope.newStudent.entry_date = $filter('date')($scope.newStudent.entry_date,'yyyy-MM-dd');
+            $scope.newStudent.birthdate = convert($scope.newStudent.birthdate);
+            $scope.newStudent.entry_date = convert($scope.newStudent.entry_date);
         }
 		$scope.addStudent = function(isValid){
             $scope.submitted = true;
@@ -163,7 +166,6 @@
                 }, function (response) {
                     $scope.loading = false;
                     $scope.error = response.data.msg;
-                    console.log(response.data.error);
                 });
 
                 $scope.loading = false;
@@ -174,12 +176,10 @@
 		}
 
 		var reset = function(){
-
 			$scope.newStudent = new Student;
             $scope.newStudent.entry_date = new Date();
             $scope.showSubjects = false;
             $scope.fees = 0;
-
 		}
 			
 

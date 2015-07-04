@@ -265,8 +265,8 @@
 
 
 		$scope.saveWithStream = function(){
-
-			$http.post('/api/Standards/'+$scope.$parent.currentStd.id+'/Streams/'+$scope.newSubject.stream+'/Subjects/add', $scope.newSubject)
+            console.log($scope.newSubject);
+			$http.post('/api/Standards/'+$scope.$parent.currentStd.id+'/Streams/Subjects/add', $scope.newSubject)
 			.then(function(response){
 				$scope.newSubject = null;
 				$scope.loadStandards();

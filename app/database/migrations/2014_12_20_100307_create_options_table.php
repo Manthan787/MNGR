@@ -17,7 +17,6 @@ class CreateOptionsTable extends Migration {
 			$table->increments('id');
 			$table->string('option');
 			$table->integer('question_id')->unsigned();
-			$table->boolean('answer');
 			$table->timestamps();
 		});
 	}

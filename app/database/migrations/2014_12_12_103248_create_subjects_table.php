@@ -17,7 +17,6 @@ class CreateSubjectsTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->integer('standard_id')->unsigned();
-			$table->integer('stream_id')->unsigned();
 			$table->decimal('fees',15,2);
 			$table->timestamps();
 		});

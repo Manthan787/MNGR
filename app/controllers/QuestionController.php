@@ -40,7 +40,7 @@ class QuestionController extends BaseController
 		$question->question = Input::get('question');
         $question->chapter_id = Input::get('chapter_id');
 		$question->save();
-		$options = Input::get('options');
+        $options = Input::get('options');
 		try{
 
 			foreach($options as $option)
@@ -48,8 +48,13 @@ class QuestionController extends BaseController
 				$o = new Option();
 				$o->option = $option['option'];
 				$o->question_id = $question->id;
-                $o->answer = $option['answer'];
 				$o->save();
+                if($option['answer']) {
+                    $answer = new Answer;
+                    $answer->option_id = $o->id;
+                    $answer->question_id = $question->id;
+                    $answer->save();
+                }
 			}
 		}
 		catch (Exception $e){

@@ -142,6 +142,15 @@
 
         $scope.selectAnswer = function(option) {
             option.answer = 1;
+            for(var i = 0; i<$scope.newQuestion.options.length; i++)
+            {
+                var currentOption = $scope.newQuestion.options[i];
+                if(currentOption.answer == 1 && currentOption.id != option.id)
+                {
+                    currentOption.answer = 0;
+                }
+            }
+
         }
 
         $scope.promptNoChapterError = function() {

@@ -10,9 +10,10 @@
         
 </head>
 <body class="fixed"  ng-controller="AppController">
+                @if(Auth::check())
                 <!-- Header -->
                 <header>
-        			<a href="/#/https://github.com/Manthan787/MNGR.git" class="logo"><i class="fa fa-bolt"></i> <span>EduFocus</span></a>
+        			<a href="/#/https://github.com/Manthan787/MNGR.git" class="logo"><i class="fa fa-bolt"></i> <span>Academyn</span></a>
                     <nav class="navbar navbar-static-top">
                         <a href="#" class="navbar-btn sidebar-toggle">
                             <span class="sr-only">Toggle navigation</span>
@@ -35,7 +36,7 @@
         									<a href="#Settings/setup"><i class="fa fa-cog"></i>Settings</a>
         								</li>
         								<li class="footer">
-        									<a  ng-click="logout()"><i class="fa fa-power-off"></i>Logout</a>
+        									<a  href="" ng-click="logout()"><i class="fa fa-power-off"></i>Logout</a>
         								</li>
                                     </ul>
                                 </li>
@@ -61,17 +62,6 @@
                                 </a>
                             </li>
                             <li class="sub-nav">
-                                <a>
-                                    <i class="fa fa-question"></i>
-                                    <span>Questions</span>
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li><a href="#Questions/all"><i class="fa fa-search"></i>Search Questions</a></li>
-                                    <li><a href="#Questions/add"><i class="fa fa-plus"></i>Add Questions</a></li>
-                                </ul>
-                            </li>
-                            <li class="sub-nav">
                                 <a href="">
                                     <i class="fa fa-users"></i>
                                     <span>Students</span>
@@ -82,7 +72,27 @@
                                     <li><a href="#/Students/add"><i class="fa fa-plus"></i>Add Students</a></li>
                                 </ul>
                             </li>
-
+                            <li class="sub-nav">
+                                <a href="">
+                                    <i class="fa fa-question"></i>
+                                        <span>Questions</span>
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#Questions/all"><i class="fa fa-search"></i>Search Questions</a></li>
+                                    <li><a href="#Questions/add"><i class="fa fa-plus"></i>Add Questions</a></li>
+                                </ul>
+                            </li>
+                            <li class="sub-nav">
+                                <a href="">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                        <span>Tests</span>
+                                            <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#/Tests/create"><i class="glyphicon glyphicon-plus"></i>Create Test</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="#Chapters">
                                     <i class="fa fa-book"></i>
@@ -102,11 +112,11 @@
                                     <li><a href="#/Settings/financial-year"><i class="glyphicon glyphicon-calendar"></i>Financial Year</a></li>
                                 </ul>
                             </li>
-
                         </ul>
 
                     </div>
                 </div>
+                @endif
                 <div ng-view></div>
             </div>
 
@@ -142,9 +152,9 @@
         <script src="app/Auth/Auth.js"></script>
         <script src="app/Auth/Authaid.js"></script>
         <script src="app/Auth/AuthService.js"></script>
-        <script src="app/panel.directive.js"></script>
         <script src="app/HomeController.js"></script>
         <script src="app/Chapters/Chapters.js"></script>
+        <script src="app/Tests/Tests.js"></script>
         <script src="app/admin/ckeditor/ckeditor.js"></script>
 
 

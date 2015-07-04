@@ -26,6 +26,7 @@ class StudentController extends Controller
         $student->fees              = Input::get('fees');
         $student->entry_date        = Input::get('entry_date');
         $student->year_id           = Input::get('year_id');
+        $student->batch_id          = Input::get('batch_id') ? Input::get('batch_id') : 0;
 		$student->save();
         //Attaching Subjects To Student
         $subjects = $this->getSubjectsArray(Input::get('subjects'));
@@ -49,6 +50,7 @@ class StudentController extends Controller
     {
         if($student = Student::find($studentID))
         {
+            $student->subjects()->detach();
             $student->delete();
             return Response::json(['msg' => 'Successfully Deleted Student From The System!'], 200);
         }

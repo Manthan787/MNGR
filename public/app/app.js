@@ -1,52 +1,211 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','ngRoute']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','ngRoute']);
 
 
 	app.config(function($routeProvider){
 		$routeProvider
         .when('/', {
             templateUrl:'app/home.html',
-            controller: 'HomeController'
+            controller: 'HomeController',
+            resolve: {
+                        load :  function($q, $window)
+                        {
+                            var deferred = $q.defer();
+                            if (!sessionStorage.authenticated) {
+                                $window.location.href = '/login';
+                                deferred.reject();
+                            }
+                            else {
+                                deferred.resolve();
+                            }
+                            return deferred.promise;
+                        }
+                    }
 
         })
         .when('/Questions/all', {
 			templateUrl:'app/partials/Questions/allQuestions.html',
-			controller : 'QuestionsController'
+			controller : 'QuestionsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
 		})
 		.when('/Questions/add', {
 			templateUrl:'app/partials/Questions/addQuestion.html',
-			controller : 'AddQuestionsController'
+			controller : 'AddQuestionsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
 		})
 		.when('/Students/search', {
 			templateUrl:'app/partials/Students/searchStudents.html',
-			controller:'StudentsController'
+			controller:'StudentsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
 
 		})
 		.when('/Students/add', {
 			templateUrl:'app/partials/Students/addStudent.html',
-			controller:'AddStudentController'
+			controller:'AddStudentController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
             })
 
         .when('/Students/:id', {
                 templateUrl:'app/partials/Students/showStudent.html',
-                controller:'StudentShowController'
+                controller:'StudentShowController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
             })
 		.when('/Settings/setup', {
 			templateUrl:'app/partials/Settings/setup.html',
-			controller:'SettingsController'
+			controller:'SettingsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
 		})
         .when('/Settings/staff', {
             templateUrl:'app/partials/Settings/staff.html',
-            controller:'StaffController'
+            controller:'StaffController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
         })
         .when('/Settings/financial-year', {
             templateUrl:'app/partials/Settings/year.html',
-            controller:'YearController'
+            controller:'YearController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
         })
         .when('/Chapters', {
                 templateUrl:'app/partials/Chapters/all.html',
-                controller:'ChapterController'
+                controller:'ChapterController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+        })
+        .when('/Tests/create', {
+                templateUrl : 'app/partials/Tests/create.html',
+                controller : 'TestController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+
         })
 		.otherwise({
 			redirectTo:'/'
@@ -76,14 +235,14 @@
            $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }]);
 
-
-    app.run(function($rootScope, $window){
+    //Resolve is much better than this option!
+    /*app.run(function($rootScope, $window){
         $rootScope.$on('$routeChangeStart', function(event){
             if(!sessionStorage.authenticated) {
                 event.preventDefault();
                 $window.location.href = "/login";
             }
         });
-    });
+    }); */
 
 })();

@@ -94,7 +94,6 @@ return array(
 	*/
 
 	'providers' => array(
-
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -123,7 +122,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'mngr\Repositories\BackendServiceProvider',
         'mngr\Services\Forms\FormServiceProvider',
-        
+        'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
+        'Thujohn\Pdf\PdfServiceProvider',
 	),
 
 	/*
@@ -190,6 +190,7 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+        'PDF'               => 'Thujohn\Pdf\PdfFacade',
 
 	),
 

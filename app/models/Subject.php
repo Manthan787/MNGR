@@ -25,9 +25,9 @@ class Subject extends Eloquent
 		return $this->belongsTo('Standard');
 	}
 
-	public function stream()
+	public function streams()
 	{
-		return $this->belongsTo('Stream');
+		return $this->belongsToMany('Stream');
 	}
 
 	

@@ -20,6 +20,10 @@ class Standard extends Eloquent
 		return $this->hasMany('Subject');
 	}
 
+    public function batches()
+    {
+        return $this->hasMany('Batch');
+    }
 	public function hasStreams()
 	{
 		
