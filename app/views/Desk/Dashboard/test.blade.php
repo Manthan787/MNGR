@@ -60,7 +60,7 @@ Practice Test
                     <div class="controls">
                         <select name="marks" ng-model="test.marks" required>
                             <option value="">Select Marks</option>
-                            <option value="10">10</option>
+                            <option value="30">30</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                         </select>
@@ -109,7 +109,7 @@ Practice Test
                         <button class="btn btn-primary" ng-click="previous()" ng-disabled="pointer==0">Previous</button>
                         <button class="btn btn-primary pull-right" ng-click="next()">Next</button>
                     </div>
-                
+
             </div>
             <div class="widget-content" ng-if="hasEnded" ng-cloak>
                 <h3 align="center">Congratulations!</h3>
