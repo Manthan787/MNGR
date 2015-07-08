@@ -109,7 +109,7 @@ Practice Test
                         <button class="btn btn-primary" ng-click="previous()" ng-disabled="pointer==0">Previous</button>
                         <button class="btn btn-primary pull-right" ng-click="next()">Next</button>
                     </div>
-                @{{questions[pointer]}}
+                
             </div>
             <div class="widget-content" ng-if="hasEnded" ng-cloak>
                 <h3 align="center">Congratulations!</h3>
