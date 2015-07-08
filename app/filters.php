@@ -35,17 +35,10 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
+	if(Auth::check())
+    {
+        return Redirect::to('/desk');
+    }
 });
 
 Route::filter('teacher',function(){
@@ -62,6 +55,20 @@ Route::filter('teacher',function(){
 		return Response::json(['msg' => 'You need to login to access this page!',
 								   'redirect' => 'login'],401);
 	}
+
+});
+
+Route::filter('student',function(){
+
+    if(Auth::check())
+    {
+        if(!Auth::user()->isStudent())
+            return Redirect::to('/desk/login')->with('message','You don\'t have enough privileges to view this page.');
+    }
+    else
+    {
+        return Redirect::to('/desk/login')->with('message','You need to login to access the desk.');
+    }
 
 });
 

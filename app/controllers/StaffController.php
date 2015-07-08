@@ -1,12 +1,12 @@
 <?php
 
-use mngr\Services\Mail\EmailNotifier;
+use mngr\Services\Mail\Notifier;
 
 class StaffController extends BaseController{
 
     protected $notifier;
 
-    public function __construct(EmailNotifier $notifier)
+    public function __construct(Notifier $notifier)
     {
         $this->notifier = $notifier;
     }

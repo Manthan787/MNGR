@@ -124,6 +124,7 @@ return array(
         'mngr\Services\Forms\FormServiceProvider',
         'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
         'Thujohn\Pdf\PdfServiceProvider',
+        'mngr\Services\Mail\NotifierServiceProvider',
 	),
 
 	/*

@@ -24,7 +24,8 @@
 		],
         
         "psr-4":{
-            "mngr\\":"app/mngr"
+            "mngr\\":"app/mngr",
+            "Desk\\":"app/controllers/Desk"
             
         }
 	},

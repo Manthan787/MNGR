@@ -15,8 +15,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-	protected $fillable = ['firstname','lastname','email','password','temp_password'];   
-	/**
+	protected $fillable = ['firstname','lastname','email','password','temp_password'];
+    /**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
@@ -33,6 +33,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Subject');
 	}
 
+    public function profile()
+    {
+        return $this->belongsTo('Student','student_id');
+    }
 	public function isAdmin()
 	{
         return ($this->role_id == 1) ? true : false;
@@ -42,6 +46,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
         return ($this->role_id == 2) ? true : false;
 	}
+
+    public function isStudent()
+    {
+        return ($this->role_id == 4) ? true : false;
+    }
 
 	public function setPasswordAttribute($password)
 	{

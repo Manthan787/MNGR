@@ -311,24 +311,37 @@ Route::group(['before'=>'admin'], function(){
     Route::get('back/tests/{id}/show', 'TestController@show');
 });
 
+Route::post('desk/test/practice/assess', 'Desk\Controller\Test@postAssess');
+
 Route::get('api/batches/all', 'BatchController@getAll');
 Route::post('api/batches/add','BatchController@postAdd');
 
 
-Route::get('/ex',function(){
+//# STUDENT's APP
+Route::group(['before'=>'auth'], function(){
 
-    $batch = new Batch;
-    $batch->name = "Second Batch";
-    $batch->standard_id = 1;
-    $batch->save();
+    Route::get('desk/login', 'Desk\Controller\Auth@getLogin');
+    Route::post('desk/login', 'Desk\Controller\Auth@postLogin');
+    Route::get('desk/activate', 'Desk\Controller\Auth@getActivate');
+    Route::post('desk/activate', 'Desk\Controller\Auth@postActivate');
 
-    $timing = new Timing;
-    $timing->day = "Wednesday";
-    $timing->from =date('H:i', strtotime('7:00 PM'));
-    $timing->to = date('H:i', strtotime('8:00 PM'));
-    $timing->batch_id = $batch->id;
-    $timing->save();
+});
 
-    $batch = Batch::find(1)->with('timings')->get();
-    return $batch;
+Route::group(['before'=>'student'], function() {
+    Route::get('desk/','Desk\Controller\Dashboard@getIndex');
+    Route::get('desk/profile','Desk\Controller\Dashboard@getProfile');
+    Route::get('desk/logout','Desk\Controller\Auth@getLogout');
+    Route::get('desk/test/practice','Desk\Controller\Test@getPractice');
+    Route::post('api/desk/test/practice/generate','Desk\Controller\Test@generatePractice');
+    Route::get('api/students/me/subjects', function(){
+        $subjects = Auth::user()->profile->subjects()->with('chapters')->get();
+        return $subjects;
+    });
+});
+
+Route::get('/ex', function(){
+    $report = new mngr\Services\Scrutineer\Report();
+    $report->setTotal(10);
+    $report->setMarks(5);
+
 });
