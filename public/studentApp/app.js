@@ -1,5 +1,5 @@
 (function(){
-    angular.module('desk',[])
+    angular.module('desk',['ngSanitize'])
         .controller('NavController', function($scope){
             $scope.active = 1;
             $scope.isActive = function(value) {
@@ -7,7 +7,7 @@
             }
 
         })
-        .controller('TestController', function($scope, $http){
+        .controller('TestController', function($scope, $http, $sce){
             $scope.loading = true;
             $scope.questions = {};
             $http.get('/api/students/me/subjects').then(function(response){
@@ -54,7 +54,7 @@
 
             }
         })
-        .controller('TestpaperController', function($scope,$http) {
+        .controller('TestpaperController', function($scope,$http, $sce) {
             $scope.enableInstructions = true;
             $scope.hasBegun = false;
             $scope.pointer = -1;

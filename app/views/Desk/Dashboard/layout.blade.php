@@ -68,6 +68,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-sanitize.js"></script>
 <script src="{{URL::asset("studentApp/js/jquery-1.7.2.min.js")}}"></script>
 <script src="{{URL::asset("studentApp/js/excanvas.min.js")}}"></script>
 <script src="{{URL::asset("studentApp/js/chart.min.js")}}" type="text/javascript"></script>

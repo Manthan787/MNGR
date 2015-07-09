@@ -60,7 +60,7 @@ Practice Test
                     <div class="controls">
                         <select name="marks" ng-model="test.marks" required>
                             <option value="">Select Marks</option>
-                            <option value="30">30</option>
+                            <option value="10">10</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                         </select>
@@ -97,7 +97,7 @@ Practice Test
             </div>
             <div class="widget-content" ng-if="hasBegun">
 
-                    <h3>@{{questions[pointer].question}}</h3>
+                    <h3 ng-bind-html="questions[pointer].question"></h3>
                         <div class="control-group" ng-repeat="option in questions[pointer].options">
                             <div class="pull-left">
                                 <input type="radio" name="answer" value="@{{option.id}}" ng-model="questions[pointer].attempted_answer">
@@ -127,7 +127,7 @@ Practice Test
                 <div ng-if="hasIncorrectAnswers()">
                     <h2>Incorrect Answers</h2>
                     <div ng-repeat="incorrect in report.incorrect">
-                        <h3>@{{ incorrect.question }}</h3>
+                        <h3><span ng-bind-html="incorrect.question"></span></h3>
                         <p><b>Your Answer :</b> @{{ student_answer(incorrect.options, incorrect.attempted_answer) }}</p>
                         <p><b>Correct Answer:</b> @{{ correct_answer(incorrect.options, incorrect.answer.option_id) }}</p>
                     </div>
@@ -135,14 +135,14 @@ Practice Test
                 <div ng-if="hasUnattemptedAnswers()">
                     <h2>Unattempted Questions</h2>
                     <div ng-repeat="unattempted in report.unattempted">
-                        <h3>@{{ unattempted.question }}</h3>
+                        <h3><span ng-bind-html="unattempted.question"></span></h3>
                         <p><b>Correct Answer:</b> @{{ correct_answer(unattempted.options, unattempted.answer.option_id) }}</p>
                     </div>
                 </div>
                 <div ng-if="hasCorrectAnswers()">
                     <h2>Correct Answers</h2>
                     <div ng-repeat="correct in report.correct">
-                        <h3>@{{ correct.question }}</h3>
+                        <h3><span ng-bind-html="correct.question"></span></h3>
                         <p><b>Your Answer :</b> @{{ student_answer(correct.options, correct.attempted_answer) }}</p>
                     </div>
                 </div>

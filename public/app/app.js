@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','ngRoute']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','ngRoute','ngSanitize']);
 
 	app.config(function($routeProvider){
 		$routeProvider

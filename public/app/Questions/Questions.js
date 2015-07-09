@@ -45,7 +45,15 @@
         $scope.editEnabled = false;
 
     });
-	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http){
+	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce){
+        var ck = CKEDITOR.replace('question');
+        ck.on('pasteState',function(){
+            var elm = document.getElementById('AddForm');
+            var scope = angular.element(elm).scope();
+            scope.$apply(function(){
+               $scope.newQuestion.question = ck.getData();
+            });
+        });
         $scope.newQuestion = new Question();
         var counter = 4;
         $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
@@ -137,8 +145,8 @@
 			$scope.newQuestion = new Question();
             $scope.newQuestion.chapter_id = prevChapter;
             $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
-		
-		}
+		    ck.setData('');
+		};
 
         $scope.selectAnswer = function(option) {
             option.answer = 1;

@@ -15,7 +15,7 @@
                         </ul>
                     </section>
                     <ul class="list-group" ng-hide="fetchedQuestion">
-                        <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b>{{ Question.question }}</b>
+                        <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b><span ng-bind-html="Question.question"></span></b>
                             <span>
                                 <button class="btn btn-danger" ng-click="delete(Question)"><i class="fa fa-trash-o"></i></button>
                             </span>
