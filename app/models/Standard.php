@@ -38,13 +38,10 @@ class Standard extends Eloquent
 
 	public function hasSubjects()
 	{
-		
-
 		if(! count($this->subjects) > 0)
 		{
 			return false;
 		}
-
 		return true;
 	}
 }

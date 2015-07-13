@@ -61,8 +61,7 @@ Route::group(['before'=>'teacher'],function(){
 });	
 //TODO Create repositories for Standards and Streams and move them to seperate Controllers. Also Create form services.
 Route::get('/api/Standards/all',function(){
-	$standards = Standard::with(['streams','subjects'])->get();
-
+	$standards = Standard::with(['streams','subjects','batches'])->get();
 	return $standards;
 });
 
@@ -340,8 +339,7 @@ Route::group(['before'=>'student'], function() {
 });
 
 Route::get('/ex', function(){
-    $report = new mngr\Services\Scrutineer\Report();
-    $report->setTotal(10);
-    $report->setMarks(5);
+    $student = Student::find(2);
+    return $student->batches;
 
 });

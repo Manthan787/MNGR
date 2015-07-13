@@ -26,11 +26,14 @@ class StudentController extends Controller
         $student->fees              = Input::get('fees');
         $student->entry_date        = Input::get('entry_date');
         $student->year_id           = Input::get('year_id');
-        $student->batch_id          = Input::get('batch_id') ? Input::get('batch_id') : 0;
 		$student->save();
         //Attaching Subjects To Student
         $subjects = $this->getSubjectsArray(Input::get('subjects'));
         $student->subjects()->attach($subjects);
+        if($batches = Input::get('batches'))
+        {
+            $student->batches()->attach($batches);
+        }
 		return Response::json(['msg'=>'Successfully Added Student To The System!'],200);
 	}
 

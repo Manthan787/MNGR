@@ -50,15 +50,12 @@
 		
 		$scope.standards = [];
 		$scope.hasStreams = false;
-		$scope.loading = false;
+		$scope.loading = true;
 		$scope.newStudent =  new Student;
         $scope.addUserForm;
         $scope.submitted = false;
         $http.get('api/years/current').then(function(response){
             $scope.currentYear = response.data;
-        });
-        $http.get('api/batches/all').then(function(response){
-           $scope.batches = response.data;
         });
         $scope.newStudent.entry_date = new Date();
 		//Get all the available standards from the API
@@ -68,9 +65,12 @@
 
 		FormHelper.getMediums().then(function(mediums){
 				$scope.mediums = mediums;
+                $scope.loading = false;
 		});
         $scope.prepareStreams = function(std)
         {
+            $scope.hasBatches = false;
+            $scope.newStudent.stream = null;
             var streams = FormHelper.loadStreams(std);
             if(streams)
             {
@@ -83,6 +83,20 @@
             {
                 $scope.hasStreams = false;
                 $scope.prepareSubjectsByStd(std);
+            }
+            prepareBatches(std);
+        }
+
+        function prepareBatches(std)
+        {
+            if(std.batches && std.batches[0] != undefined)
+            {
+                $scope.batches = std.batches;
+                $scope.hasBatches = true;
+            }
+            else
+            {
+                $scope.hasBatches = false;
             }
         }
 
@@ -134,7 +148,6 @@
 			{
 				$scope.schools = null;
 			}
-				
 
 		}
 

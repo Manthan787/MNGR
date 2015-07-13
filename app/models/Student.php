@@ -30,7 +30,12 @@ class Student extends Eloquent
         return $this->belongsToMany('Subject');
     }
 
-	public function setPhoneAttribute($phone)
+    public function batches()
+    {
+        return $this->belongsToMany('Batch');
+    }
+
+    public function setPhoneAttribute($phone)
 	{
 		if(is_null($phone))
 		{
