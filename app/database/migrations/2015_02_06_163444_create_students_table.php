@@ -25,7 +25,6 @@ class CreateStudentsTable extends Migration {
 			$table->integer('standard_id')->unsigned();
 			$table->integer('medium_id')->unsigned();
 			$table->integer('stream_id')->unsigned();
-            $table->integer('batch_id')->unsigned();
 			$table->string('school');
             $table->decimal('fees',15,2);
 			$table->string('city');
