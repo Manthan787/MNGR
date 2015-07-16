@@ -327,19 +327,49 @@ Route::group(['before'=>'auth'], function(){
 });
 
 Route::group(['before'=>'student'], function() {
+    ## STUDENT DESK WEB APP ROUTES
     Route::get('desk/','Desk\Controller\Dashboard@getIndex');
     Route::get('desk/profile','Desk\Controller\Dashboard@getProfile');
     Route::get('desk/logout','Desk\Controller\Auth@getLogout');
     Route::get('desk/test/practice','Desk\Controller\Test@getPractice');
+    Route::get('desk/study','Desk\Controller\Study@getIndex');
+
+    ## STUDENT DESK API ROUTES
     Route::post('api/desk/test/practice/generate','Desk\Controller\Test@generatePractice');
+    Route::get('api/desk/chapters/{id}/material', function($id){
+        $chapter = Chapter::find($id);
+        if($chapter)
+        {
+            return $chapter->material;
+        }
+        else
+        {
+            return Response::json(['msg'=>'The chapter can not be accessed at this moment. Please try again later.'],500);
+        }
+    });
     Route::get('api/students/me/subjects', function(){
         $subjects = Auth::user()->profile->subjects()->with('chapters')->get();
         return $subjects;
     });
 });
 
-Route::get('/ex', function(){
-    $student = Student::find(2);
-    return $student->batches;
+Route::post('api/materials/add', function(){
+    try {
+        $material = new StudyMaterial;
+        $material->topic = Input::get('topic');
+        $material->text = Input::get('text');
+        $material->chapter_id = Input::get('chapter_id');
+        $material->save();
+        return Response::json(['msg' => 'Successfully Added This Topic To The System'], 200);
+    }
+    catch(Exception $e)
+    {
+        return Response::json($e->getMessage());
+    }
+});
 
+
+Route::get('/ex', function(){
+    $ch = Chapter::find(3);
+    return $ch->material;
 });

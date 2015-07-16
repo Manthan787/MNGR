@@ -42,7 +42,7 @@
       <ul class="mainnav">
         <li class="active"><a href="/desk"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li class="active"><a href="/desk/test/practice"><i class="icon-list-alt"></i><span>Practice Test</span> </a> </li>
-
+        <li class="active"><a href="/desk/study/"><i class="icon-file"></i><span>Online Study</span> </a> </li>
       </ul>
     </div>
     <!-- /container -->
@@ -75,7 +75,7 @@
 <script src="{{URL::asset("studentApp/js/bootstrap.js")}}"></script>
 <script src="{{URL::asset("studentApp/js/base.js")}}"></script>
 <script src="{{URL::asset("studentApp/app.js")}}"></script>
-
+<script src="{{URL::asset("studentApp/StudyController.js")}}"></script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

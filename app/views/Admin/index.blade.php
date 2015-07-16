@@ -13,7 +13,7 @@
                 @if(Auth::check())
                 <!-- Header -->
                 <header>
-        			<a href="/#/https://github.com/Manthan787/MNGR.git" class="logo"><i class="fa fa-bolt"></i> <span>Academyn</span></a>
+        			<a href="/#/" class="logo"><i class="fa fa-bolt"></i> <span>Academyn</span></a>
                     <nav class="navbar navbar-static-top">
                         <a href="#" class="navbar-btn sidebar-toggle">
                             <span class="sr-only">Toggle navigation</span>
@@ -85,6 +85,16 @@
                             </li>
                             <li class="sub-nav">
                                 <a href="">
+                                    <i class="fa fa-file-archive-o"></i>
+                                        <span>Study Material</span>
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#Materials/add"><i class="fa fa-plus"></i>Add Material</a></li>
+                                </ul>
+                            </li>
+                            <li class="sub-nav">
+                                <a href="">
                                     <i class="fa fa-pencil-square-o"></i>
                                         <span>Tests</span>
                                             <i class="fa fa-angle-right pull-right"></i>
@@ -97,7 +107,6 @@
                                 <a href="#Chapters">
                                     <i class="fa fa-book"></i>
                                     <span>Chapters</span>
-                                    <i class="fa fa-angle-right pull-right"></i>
                                 </a>
                             </li>
                             <li class="sub-nav">
@@ -142,6 +151,7 @@
         <script src="app/AppController.js"> </script>
         <script src="app/Questions/Questions.js"></script>
         <script src="app/Questions/Questions.factory.js"></script>
+        <script src="app/Materials/Materials.js"></script>
         <script src="app/Students/Students.js"></script>
         <script src="app/Students/Students.factory.js"></script>
         <script src="app/Services/SchoolFinder.js"></script>

@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','ngRoute','ngSanitize']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','ngRoute','ngSanitize']);
 
 	app.config(function($routeProvider){
 		$routeProvider
@@ -59,6 +59,24 @@
                     }
                 }
 		})
+        .when('/Materials/add', {
+            templateUrl:'app/partials/Materials/addMaterial.html',
+            controller:'MaterialsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+        })
 		.when('/Students/search', {
 			templateUrl:'app/partials/Students/searchStudents.html',
 			controller:'StudentsController',

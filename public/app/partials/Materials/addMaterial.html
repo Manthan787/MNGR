@@ -1,0 +1,81 @@
+<div class="rightside">
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                <div align="center" ng-show="loading">
+                    <img src="app/admin/img/loader.gif" height="45" width="45">
+                </div>
+                <section>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Questions/add"><i class="glyphicon glyphicon-plus"></i> Add Material</a></li>
+                    </ul>
+                </section>
+                <form  class="form-horizontal" id="AddForm" ng-controller="AddMaterialController" ng-submit="addMaterial()">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3>Select Chapter</h3>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-offset-3 control-label">Standard</label>
+                                <div class="col-sm-8">
+                                    <select type="text" class="form-control" ng-options="standard.division for standard in standards" ng-model="selectedStandard" ng-change="getStreams()">
+                                        <option value="">Select Standard</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="hasStreams">
+                                <label class="col-sm-2 col-offset-3 control-label">Stream</label>
+                                <div class="col-sm-8">
+                                    <select type="text" class="form-control" ng-options="stream.stream for stream in streams" ng-model="selectedStream" ng-change="getSubjects(selectedStream)">
+                                        <option value="">Select Stream</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="hasSubjects">
+                                <label class="col-sm-2 col-offset-3 control-label">Subject</label>
+                                <div class="col-sm-8">
+                                    <select type="text" class="form-control" ng-options="subject.name for subject in subjects" ng-model="selectedSubject" ng-change="getChapters(selectedSubject)">
+                                        <option value="">Select Subject</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="subjectsError">
+                                <div class="col-sm-8">
+                                    <div class="alert alert-danger">Looks like there are no subjects in the system. Please add subjects in the settings section then try this operation!</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="hasChapters">
+                                <label class="col-sm-2 col-offset-3 control-label">Chapter</label>
+                                <div class="col-sm-8">
+                                    <select type="text" class="form-control" ng-options="chapter.id as chapter.title for chapter in chapters" ng-model="newMaterial.chapter_id" >
+                                        <option value="">Select Chapter</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-title">
+                            <h3>Text</h3>
+                        </div>
+                        <div class="box-body">
+                            <input type="text" class="form-control" ng-model="newMaterial.topic" placeholder="Topic">
+                            <br>
+                            <textarea name="question" class="ckeditor" ng-model="newMaterial.text" rows="30" required></textarea>
+                            <br>
+                            <div class="row" align="center">
+                                <input type="submit" value="Add" class="btn btn-success">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

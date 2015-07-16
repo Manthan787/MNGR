@@ -186,5 +186,12 @@
                     }
                 }
             }
+        })
+        .config(function ($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+                'self',   // trust all resources from the same origin
+                '*://www.youtube.com/**'   // trust all resources from `www.youtube.com`
+            ]);
         });
+
 })();
