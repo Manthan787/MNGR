@@ -19,16 +19,16 @@ class StudentController extends Controller
 		$student->email             = Input::get('email', false);
 		$student->city              = Input::get('city', false);
 		$student->phone             = Input::get('phone');
-		$student->school            = Input::get('school', false);
-		$student->parents_mobile    = Input::get('parent_mobile', false);
+		$student->school            = Input::get('school') ? Input::get('school') : "";
+		$student->parents_mobile    = Input::get('parents_mobile', false);
 		$student->student_mobile    = Input::get('student_mobile', false);
 		$student->medium_id         = Input::get('medium')['id'];
-        $student->fees              = Input::get('fees');
+        $student->fees              = Input::get('fees')? Input::get('fees'): "";
         $student->entry_date        = Input::get('entry_date');
         $student->year_id           = Input::get('year_id');
 		$student->save();
         //Attaching Subjects To Student
-        $subjects = $this->getSubjectsArray(Input::get('subjects'));
+        $subjects = $this->getObjectsArray(Input::get('subjects'));
         $student->subjects()->attach($subjects);
         if($batches = Input::get('batches'))
         {
@@ -37,13 +37,13 @@ class StudentController extends Controller
 		return Response::json(['msg'=>'Successfully Added Student To The System!'],200);
 	}
 
-    protected function getSubjectsArray($subjects)
+    protected function getObjectsArray($objects)
     {
         $array = array();
         $i = 0;
-        foreach($subjects as $subject)
+        foreach($objects as $object)
         {
-            $array[$i] = $subject['id'];
+            $array[$i] = $object['id'];
             $i++;
         }
         return $array;
@@ -65,31 +65,41 @@ class StudentController extends Controller
 
     public function getById($studentID)
     {
-       return Student::with(['standard', 'stream', 'subjects','medium'])->find($studentID);
+       return Student::with(['standard', 'stream', 'subjects','medium','batches'])->find($studentID);
     }
 
     public function update($studentID)
     {
-        if($student = Student::find($studentID))
+        try {
+            if ($student = Student::find($studentID)) {
+                $student->name = Input::get('name', false);
+                $student->address = Input::get('address', false);
+                $student->birthdate = Input::get('birthdate', false);
+                $student->standard_id = Input::get('standard')['id'];
+                $student->stream_id = Input::get('stream')['id'];
+                $student->email = Input::get('email', false);
+                $student->city = Input::get('city', false);
+                $student->phone = Input::get('phone');
+                $student->school = Input::get('school') ? Input::get('school') : "";
+                $student->parents_mobile = Input::get('parents_mobile', false);
+                $student->student_mobile = Input::get('student_mobile', false);
+                $student->medium_id = Input::get('medium')['id'];
+                $student->fees = Input::get('fees') ? Input::get('fees') : "";
+                $student->entry_date = Input::get('entry_date');
+                $student->year_id = Input::get('year_id');
+                $student->save();
+                //Syncing Subjects
+                $subjects = $this->getObjectsArray(Input::get('subjects'));
+                $student->subjects()->sync($subjects);
+                //Syncing Batches
+                if ($batches = Input::get('batches')) {
+                    $student->batches()->sync($this->getObjectsArray($batches));
+                }
+                return Response::json(['msg' => 'Successfully Updated Student!'], 200);
+            }
+        } catch(Exception $e)
         {
-            $student->name              = Input::get('name', false);
-            $student->address           = Input::get('address', false);
-            $student->birthdate         = Input::get('birthdate', false) ;
-            $student->standard_id       = Input::get('standard')['id'];
-            $student->stream_id         = Input::get('stream')['id'];
-            $student->email             = Input::get('email', false);
-            $student->city              = Input::get('city', false);
-            $student->phone             = Input::get('phone');
-            $student->school            = Input::get('school', false);
-            $student->parents_mobile    = Input::get('parent_mobile', false);
-            $student->student_mobile    = Input::get('student_mobile', false);
-            $student->medium_id         = Input::get('medium')['id'];
-            $student->fees              = Input::get('fees');
-            $student->save();
-            //Attaching Subjects To Student
-            $subjects = $this->getSubjectsArray(Input::get('subjects'));
-            $student->subjects()->sync($subjects);
-            return Response::json(['msg'=>'Successfully Updated Student!'],200);
+            return Response::json($e);
         }
     }
 }

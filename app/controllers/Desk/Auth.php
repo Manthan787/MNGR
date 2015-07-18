@@ -6,6 +6,7 @@ use mngr\Services\Mail\Notifier;
 use Input;
 use Student;
 use User;
+
 class Auth extends BaseController{
     protected $notifier;
     public function __construct(Notifier $notifier)

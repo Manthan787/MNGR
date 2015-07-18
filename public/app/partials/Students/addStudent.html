@@ -94,7 +94,7 @@
                                     <div class="form-group" ng-class="{'has-error' :(submitted && addUserForm.parent_mobile.$invalid) || (addUserForm.parent_mobile.$invalid && !addUserForm.parent_mobile.$pristine)}">
                                         <label class="col-sm-2 control-label">Parent's Mobile No.</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="parent_mobile" ng-model="newStudent.parent_mobile" ng-minlength="10" ng-maxlength="10" required>
+                                            <input type="number" class="form-control" name="parent_mobile" ng-model="newStudent.parents_mobile" ng-minlength="10" ng-maxlength="10" required>
                                             <p ng-show="(submitted && addUserForm.parent_mobile.$error.required) || ((addUserForm.parent_mobile.$error.number || addUserForm.parent_mobile.$error.required) && !addUserForm.parent_mobile.$pristine)" class="help-block">Enter a valid Mobile Number.</p>
                                             <p ng-show="(addUserForm.parent_mobile.$error.minlength || addUserForm.parent_mobile.$error.maxlength) && !addUserForm.parent_mobile.$pristine" class="help-block">Mobile Number must be 10 digits long.</p>
                                         </div>

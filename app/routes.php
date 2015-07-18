@@ -263,7 +263,10 @@ Route::get('/api/Streams/{streamID}/Subjects/all', function($streamID){
 
 
 });
-
+Route::get('/api/Standards/{id}/batches', function($id){
+    $standard = Standard::find($id);
+    return $standard->batches;
+});
 Route::get('/api/Standards/{stdID}/Subjects/all', function($stdID){
 
 	if($standard = Standard :: find($stdID))

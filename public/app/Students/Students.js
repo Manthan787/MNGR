@@ -178,6 +178,7 @@
                     reset();
                 }, function (response) {
                     $scope.loading = false;
+                    console.log(response);
                     $scope.error = response.data.msg;
                 });
 
@@ -220,12 +221,14 @@
 
 	});
 
-    app.controller('StudentShowController', function($scope, $http, Student, FormHelper, $routeParams){
+    app.controller('StudentShowController', function($scope, $http, Student, FormHelper, $routeParams, $filter){
         $scope.loading = true;
         $scope.showSubjects = true;
 
         Student.show($routeParams.id).then(function(data) {
             $scope.Student = data;
+            $scope.Student.birthdate = new Date($scope.Student.birthdate);
+            $scope.Student.entry_date = new Date($scope.Student.entry_date);
             FormHelper.getStandards().then(function (standards) {
 
                 $scope.standards = standards;
@@ -244,20 +247,51 @@
             FormHelper.getMediums().then(function (mediums) {
                 $scope.mediums = mediums;
             });
+            $http.get('api/years/current').then(function(response){
+                $scope.currentYear = response.data;
+            });
+            $http.get('api/Standards/'+$scope.Student.standard_id+"/batches").then(function(response){
+
+                $scope.batches = response.data;
+            });
             $scope.loading = false;
         });
 
+        function prepareBatches(std)
+        {
+            if(std.batches && std.batches[0] != undefined)
+            {
+                $scope.batches = std.batches;
+                $scope.hasBatches = true;
+            }
+            else
+            {
+                $scope.hasBatches = false;
+            }
+        }
         $scope.calculateFees = function(){
 
             $scope.Student.fees = FormHelper.calculateFees($scope.Student.subjects);
             console.log($scope.Student);
         }
 
+        var convert = function(date) {
+            return $filter('date')(date, 'yyyy-MM-dd');
+        }
+        var prepare = function() {
+            $scope.Student.year_id = $scope.currentYear.id;
+            $scope.Student.birthdate = convert($scope.Student.birthdate);
+            $scope.Student.entry_date = convert($scope.Student.entry_date);
+        }
+
         $scope.update = function()
         {
+            prepare();
             $scope.Student.update().then(function(msg){
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
                 $scope.success = msg;
+            }, function(response){
+                console.log(response);
             });
         }
         $scope.refresh = function()
@@ -276,9 +310,11 @@
             }
             else
             {
+                $scope.streams = [];
                 $scope.hasStreams = false;
                 $scope.prepareSubjectsByStd(std);
             }
+            prepareBatches(std);
         }
 
         $scope.prepareSubjectsByStd = function(std){

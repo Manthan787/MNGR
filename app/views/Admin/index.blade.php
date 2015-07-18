@@ -10,7 +10,7 @@
         
 </head>
 <body class="fixed"  ng-controller="AppController">
-                @if(Auth::check())
+                @if(Auth::check() && Auth::user()->isAdmin())
                 <!-- Header -->
                 <header>
         			<a href="/#/" class="logo"><i class="fa fa-bolt"></i> <span>Academyn</span></a>

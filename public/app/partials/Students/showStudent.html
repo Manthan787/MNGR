@@ -15,22 +15,28 @@
                             <h3>Edit Student Details</h3>
                         </div>
                         <div class="box-body">
-                            <form  class="form-horizontal" autocomplete="off" >
-
+                            <form  class="form-horizontal" name="editUserForm" autocomplete="off" novalidate>
+                                <div class="form-group" ng-class="{'has-error': (submitted && editUserForm.entry_date.$invalid) || (editUserForm.entry_date.$invalid && editUserForm.entry_date.$dirty)}">
+                                    <div class="col-sm-2 pull-right">
+                                        <input type="date" name="entry_date" ng-model="Student.entry_date" min="{{currentYear.start_date}}" max="{{currentYear.end_date}}" class="form-control" required>
+                                        <span class="help-block" ng-if="(submitted && (editUserForm.entry_date.$error.min||editUserForm.entry_date.$error.max)) || ((editUserForm.entry_date.$error.min||editUserForm.entry_date.$error.max) && editUserForm.entry_date.$dirty)">Entry Date of this form must be between the range of the current financial year {{currentYear.year}}</span>
+                                        <span class="help-block" ng-if="editUserForm.entry_date.$error.date && editUserForm.entry_date.$dirty">Entry Date must be a valid date.</span>
+                                        <span class="help-block" ng-if="editUserForm.entry_date.$error.required && editUserForm.entry_date.$dirty">This field is required.</span>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.name">
+                                        <input type="text" class="form-control" ng-model="Student.name" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Address</label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" ng-model="Student.address"></textarea>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">City</label>
                                     <div class="col-sm-10">
@@ -62,7 +68,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Parent Mobile No.</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.parent_mobile">
+                                        <input type="text" class="form-control" ng-model="Student.parents_mobile">
                                     </div>
                                 </div>
 
@@ -108,6 +114,19 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">Financial Year</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="input-text-disabled" class="form-control" value="{{currentYear.year}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Batches</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="batch" ng-model="Student.batches" ng-options="batch.name for batch in batches track by batch.id" ng-multiple="true" multiple>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Medium</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" ng-model="Student.medium" ng-options="medium.medium for medium in mediums track by medium.id">
@@ -118,7 +137,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">School</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.school" ng-change="search()">
+                                        <input type="text" class="form-control" ng-model="Student.school" value="{{Student.school? Student.school : '' }}" ng-change="search()">
                                         <ul class="list-group">
                                             <li class="list-group-item" ng-repeat="school in schools"><a href="" ng-click="approveSuggestion(school)">{{ school.name }}</a></li>
                                         </ul>
