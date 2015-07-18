@@ -15,7 +15,7 @@
                             <h3>Edit Student Details</h3>
                         </div>
                         <div class="box-body">
-                            <form  class="form-horizontal" name="editUserForm" autocomplete="off" novalidate>
+                            <form  class="form-horizontal" name="editUserForm" ng-submit="update(editUserForm.$valid)" autocomplete="off" novalidate>
                                 <div class="form-group" ng-class="{'has-error': (submitted && editUserForm.entry_date.$invalid) || (editUserForm.entry_date.$invalid && editUserForm.entry_date.$dirty)}">
                                     <div class="col-sm-2 pull-right">
                                         <input type="date" name="entry_date" ng-model="Student.entry_date" min="{{currentYear.start_date}}" max="{{currentYear.end_date}}" class="form-control" required>
@@ -25,16 +25,18 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':(submitted && editUserForm.name.$error.required ) || (editUserForm.name.$invalid && !editUserForm.name.$pristine)}">
                                     <label class="col-sm-2 control-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.name" required>
+                                        <input type="text" name="name" class="form-control" ng-model="Student.name" required>
+                                        <p ng-show="(submitted && editUserForm.name.$error.required ) || (editUserForm.name.$invalid && !editUserForm.name.$pristine)" class="help-block">Name of the Student is required.</p>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':(submitted && editUserForm.address.$error.required ) || (editUserForm.address.$invalid && !editUserForm.address.$pristine)}">
                                     <label class="col-sm-2 control-label">Address</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" ng-model="Student.address"></textarea>
+                                        <textarea class="form-control" name="address" ng-model="Student.address" required></textarea>
+                                        <p class="help-block" ng-if="(submitted && editUserForm.address.$error.required ) || (editUserForm.address.$invalid && !editUserForm.address.$pristine)">Address is required.</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -44,64 +46,77 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : editUserForm.birthdate.$invalid && !editUserForm.birthdate.$pristine}">
                                     <label class="col-sm-2 control-label">Birthdate</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" ng-model="Student.birthdate">
+                                        <input type="date" class="form-control" name="birthdate" ng-model="Student.birthdate" required>
+                                        <p class="help-block" id="noBrowserSupport"></p>
+                                        <p ng-show="editUserForm.birthdate.$error.date && !editUserForm.birthdate.$pristine" class="help-block">Select a valid date.</p>
+                                        <p ng-show="editUserForm.birthdate.$error.required && !editUserForm.birthdate.$pristine" class="help-block">Birthdate is required.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (submitted && editUserForm.email.$invalid) || (editUserForm.email.$invalid && !editUserForm.email.$pristine)}">
                                     <label class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" ng-model="Student.email">
+                                        <input type="email" class="form-control" name="email" ng-model="Student.email" required>
+                                        <p ng-show="(submitted && editUserForm.email.$error.email) || (editUserForm.email.$error.email && !editUserForm.email.$pristine)" class="help-block">Enter a valid Email Address.</p>
+                                        <p ng-show="(submitted && editUserForm.email.$error.required) || (editUserForm.email.$error.required && !editUserForm.email.$pristine)" class="help-block">Email Address is required.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error' : editUserForm.phone.$invalid && !editUserForm.phone.$pristine}">
                                     <label class="col-sm-2 control-label">Phone No.</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.phone">
+                                        <input type="text" class="form-control" name="phone" ng-model="Student.phone" ng-minlength="10" ng-maxlength="12">
+                                        <p ng-show="(editUserForm.phone.$error.minlength || editUserForm.phone.maxlength) && !editUserForm.phone.$pristine" class="help-block">The Phone Number must be between 10 and 12 digits. Include STD Code.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Parent Mobile No.</label>
+                                <div class="form-group" ng-class="{'has-error' :(submitted && editUserForm.parent_mobile.$invalid) || (editUserForm.parent_mobile.$invalid && !editUserForm.parent_mobile.$pristine)}">
+                                    <label class="col-sm-2 control-label">Parent's Mobile No.</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.parents_mobile">
+                                        <input type="text" class="form-control" name="parent_mobile" ng-model="Student.parents_mobile" ng-minlength="10" ng-maxlength="10" required>
+                                        <p ng-show="(submitted && editUserForm.parent_mobile.$error.required) || ((editUserForm.parent_mobile.$error.number || editUserForm.parent_mobile.$error.required) && !editUserForm.parent_mobile.$pristine)" class="help-block">Enter a valid Mobile Number.</p>
+                                        <p ng-show="(editUserForm.parent_mobile.$error.minlength || editUserForm.parent_mobile.$error.maxlength) && !editUserForm.parent_mobile.$pristine" class="help-block">Mobile Number must be 10 digits long.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Student Mobile No.</label>
+                                <div class="form-group" ng-class="{'has-error' :(editUserForm.student_mobile.$invalid && !editUserForm.student_mobile.$pristine) }">
+                                    <label class="col-sm-2 control-label">Student's Mobile No.</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" ng-model="Student.student_mobile">
+                                        <input type="text" class="form-control" ng-model="Student.student_mobile" name="student_mobile" ng-minlength="10" ng-maxlength="10">
+                                        <p ng-show="(submitted && editUserForm.parent_mobile.$error.number) || ((editUserForm.student_mobile.$error.number) && !editUserForm.student_mobile.$pristine)" class="help-block">Enter a valid Mobile Number.</p>
+                                        <p ng-show="(editUserForm.student_mobile.$error.minlength || editUserForm.student_mobile.$error.maxlength) && !editUserForm.student_mobile.$pristine" class="help-block">Mobile Number must be 10 digits long.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' :(submitted && editUserForm.standard.$invalid) || (editUserForm.standard.$invalid && !editUserForm.standard.$pristine) }">
                                     <label class="col-sm-2 control-label">Standard</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" ng-model="Student.standard" ng-options="standard.division for standard in standards track by standard.id" ng-change="prepareStreams(Student.standard)">
+                                        <select name="standard" class="form-control" ng-model="Student.standard" ng-options="standard.division for standard in standards track by standard.id" ng-change="prepareStreams(Student.standard)" required>
                                         </select>
+                                        <p ng-show="(submitted && editUserForm.standard.$error.required) || (editUserForm.standard.$error.required && !editUserForm.standard.$pristine)" class="help-block">Selecting Standard is required.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group" ng-show="hasStreams">
+                                <div class="form-group" ng-show="hasStreams" ng-class="{'has-error' : (submitted && editUserForm.stream.$invalid) || (editUserForm.stream.$invalid && !editUserForm.stream.$pristine)}">
                                     <label class="col-sm-2 control-label">Stream</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" ng-model="Student.stream" ng-options="stream.stream for stream in streams track by stream.id" ng-change="prepareSubjectsByStream(Student.stream)" >
+                                        <select name="stream" class="form-control" ng-model="Student.stream" ng-options="stream.stream for stream in streams track by stream.id" ng-change="prepareSubjectsByStream(Student.stream)" ng-required="hasStreams">
                                             <option value="">Select Stream</option>
                                         </select>
+                                        <p ng-show="(submitted && editUserForm.stream.$invalid) || (editUserForm.stream.$invalid && !editUserForm.stream.$pristine)" class="help-block">Selecting Stream is mandatory.</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group" ng-show="showSubjects">
+                                <div class="form-group" ng-show="showSubjects" ng-class="{'has-error' :(submitted && editUserForm.subjects.$invalid) || (editUserForm.subjects.$invalid && !editUserForm.subjects.$pristine)}">
                                     <label class="col-sm-2 control-label">Subjects</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" multiple="true" ng-model="Student.subjects" ng-options="subject.name for subject in subjects track by subject.id" ng-change="calculateFees()">
+                                        <select name="subjects" class="form-control" multiple="true" ng-model="Student.subjects" ng-options="subject.name for subject in subjects track by subject.id" ng-change="calculateFees()" required>
 
                                         </select>
+                                        <p class="help-block" ng-show="(submitted && editUserForm.subjects.$invalid) || (editUserForm.subjects.$invalid && !editUserForm.subjects.$pristine)">Select Subjects which will be studied by this student. Make sure you've added subjects in the <a href="/#/Settings/setup">Setup </a>section.</p>
                                     </div>
 
                                 </div>
@@ -126,11 +141,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (submitted && editUserForm.medium.$invalid) || (editUserForm.medium.$invalid && !editUserForm.medium.$pristine)}">
                                     <label class="col-sm-2 control-label">Medium</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" ng-model="Student.medium" ng-options="medium.medium for medium in mediums track by medium.id">
+                                        <select name="medium" class="form-control" ng-model="Student.medium" ng-options="medium.medium for medium in mediums track by medium.id" required>
                                         </select>
+                                        <p ng-show="(submitted && editUserForm.medium.$invalid) || (editUserForm.medium.$invalid && !editUserForm.medium.$pristine)" class="help-block">Selecting Medium is required.</p>
                                     </div>
                                 </div>
 
@@ -147,7 +163,7 @@
 
                                 <div class="form-group">
                                     <div align="center">
-                                        <input type="submit" value="Update" class="btn btn-success" ng-click="update()">
+                                        <input type="submit" value="Update" class="btn btn-success">
                                     </div>
                                 </div>
                             </form>

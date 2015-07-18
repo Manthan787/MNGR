@@ -71,6 +71,7 @@
         {
             $scope.hasBatches = false;
             $scope.newStudent.stream = null;
+            $scope.newStudent.fees = null;
             var streams = FormHelper.loadStreams(std);
             if(streams)
             {
@@ -284,15 +285,25 @@
             $scope.Student.entry_date = convert($scope.Student.entry_date);
         }
 
-        $scope.update = function()
+        $scope.update = function(isValid)
         {
-            prepare();
-            $scope.Student.update().then(function(msg){
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-                $scope.success = msg;
-            }, function(response){
-                console.log(response);
-            });
+            $scope.submitted = true;
+            if(isValid) {
+                prepare();
+                $scope.Student.update().then(function (msg) {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    $scope.error = null;
+                    $scope.success = msg;
+                    $scope.submitted = false;
+                    $scope.editUserForm.$setPristine();
+                }, function (response) {
+                    console.log(response);
+                    $scope.success = null;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    $scope.error = "There was an error while updating this record.";
+                    $scope.submitted = false;
+                });
+            }
         }
         $scope.refresh = function()
         {
@@ -301,6 +312,9 @@
 
         $scope.prepareStreams = function(std)
         {
+            $scope.Student.stream = null;
+            $scope.Student.fees = null;
+            $scope.Student.subjects = null;
             var streams = FormHelper.loadStreams(std);
             if(streams)
             {
