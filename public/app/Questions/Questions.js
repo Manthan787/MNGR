@@ -2,19 +2,20 @@
 
 	var app = angular.module('Questions',[]);
 
-	app.controller('QuestionsController',function($scope, Question, $location){
+	app.controller('QuestionsController',function($scope, Question, $location, $sce){
 		
 		$scope.questions = [];
 		$scope.error;
 		$scope.fetchedQuestion;
         $scope.loading = true;
+        loadQuestions();
 		$scope.fetchQuestion = function(id){
 			var fetchQuestionPromise = Question.get(id);
 			fetchQuestionPromise.then(function(q){
 				$scope.fetchedQuestion = q;
 			});
 		};
-		var loadQuestions = function() {
+		 function loadQuestions() {
             var promise = Question.getAll();
             promise.then(function (q) {
                 if (q.length === 0) {
@@ -22,6 +23,7 @@
                 }
                 else {
                     $scope.questions = q;
+                    trust($scope.questions);
                 }
                 $scope.loading = false;
             }, function (response) {
@@ -30,7 +32,14 @@
                 $scope.loading = false;
             });
         };
-        loadQuestions();
+
+        function trust(questions)
+        {
+            for(var i = 0; i<questions.length; i++)
+            {
+                questions[i].question = $sce.trustAsHtml(questions[i].question);
+            }
+        }
         $scope.delete = function(question) {
             $scope.loading = true;
             question.delete().then(function(msg){
