@@ -1,5 +1,15 @@
 <?php
 
+Route::get('/', function()
+{
+	$user = Auth::user();
+    return View::make('Admin.index')->with('user',$user);
+});
+
+Route::get('/login', function() {
+    return View::make('Admin.login');
+});
+
 Route::post("/upload", function(){
     $file = Input::file('upload');
     if($file)
@@ -16,28 +26,13 @@ Route::post("/upload", function(){
 
 });
 
-Route::get('/browse', function(){
+/*Route::get('/browse', function(){
 
     $files = File::files(public_path().'/Uploads');
     $funcNum = Input::get('CKEditorFuncNum');
     $url = Public_path().'/Uploads/IMAG0196.jpg';
     echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url');</script>";
-    /*require "mngr/Services/FileUpload/kcfinder/core/bootstrap.php";
-    $browser = new \mngr\Services\FileUpload\kcfinder\core\code\browser();
-    $browser->action(); */
-
-});
-
-Route::get('/', function()
-{
-	$user = Auth::user();
-    return View::make('Admin.index')->with('user',$user);
-});
-
-Route::get('/login', function() {
-    return View::make('Admin.login');
-});
-
+}); */
 
 Route::get('/stats', 'DashboardController@getStats');
 Route::group(['before'=>'teacher'], function() {
