@@ -1,12 +1,16 @@
 <?php
 
-Route::get('/', function()
+Route::get('/', function(){
+    return View::make("Landing.index");
+});
+
+Route::get('/admin', function()
 {
 	$user = Auth::user();
     return View::make('Admin.index')->with('user',$user);
 });
 
-Route::get('/login', function() {
+Route::get('/admin/login', function() {
     return View::make('Admin.login');
 });
 

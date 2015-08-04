@@ -4,7 +4,7 @@
         $scope.logout = function() {
             $http.get('api/auth/logout').then(function(response){
                 delete sessionStorage.authenticated;
-                $window.location.href = '/login';
+                $window.location.href = '/admin/login';
             }, function(response){
                 console.log(response);
             });

@@ -12,7 +12,7 @@
                         {
                             var deferred = $q.defer();
                             if (!sessionStorage.authenticated) {
-                                $window.location.href = '/login';
+                                $window.location.href = '/admin/login';
                                 deferred.reject();
                             }
                             else {
@@ -31,7 +31,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -49,7 +49,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -67,7 +67,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -85,7 +85,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -104,7 +104,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -123,7 +123,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -141,7 +141,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -159,7 +159,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -177,7 +177,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -195,7 +195,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -214,7 +214,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {
@@ -232,7 +232,7 @@
                     {
                         var deferred = $q.defer();
                         if (!sessionStorage.authenticated) {
-                            $window.location.href = '/login';
+                            $window.location.href = '/admin/login';
                             deferred.reject();
                         }
                         else {

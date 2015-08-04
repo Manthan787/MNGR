@@ -10,9 +10,9 @@
                 'email' : $scope.email,
                 'password' : $scope.password
             };
-            $http.post('api/auth/login', credentials).then(function (response) {
+            $http.post('/api/auth/login', credentials).then(function (response) {
                 sessionStorage.authenticated = true;
-                $window.location.href = '/';
+                $window.location.href = '/admin';
             }, function (response) {
                 $scope.msg = response.data.msg;
                 console.log($scope.msg);
