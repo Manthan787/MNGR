@@ -88,6 +88,20 @@ Route::filter('admin',function(){
 	}
 });
 
+Route::filter('admin_redirect',function(){
+    if(Auth::check())
+    {
+        if(!Auth::user()->isAdmin())
+        {
+            return Redirect::to('/');
+        }
+    }
+    else
+    {
+        return Redirect::to('/admin/login');
+    }
+});
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
