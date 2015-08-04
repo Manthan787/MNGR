@@ -47,7 +47,6 @@
           <p class="alert alert-info" align="center">
             <button type="button" class="close" data-dismiss="alert">×</button>
             {{Session::get('message')}}
-
           </p>
           @endif
 

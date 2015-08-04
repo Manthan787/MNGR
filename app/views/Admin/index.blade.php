@@ -13,7 +13,7 @@
                 @if(Auth::check() && Auth::user()->isAdmin())
                 <!-- Header -->
                 <header>
-        			<a href="/#/" class="logo"><i class="fa fa-bolt"></i> <span>Academyn</span></a>
+        			<a href="/#/" class="logo"><i class="fa fa-bolt"></i> <span>Acharya</span></a>
                     <nav class="navbar navbar-static-top">
                         <a href="#" class="navbar-btn sidebar-toggle">
                             <span class="sr-only">Toggle navigation</span>

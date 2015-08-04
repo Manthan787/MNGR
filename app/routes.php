@@ -359,7 +359,8 @@ Route::group(['before'=>'student'], function() {
     Route::get('desk/logout','Desk\Controller\Auth@getLogout');
     Route::get('desk/test/practice','Desk\Controller\Test@getPractice');
     Route::get('desk/study','Desk\Controller\Study@getIndex');
-
+    Route::get('desk/change-password', 'Desk\Controller\Dashboard@getChangePassword');
+    Route::post('desk/change-password', 'Desk\Controller\Dashboard@postChangePassword');
     ## STUDENT DESK API ROUTES
     Route::post('api/desk/test/practice/generate','Desk\Controller\Test@generatePractice');
     Route::get('api/desk/chapters/{id}/material', function($id){

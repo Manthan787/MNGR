@@ -24,6 +24,7 @@
                             class="icon-cog"></i> {{ Auth::user()->profile->name }} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="/desk/profile">Profile</a></li>
+              <li><a href="/desk/change-password">Change Password</a></li>
               <li><a href="/desk/logout">Sign Out</a></li>
             </ul>
           </li>
