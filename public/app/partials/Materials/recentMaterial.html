@@ -1,0 +1,39 @@
+<div class="rightside">
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                <div align="center" ng-show="loading">
+                    <img src="app/admin/img/loader.gif" height="45" width="45">
+                </div>
+                <section>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Materials/recent"><i class="fa fa-clock-o"></i> Recently Added</a></li>
+                        <li><a href="#Materials/add"><i class="glyphicon glyphicon-plus"></i> Add Material</a></li>
+
+                    </ul>
+                </section>
+                <br>
+                    <div class="row" ng-repeat="material in materials">
+                        <div class="col-md-12">
+                            <div class="custom-box-material palette-white">
+                                <div class="controls">
+                                    <button class="btn btn-danger btn-circle btn-outline" ng-click="delete(material.id)"><i class="glyphicon glyphicon-remove"></i></button>
+                                </div>
+                                <a href="#/Materials/{{material.id}}">
+                                    <h1>{{ material.topic }}</h1>
+                                </a>
+                                <div class="meta">
+                                    <span class="tag label label-danger">{{ material.subject.name }}</span>
+                                    <span class="tag label label-success">{{ material.chapter.title }}</span>
+                                </div>
+                                <p ng-bind-html="material.text | limitHtml:500"></p>
+                                <p ><b>...</b></p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

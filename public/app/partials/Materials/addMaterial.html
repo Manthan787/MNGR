@@ -9,7 +9,8 @@
                 </div>
                 <section>
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#Questions/add"><i class="glyphicon glyphicon-plus"></i> Add Material</a></li>
+                        <li><a href="#Materials/recent"><i class="fa fa-clock-o"></i> Recently Added</a></li>
+                        <li class="active"><a href="#Materials/add"><i class="glyphicon glyphicon-plus"></i> Add Material</a></li>
                     </ul>
                 </section>
                 <form  class="form-horizontal" id="AddForm" ng-controller="AddMaterialController" ng-submit="addMaterial()">
@@ -67,7 +68,7 @@
                         <div class="box-body">
                             <input type="text" class="form-control" ng-model="newMaterial.topic" placeholder="Topic">
                             <br>
-                            <textarea name="question" class="ckeditor" ng-model="newMaterial.text" rows="30" required></textarea>
+                            <textarea name="material_text" class="ckeditor" ng-model="newMaterial.text" rows="30" required></textarea>
                             <br>
                             <div class="row" align="center">
                                 <input type="submit" value="Add" class="btn btn-success">

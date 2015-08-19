@@ -1,11 +1,20 @@
 (function(){
     angular.module('Materials', [])
+        .filter('limitHtml', function() {
+            return function(text, limit) {
+
+                var changedString = String(text).replace(/<[^>]+>/gm, '');
+                var length = changedString.length;
+
+                return changedString.length > limit ? changedString.substr(0, limit - 1) : changedString;
+            }
+        })
         .controller("MaterialsController", function(){
 
         })
         .controller('AddMaterialController', function($scope, Standard, FormHelper, $http){
             $scope.newMaterial = {};
-            var ck = CKEDITOR.replace('question',{
+            var ck = CKEDITOR.replace('material_text',{
                 'extraPlugins': 'pastefromword,oembed,widget',
                 'height': '500px'
             });
@@ -81,5 +90,101 @@
                     console.log(response);
                 });
             }
+        })
+
+        .controller('RecentMaterialController', function($scope, $http, $sce) {
+            getRecent();
+            function getRecent() {
+                $scope.loading = true;
+                $http.get('api/materials/recent').then(function(response){
+                    $scope.materials = response.data;
+                    trust($scope.materials);
+                    $scope.loading = false;
+                });
+            }
+
+            function trust(materials)
+            {
+                for(var i = 0; i<materials.length; i++)
+                {
+                    materials[i].text = $sce.trustAsHtml(materials[i].text);
+                }
+            }
+
+            $scope.delete = function(id) {
+                var ans = confirm('Are you sure you want to delete this item?');
+                if(ans === true)
+                {
+                    $scope.loading = true;
+                    $http.delete('api/materials/'+id+'/delete')
+                        .then(function(response){
+                            $scope.success = response.data.msg;
+                            getRecent();
+                            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                        },function(response){
+                            $scope.error = response.data;
+                            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    });
+                }
+            }
+
+        })
+        .controller('EditMaterialController', function($scope, $http, $routeParams){
+            $scope.$parent.loading = true;
+            var ck;
+            $http.get('api/materials/'+$routeParams.id).then(function(response){
+
+                $scope.material = response.data;
+                $scope.selectedSubject = response.data.subject.id;
+                $scope.getChapters($scope.selectedSubject);
+                ck = CKEDITOR.replace('material_text_edit', {
+                    'extraPlugins': 'pastefromword,oembed,widget',
+                    'height': '500px'
+                });
+                ck.setData($scope.material.text);
+                ck.on('pasteState', pasteStateHandler);
+                $scope.$parent.loading = false;
+            });
+            $scope.$parent.loading = true;
+            $http.get('api/Subjects/all').then(function(response){
+                $scope.subjects = response.data;
+                $scope.$parent.loading = false;
+            });
+            function pasteStateHandler() {
+                console.log('called!');
+                var elm = document.getElementById('EditForm');
+                var scope = angular.element(elm).scope();
+                scope.$apply(function () {
+                    $scope.material.text = ck.getData();
+                });
+            }
+
+            $scope.isSelected = function(check, reference){
+                if(check === reference)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            $scope.getChapters = function(subjectID) {
+                $scope.loading = true;
+                $http.get("api/Subjects/"+subjectID+"/Chapters").then(function(response){
+                    $scope.chapters = response.data;
+                    $scope.loading = false;
+                });
+            };
+
+            $scope.updateMaterial = function(isValid) {
+                if(isValid) {
+                    $http.post('api/materials/'+$scope.material.id+'/edit', $scope.material)
+                        .then(function(response){
+                            $scope.$parent.success = response.data.msg;
+                        }, function(response){
+                            $scope.$parent.error = response.data;
+                        });
+                }
+            }
         });
+
 })();

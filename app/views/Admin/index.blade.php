@@ -57,7 +57,7 @@
                         <br>
                         <ul class="sidebar-menu">
                             <li>
-                                <a href="/admin#">
+                                <a href="/admin#/">
                                     <i class="fa fa-home"></i> <span>Dashboard</span>
                                 </a>
                             </li>
@@ -90,7 +90,9 @@
                                         <i class="fa fa-angle-right pull-right"></i>
                                 </a>
                                 <ul class="sub-menu">
+                                    <li><a href="#Materials/recent"><i class="fa fa-clock-o"></i>Recently Added</a></li>
                                     <li><a href="#Materials/add"><i class="fa fa-plus"></i>Add Material</a></li>
+                                    <li><a href="#Materials/search"><i class="fa fa-search"></i>Search Material</a></li>
                                 </ul>
                             </li>
                             <li class="sub-nav">

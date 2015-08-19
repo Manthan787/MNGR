@@ -19,4 +19,5 @@ class Chapter extends Eloquent
     {
         return $this->hasMany('StudyMaterial','chapter_id');
     }
+
 }

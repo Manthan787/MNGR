@@ -3,6 +3,7 @@
 Route::get('/', function(){
     return View::make("Landing.index");
 });
+
 Route::group(['before' => 'admin_redirect'], function(){
     Route::get('/admin', function()
     {
@@ -386,23 +387,18 @@ Route::group(['before'=>'student'], function() {
     });
 });
 
-Route::post('api/materials/add', function(){
-    try {
-        $material = new StudyMaterial;
-        $material->topic = Input::get('topic');
-        $material->text = Input::get('text');
-        $material->chapter_id = Input::get('chapter_id');
-        $material->save();
-        return Response::json(['msg' => 'Successfully Added This Topic To The System'], 200);
-    }
-    catch(Exception $e)
-    {
-        return Response::json($e->getMessage());
-    }
+Route::group(['before' => 'teacher'], function(){
+    Route::post('api/materials/add', 'MaterialController@add');
+    Route::get('api/materials/recent', 'MaterialController@getRecent');
+    Route::get('api/materials/{id}', 'MaterialController@getById');
+    Route::post('api/materials/{id}/edit', 'MaterialController@edit');
+    Route::delete('api/materials/{id}/delete','MaterialController@delete');
 });
 
 
+
 Route::get('/ex', function(){
-    $ch = Chapter::find(3);
-    return $ch->material;
+    $mat = StudyMaterial::orderBy('created_at','DESC')->with('chapter')->get()->take(10);
+    return $mat;
+
 });

@@ -114,7 +114,6 @@
                                     <label class="col-sm-2 control-label">Subjects</label>
                                     <div class="col-sm-10">
                                         <select name="subjects" class="form-control" multiple="true" ng-model="Student.subjects" ng-options="subject.name for subject in subjects track by subject.id" ng-change="calculateFees()" required>
-
                                         </select>
                                         <p class="help-block" ng-show="(submitted && editUserForm.subjects.$invalid) || (editUserForm.subjects.$invalid && !editUserForm.subjects.$pristine)">Select Subjects which will be studied by this student. Make sure you've added subjects in the <a href="/#/Settings/setup">Setup </a>section.</p>
                                     </div>

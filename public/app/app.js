@@ -77,6 +77,42 @@
                     }
                 }
         })
+            .when('/Materials/recent', {
+                templateUrl:'app/partials/Materials/recentMaterial.html',
+                controller:'RecentMaterialController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/admin/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+            })
+            .when('/Materials/:id', {
+                templateUrl:'app/partials/Materials/editMaterial.html',
+                controller:'MaterialsController',
+                resolve: {
+                    load :  function($q, $window)
+                    {
+                        var deferred = $q.defer();
+                        if (!sessionStorage.authenticated) {
+                            $window.location.href = '/admin/login';
+                            deferred.reject();
+                        }
+                        else {
+                            deferred.resolve();
+                        }
+                        return deferred.promise;
+                    }
+                }
+            })
 		.when('/Students/search', {
 			templateUrl:'app/partials/Students/searchStudents.html',
 			controller:'StudentsController',
