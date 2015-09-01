@@ -26,7 +26,7 @@ class Standard extends Eloquent
     }
 	public function hasStreams()
 	{
-		
+
 
 		if(! count($this->streams) > 0)
 		{

@@ -6,11 +6,12 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "thujohn/pdf": "dev-master"
+    "thujohn/pdf": "dev-master",
+		"manthan/nuncio":"~1.0"
 	},
     "require-dev":{
       "phpunit/phpunit":"3.7.*",
-      "way/generators": "~2.0"  
+      "way/generators": "~2.0"
     },
 	"autoload": {
 		"classmap": [
@@ -22,11 +23,11 @@
 			"app/tests/TestCase.php",
             "app/helpers"
 		],
-        
+
         "psr-4":{
             "mngr\\":"app/mngr",
             "Desk\\":"app/controllers/Desk"
-            
+
         }
 	},
 	"scripts": {

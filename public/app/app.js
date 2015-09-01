@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','ngRoute','ngSanitize']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','ngRoute','ngSanitize']);
 
 	app.config(function($routeProvider){
 		$routeProvider
@@ -151,9 +151,27 @@
                 }
             })
 
-        .when('/Students/:id', {
-                templateUrl:'app/partials/Students/showStudent.html',
-                controller:'StudentShowController',
+    .when('/Students/:id', {
+            templateUrl:'app/partials/Students/showStudent.html',
+            controller:'StudentShowController',
+            resolve: {
+                load :  function($q, $window)
+                {
+                    var deferred = $q.defer();
+                    if (!sessionStorage.authenticated) {
+                        $window.location.href = '/admin/login';
+                        deferred.reject();
+                    }
+                    else {
+                        deferred.resolve();
+                    }
+                    return deferred.promise;
+                }
+            }
+        })
+		.when('/Alerts/send', {
+			templateUrl:'app/partials/SMS/send.html',
+			controller:'SMSController',
                 resolve: {
                     load :  function($q, $window)
                     {
@@ -168,7 +186,7 @@
                         return deferred.promise;
                     }
                 }
-            })
+		})
 		.when('/Settings/setup', {
 			templateUrl:'app/partials/Settings/setup.html',
 			controller:'SettingsController',

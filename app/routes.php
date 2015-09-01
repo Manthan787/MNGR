@@ -88,7 +88,7 @@ Route::group(['before'=>'teacher'],function(){
     Route::get('api/Students/{studentID}/delete', 'StudentController@delete');
     Route::post('api/Students/{studentID}/update', 'StudentController@update');
 
-});	
+});
 //TODO Create repositories for Standards and Streams and move them to seperate Controllers. Also Create form services.
 Route::get('/api/Standards/all',function(){
 	$standards = Standard::with(['streams','subjects','batches'])->get();
@@ -130,7 +130,7 @@ Route::post('/api/Standards/add', function(){
 		}
 	}
 	return Response::json(['msg'=>'Successfully Added Standard To The System!'],200);
-	
+
 });
 
 Route::post('/api/Standards/delete', function(){
@@ -156,6 +156,13 @@ Route::post('/api/Standards/delete', function(){
 
 	return Response::json(['msg'=>'Successfully Deleted Standard From The System.'],200);
 
+});
+
+Route::get('api/Standards/{id}/Students', function($id) {
+    if($std = Standard::find($id))
+    {
+      return $std->students()->with(['batches'])->get();
+    }
 });
 
 Route::post('/api/Standards/{id}/Streams/add', function($id){
@@ -275,12 +282,12 @@ Route::post('/api/Subjects/{id}/edit', function($id){
 	if($subject)
 	{
 		$subject->name = Input::get('name');
-        $subject->stream_id = Input::get('stream_id');
+    $subject->stream_id = Input::get('stream_id');
 		$subject->fees = Input::get('fees');
 		$subject->save();
-		
+
 		return Response::json(['msg' => 'Successfully Edited Subject.'],200);
-		
+
 	}
 });
 

@@ -1,0 +1,110 @@
+<div class="rightside">
+  <div class="page-head">
+      <h1>
+        <i class="fa fa-bullhorn"> SMS Alerts</i>
+        <small>Send SMS Alerts to parents!</small>
+      </h1>
+  </div>
+
+  <div class="content">
+    <div class="row">
+      <div class="container">
+        <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+        <div class="alert alert-success" ng-show="success">{{ success }}</div>
+        <div align="center" ng-show="loading">
+            <img src="app/admin/img/loader.gif" height="45" width="45">
+        </div>
+
+        <div class="box" style="margin-bottom: 30px">
+           <div class="box-title">
+               <i class="fa fa-envelope-square"></i>
+               <h3>Compose Message</h3>
+           </div>
+           <div class="box-body">
+               <form class="from-horizontal" name="SendForm" novalidate>
+                <div class="form-group">
+                  <select class="form-control"
+                          name="standard"
+                          ng-options="standard.division for standard in standards"
+                          ng-model="Standard"
+                          ng-change="standardSelected(Standard)"
+                          required
+                          >
+                    <option value="">Select Standard</option>
+                  </select>
+                </div>
+                   <textarea name="message"
+                             ng-model="Message"
+                             placeholder="Compose your message here..."
+                             class="form-control"
+                             rows="4">
+                    </textarea>
+              </form>
+          </div>
+           <div class="box-footer clearfix">
+
+               <button type="submit"
+               class="pull-right btn btn-success"
+               ng-click="Send(SendForm.$valid)"
+               >
+                 Send
+               <i class="fa fa-send-o"></i></button>
+           </div>
+      </div>
+
+      <div class="box" ng-if="hasRecepients()">
+        <div class="box-title">
+          <h3>Recepients ({{ recepientCount }})</h3>
+        </div>
+        <div class="box-body">
+            <form class="form-horizontal" ng-if="showFilter(Standard)">
+              <div class="form-group">
+                <label class="col-sm-2 control-label"> Choose Filter</label>
+                <div class="col-sm-4">
+                  <select class="form-control" id="select_filter" ng-model="filter" ng-change="loadFilters(filter)">
+                    <option value="">None</option>
+                    <option value="filter_by_stream" ng-if="hasStreams(Standard)">Filter By Stream</option>
+                    <option value="filter_by_batch" ng-if="hasBatches(Standard)">Filter By Batch</option>
+                    <option value="filter_by_both" ng-if="hasStreams(Standard) && hasBatches(Standard)">Filter By Stream and Batch</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" ng-if="displayStreamsOption">
+                <label class="col-sm-2 control-label">Stream</label>
+                <div class="col-sm-4">
+                  <select name="stream"
+                          ng-model="Stream"
+                          ng-options="stream.stream for stream in Standard.streams"
+                          ng-change="filterByStream(Stream)"
+                          class="form-control">
+                    <option value="">Select Stream</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="displayBatchesOption">
+                <label class="col-sm-2 control-label">Batch</label>
+                <div class="col-sm-4">
+                  <select name="batch"
+                          ng-model="Batch"
+                          ng-options="batch.name for batch in Standard.batches"
+                          ng-change="filterByBatch(Batch)"
+                          class="form-control">
+                    <option value="">Select Batch</option>
+                  </select>
+                </div>
+              </div>
+          </form>
+
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="recepient in recepients">
+              {{recepient.name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

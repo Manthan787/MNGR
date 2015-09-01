@@ -23,17 +23,17 @@ class StudentController extends Controller
 		$student->parents_mobile    = Input::get('parents_mobile', false);
 		$student->student_mobile    = Input::get('student_mobile', false);
 		$student->medium_id         = Input::get('medium')['id'];
-        $student->fees              = Input::get('fees')? Input::get('fees'): "";
-        $student->entry_date        = Input::get('entry_date');
-        $student->year_id           = Input::get('year_id');
+    $student->fees              = Input::get('fees')? Input::get('fees'): "";
+    $student->entry_date        = Input::get('entry_date');
+    $student->year_id           = Input::get('year_id');
 		$student->save();
-        //Attaching Subjects To Student
-        $subjects = $this->getObjectsArray(Input::get('subjects'));
-        $student->subjects()->attach($subjects);
-        if($batches = Input::get('batches'))
-        {
-            $student->batches()->attach($batches);
-        }
+    //Attaching Subjects To Student
+    $subjects = $this->getObjectsArray(Input::get('subjects'));
+    $student->subjects()->attach($subjects);
+    if($batches = Input::get('batches'))
+    {
+        $student->batches()->attach($batches);
+    }
 		return Response::json(['msg'=>'Successfully Added Student To The System!'],200);
 	}
 
