@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module('SMS', []);
 
-    app.controller('SMSController', function($scope, Standard, $http) {
+    app.controller('SMSController', function($scope, Standard, Student, $http) {
         // bootstrap the page
         $scope.loading = true;
         Standard.getAll().then(function(standards) {
@@ -13,21 +13,48 @@
         $scope.displayStreamsOption = false;
         $scope.displayBatchesOption = false;
 
+        $scope.RecepientTypes = [
+          {"id": 1, "type": "Notify Students"},
+          {"id": 2, "type": "Notify Parents"}, // This is the default recepient type
+          {"id": 3, "type": "Notify both Students & Parents"}
+        ];
+
+        $scope.setRecepientType = function(typeID) {
+          for(var i = 0; i < $scope.RecepientTypes.length; i++)
+          {
+            if($scope.RecepientTypes[i].id === typeID)
+                $scope.currentRecepientType = $scope.RecepientTypes[i];
+          }
+
+        }
+
+        $scope.setRecepientType(2);
+
         $scope.standardSelected = function(standard) {
+            $scope.currentFilter = null;
             if(standard)
             {
+              $scope.error = "";
               $scope.loading = true;
               $http.get('api/Standards/'+standard.id+'/Students')
               .then(function(response) {
                   $scope.students = response.data;
                   $scope.recepients = response.data;
                   $scope.recepientCount = $scope.recepients.length;
+
+                  if(!$scope.hasRecepients()) {
+                    $scope.error = "There are no students in standard " + standard.division +". Add students to this standard and try again later.";
+                  }
                   $scope.loading = false;
               }, function() {
                   console.log("ERROR!");
                   $scope.loading = false;
               });
 
+            }
+            else {
+              $scope.error = '';
+              updateRecepients([]);
             }
           }
 
@@ -56,43 +83,12 @@
               return true;
         }
 
-        $scope.showFilter = function(standard) {
-            if(!$scope.hasStreams(standard) && !$scope.hasBatches(standard))
-            {
-              return false;
-            }
-              return true;
-        }
-
-        $scope.loadFilters = function(filter) {
-          $scope.loading = true;
-
-          if(filter === 'filter_by_stream') {
-            $scope.displayStreamsOption = true;
-            $scope.displayBatchesOption = false;
-          }
-          else if(filter === 'filter_by_batch') {
-            $scope.displayStreamsOption = false;
-            $scope.displayBatchesOption = true;
-          }
-          else if(filter === 'filter_by_both') {
-            resetFilterVariables();
-            $scope.displayStreamsOption = true;
-            $scope.displayBatchesOption = true;
-          }
-          else {
-            $scope.displayStreamsOption = false;
-            $scope.displayBatchesOption = false;
-          }
-          updateRecepients($scope.students);
-          $scope.loading = false;
-        }
-
 
         $scope.filterByStream = function(stream) {
           $scope.loading = true;
           if(stream)
           {
+            $scope.currentFilter = stream.stream;
             var filtered_recepients = [];
             for(var i = 0; i < $scope.students.length; i++)
             {
@@ -114,6 +110,7 @@
           $scope.loading = true;
           if(batch)
           {
+            $scope.currentFilter = batch.name;
             var filtered_recepients = [];
             for(var i = 0; i < $scope.students.length; i++)
             {
@@ -138,9 +135,37 @@
           }
         }
 
-
         $scope.Send = function(isValid) {
           alert(isValid);
+        }
+
+        $scope.resetRecepientList = function() {
+          $scope.currentFilter = null;
+          updateRecepients($scope.students);
+        }
+
+        $scope.checkAll = function() {
+          angular.forEach($scope.recepients, function (recepient) {
+            recepient.selected = true;
+          });
+        }
+
+        $scope.uncheckAll = function() {
+          angular.forEach($scope.recepients, function(recepient) {
+            recepient.selected = false;
+          });
+        }
+
+        $scope.remove = function() {
+          for(var i = 0; i < $scope.students.length; i++)
+          {
+              console.log(i);
+              if($scope.recepients[i].selected) {
+                var index = $scope.recepients.indexOf($scope.recepients[i]);
+                $scope.recepients.splice(index, 1);
+              }
+          }
+          $scope.recepientCount = $scope.recepients.length;
         }
 
         function updateRecepients(newRecepients) {
@@ -149,8 +174,8 @@
         }
 
         function resetFilterVariables() {
-          $scope.Stream = {};
-          $scope.Batch = {};
+          $scope.Stream = "";
+          $scope.Batch = "";
         }
 
     });

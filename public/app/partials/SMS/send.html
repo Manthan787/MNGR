@@ -42,13 +42,34 @@
               </form>
           </div>
            <div class="box-footer clearfix">
+             <div class="btn-group">
+               <button type="button"
+                       title="Click on this button to change this option!"
+                       class="btn btn-info dropdown-toggle"
+                       data-toggle="dropdown">
+                       {{ currentRecepientType.type }}
+                       <i class="fa fa-bell-o"></i>
+              </button>
+               <ul class="dropdown-menu" role="menu">
+                   <li>
+                     <a href=""
+                          ng-repeat="RecepientType in RecepientTypes"
+                          ng-click="setRecepientType(RecepientType.id)">
+                          {{ RecepientType.type }}
+                          <i class="fa fa-check"
+                             ng-if="currentRecepientType.id === RecepientType.id"></i>
+                      </a>
+                   </li>
+               </ul>
+             </div>
 
-               <button type="submit"
-               class="pull-right btn btn-success"
-               ng-click="Send(SendForm.$valid)"
+             <button type="submit"
+                       class="pull-right btn btn-success"
+                       ng-click="Send(SendForm.$valid)"
                >
                  Send
-               <i class="fa fa-send-o"></i></button>
+               <i class="fa fa-send-o"></i>
+             </button>
            </div>
       </div>
 
@@ -57,54 +78,87 @@
           <h3>Recepients ({{ recepientCount }})</h3>
         </div>
         <div class="box-body">
-            <form class="form-horizontal" ng-if="showFilter(Standard)">
-              <div class="form-group">
-                <label class="col-sm-2 control-label"> Choose Filter</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="select_filter" ng-model="filter" ng-change="loadFilters(filter)">
-                    <option value="">None</option>
-                    <option value="filter_by_stream" ng-if="hasStreams(Standard)">Filter By Stream</option>
-                    <option value="filter_by_batch" ng-if="hasBatches(Standard)">Filter By Batch</option>
-                    <option value="filter_by_both" ng-if="hasStreams(Standard) && hasBatches(Standard)">Filter By Stream and Batch</option>
-                  </select>
+          <div class="mailbox row">
+            <div class="col-md-12 col-sm-8">
+              <div class="mailbox-tools clearfix">
+                <div class="pull-left">
+                  <div class="btn-group">
+                    <button type="button"
+                            class="btn btn-info no-radius dropdown-toggle"
+                            data-toggle="dropdown">Options
+                            <i class="fa fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="" ng-click="checkAll()">Select all</a></li>
+                      <li><a href="" ng-click="uncheckAll()">Select none</a></li>
+                      <li><a href="" ng-click="remove()">Remove</a></li>
+                    </ul>
+                  </div>
+                  <button class="btn btn-primary"
+                          ng-click = "resetRecepientList()">
+                          <i class="fa fa-refresh"></i>
+                          Reset
+                  </button>
+                </div>
+                <div class="pull-right" ng-if="hasStreams(Standard)">
+                  <!-- Current Filter -->
+                  <span class="tag label label-primary" ng-if="currentFilter"><i class="fa fa-filter"></i> {{ currentFilter }}</span>
+                  <div class="btn-group">
+                    <button type="button"
+                            class="btn btn-warning palette-carrot dropdown-toggle"
+                            data-toggle="dropdown">Filter By Stream
+                            <i class="fa fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href=""
+                             ng-repeat="stream in Standard.streams"
+                             ng-click="filterByStream(stream)">
+                             {{ stream.stream }}
+                             <i class="fa fa-filter"
+                                ng-if="stream.stream === currentFilter"></i>
+                          </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button"
+                            class="btn btn-info palette-sun-flower dropdown-toggle"
+                            data-toggle="dropdown">Filter By Batch
+                            <i class="fa fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href=""
+                             ng-repeat="batch in Standard.batches"
+                             ng-click="filterByBatch(batch)">
+                             {{ batch.name }}
+                             <i class="fa fa-filter"
+                                ng-if="batch.name === currentFilter"></i>
+                          </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="form-group" ng-if="displayStreamsOption">
-                <label class="col-sm-2 control-label">Stream</label>
-                <div class="col-sm-4">
-                  <select name="stream"
-                          ng-model="Stream"
-                          ng-options="stream.stream for stream in Standard.streams"
-                          ng-change="filterByStream(Stream)"
-                          class="form-control">
-                    <option value="">Select Stream</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group" ng-if="displayBatchesOption">
-                <label class="col-sm-2 control-label">Batch</label>
-                <div class="col-sm-4">
-                  <select name="batch"
-                          ng-model="Batch"
-                          ng-options="batch.name for batch in Standard.batches"
-                          ng-change="filterByBatch(Batch)"
-                          class="form-control">
-                    <option value="">Select Batch</option>
-                  </select>
-                </div>
-              </div>
-          </form>
-
-          <ul class="list-group">
-            <li class="list-group-item" ng-repeat="recepient in recepients">
-              {{recepient.name}}
-            </li>
-          </ul>
-        </div>
-      </div>
-
+              <div class="table-responsive scroll">
+                <table class="table table-hover">
+                  <tr class="unread" ng-repeat = "recepient in recepients">
+                      <td class="small"><input type="checkbox" ng-model="recepient.selected"/></td>
+                      <td>{{ recepient.name }}</td>
+                      <td>{{ recepient.stream.stream }}</td>
+                      <td>
+                        <span ng-repeat="batch in recepient.batches">
+                            {{ batch.name }} <br/>
+                        </span>
+                      </td>
+                  </tr>
+                </table>
+             </div><!-- /.table-responsive -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
       </div>
     </div>
+
   </div>
+</div>
+</div>
 </div>

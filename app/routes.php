@@ -161,7 +161,7 @@ Route::post('/api/Standards/delete', function(){
 Route::get('api/Standards/{id}/Students', function($id) {
     if($std = Standard::find($id))
     {
-      return $std->students()->with(['batches'])->get();
+      return $std->students()->with(['batches', 'stream'])->get();
     }
 });
 

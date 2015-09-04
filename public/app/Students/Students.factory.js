@@ -8,7 +8,7 @@
 
 			angular.extend(this, data);
 		}
-		
+
 		Student.getAll = function(){
 			return $http.get('api/Students/all').then(function(response){
 				var Students = [];
@@ -18,7 +18,7 @@
 				}
 
 				return Students;
-			
+
 			});
 		};
 
