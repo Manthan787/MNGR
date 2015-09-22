@@ -33,9 +33,9 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('auth.student', function()
 {
-	if(Auth::check())
+	if(Auth::check() && Auth::user()->isStudent())
     {
         return Redirect::to('/desk');
     }
@@ -51,7 +51,7 @@ Route::filter('teacher',function(){
 	}
 	else
 	{
-		
+
 		return Response::json(['msg' => 'You need to login to access this page!',
 								   'redirect' => 'login'],401);
 	}

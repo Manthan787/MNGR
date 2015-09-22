@@ -22,7 +22,8 @@
            </div>
            <div class="box-body">
                <form class="from-horizontal" name="SendForm" novalidate>
-                <div class="form-group">
+                <div class="form-group"
+                     ng-class="{'has-error': (SendForm.standard.$invalid && SendForm.$submitted)||(SendForm.standard.$invalid && SendForm.standard.$dirty) }">
                   <select class="form-control"
                           name="standard"
                           ng-options="standard.division for standard in standards"
@@ -32,13 +33,24 @@
                           >
                     <option value="">Select Standard</option>
                   </select>
+                  <p class="help-block"
+                     ng-if="(SendForm.standard.$invalid && SendForm.$submitted)||(SendForm.standard.$invalid && SendForm.standard.$dirty)">This field is required.
+                   </p>
                 </div>
+                <div class="form-group"
+                     ng-class="{'has-error': (SendForm.message.$invalid && SendForm.$submitted)||(SendForm.message.$invalid && SendForm.message.$dirty) }">
                    <textarea name="message"
                              ng-model="Message"
                              placeholder="Compose your message here..."
                              class="form-control"
-                             rows="4">
+                             rows="4"
+                             required>
                     </textarea>
+                    <p class="help-block"
+                       ng-if="(SendForm.message.$invalid && SendForm.$submitted)||(SendForm.message.$invalid && SendForm.message.$dirty)">
+                       Message can't be empty.
+                     </p>
+                </div
               </form>
           </div>
            <div class="box-footer clearfix">
@@ -47,8 +59,8 @@
                        title="Click on this button to change this option!"
                        class="btn btn-info dropdown-toggle"
                        data-toggle="dropdown">
-                       {{ currentRecepientType.type }}
                        <i class="fa fa-bell-o"></i>
+                       {{ currentRecepientType.type }}
               </button>
                <ul class="dropdown-menu" role="menu">
                    <li>
@@ -99,6 +111,12 @@
                           <i class="fa fa-refresh"></i>
                           Reset
                   </button>
+                  <button class="btn btn-danger"
+                          ng-click = "remove()"
+                          ng-if = "showRemoveButton"
+                          >
+                          <i class="fa fa-trash-o"></i>
+                  </button>
                 </div>
                 <div class="pull-right" ng-if="hasStreams(Standard)">
                   <!-- Current Filter -->
@@ -142,7 +160,8 @@
               <div class="table-responsive scroll">
                 <table class="table table-hover">
                   <tr class="unread" ng-repeat = "recepient in recepients">
-                      <td class="small"><input type="checkbox" ng-model="recepient.selected"/></td>
+                      <td class="small"><input type="checkbox"
+                                               ng-model="recepient.selected"/></td>
                       <td>{{ recepient.name }}</td>
                       <td>{{ recepient.stream.stream }}</td>
                       <td>

@@ -49,6 +49,10 @@ Route::group(['before'=>'teacher'], function() {
     Route::post('api/Chapters/{id}/edit', 'ChapterController@postEdit');
 });
 
+Route::group(['before' => 'admin'], function() {
+    Route::post('api/sms/send', 'SMSController@send');
+});
+
 Route::post('form','UserController@store');
 
 Route::post('api/auth/login', 'AuthController@login');
@@ -357,12 +361,14 @@ Route::post('api/batches/add','BatchController@postAdd');
 
 
 //# STUDENT's APP
-Route::group(['before'=>'auth'], function(){
+Route::group(['before'=>'auth.student'], function(){
 
     Route::get('desk/login', 'Desk\Controller\Auth@getLogin');
     Route::post('desk/login', 'Desk\Controller\Auth@postLogin');
     Route::get('desk/activate', 'Desk\Controller\Auth@getActivate');
     Route::post('desk/activate', 'Desk\Controller\Auth@postActivate');
+    Route::get('desk/forgot-password', 'Desk\Controller\Auth@getForgotPassword');
+    Route::post('desk/forgot-password', 'Desk\Controller\Auth@postForgotPassword');
 
 });
 
@@ -375,6 +381,7 @@ Route::group(['before'=>'student'], function() {
     Route::get('desk/study','Desk\Controller\Study@getIndex');
     Route::get('desk/change-password', 'Desk\Controller\Dashboard@getChangePassword');
     Route::post('desk/change-password', 'Desk\Controller\Dashboard@postChangePassword');
+
     ## STUDENT DESK API ROUTES
     Route::post('api/desk/test/practice/generate','Desk\Controller\Test@generatePractice');
     Route::get('api/desk/chapters/{id}/material', function($id){
@@ -405,7 +412,8 @@ Route::group(['before' => 'teacher'], function(){
 
 
 Route::get('/ex', function(){
-    $mat = StudyMaterial::orderBy('created_at','DESC')->with('chapter')->get()->take(10);
-    return $mat;
+
+    $plivo = App::make('mngr\Services\SMS\PlivoMessenger');
+    $plivo->from("whatever")->to('+917698716148')->notify(null, "What up!");
 
 });

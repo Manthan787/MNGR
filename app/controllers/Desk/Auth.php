@@ -6,9 +6,12 @@ use mngr\Services\Mail\Notifier;
 use Input;
 use Student;
 use User;
+use Config;
 
 class Auth extends BaseController{
+
     protected $notifier;
+
     public function __construct(Notifier $notifier)
     {
         $this->notifier = $notifier;
@@ -25,8 +28,6 @@ class Auth extends BaseController{
         $student = Student::where('email',$email)->first();
         if($student)
         {
-            //Add entry to USER table
-            $password = \Str::random(8);
             $email = $student->email;
             $v = \Validator::make(array('email'=> $email),array('email'=>'unique:users'));
             if($v->fails())
@@ -35,6 +36,7 @@ class Auth extends BaseController{
             }
             else
             {
+                $password = \Str::random(8);
                 $user = new User;
                 $user->email = $student->email;
                 $user->temp_password = 1;
@@ -44,11 +46,16 @@ class Auth extends BaseController{
                 $user->save();
 
                 $data = array(
-                    'name' => $student->name,
-                    'password' => $password
+                    'name'     => $student->name,
+                    'password' => $password,
+                    'base_url' => Config::get('preferences.BASE_URL')
                 );
-                $this->notifier->from('manthant15@gmail.com')->to($student->email)->notify('EmailNotification.activate',$data);
-                return \Redirect::back()->with('success','Your account has been activated. Check your email!');
+
+                $this->notifier->from(Config::get('preferences.EMAIL'))
+                               ->subject("Student Desk Activation")
+                               ->to($student->email)
+                               ->notify('EmailNotification.activate',$data);
+                return \Redirect::back()->with('message','Your account has been activated. Check your email!');
             }
         }
         else
@@ -79,4 +86,41 @@ class Auth extends BaseController{
         \Auth::logout();
         return \Redirect::to('/desk/login');
     }
-} 
+
+    public function getForgotPassword()
+    {
+        return View::make('Desk.Auth.forgot');
+    }
+
+    public function postForgotPassword()
+    {
+        $email = Input::get('email');
+        $student = Student::where('email', $email)->first();
+
+        if($student)
+        {
+          $user = User::where('student_id', $student->id)->first();
+          $password = \Str::random(8);
+
+          $user->temp_password = 1;
+          $user->password = $password;
+          $user->save();
+
+          $data = array(
+              'name'     => $student->name,
+              'password' => $password,
+              'base_url' => Config::get('preferences.BASE_URL')
+          );
+
+          $this->notifier->from(Config::get('preferences.EMAIL'))
+                         ->subject("Password Reset")
+                         ->to($student->email)
+                         ->notify('EmailNotification.forgot',$data);
+          return \Redirect::back()->with('message','Password for your Student Desk account has been reset. You will shortly receive the newly generated password via email.');
+
+        }
+        else {
+          return \Redirect::back()->with('error', 'Invalid Email ID. Please enter correct Email!');
+        }
+    }
+}

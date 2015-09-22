@@ -19,8 +19,7 @@ Login
 			</div> <!-- /login-fields -->
 			<div class="login-actions">
 				<span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Keep me signed in</label>
+					<label><a href="forgot-password">Forgot Password?</a></label>
 				</span>
 				<button class="button btn btn-success btn-large">Sign In</button>
 			</div> <!-- .actions -->

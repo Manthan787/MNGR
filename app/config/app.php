@@ -120,11 +120,13 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-        'mngr\Repositories\BackendServiceProvider',
-        'mngr\Services\Forms\FormServiceProvider',
-        'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
-        'Thujohn\Pdf\PdfServiceProvider',
-        'mngr\Services\Mail\NotifierServiceProvider',
+    'mngr\Repositories\BackendServiceProvider',
+    'mngr\Services\Forms\FormServiceProvider',
+    'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
+    'Thujohn\Pdf\PdfServiceProvider',
+    'mngr\Services\Mail\NotifierServiceProvider',
+		'mngr\Services\SMS\PlivoServiceProvider',
+		'mngr\Services\SMS\NotifierServiceProvider'
 	),
 
 	/*

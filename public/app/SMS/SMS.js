@@ -89,16 +89,14 @@
           if(stream)
           {
             $scope.currentFilter = stream.stream;
-            var filtered_recepients = [];
-            for(var i = 0; i < $scope.students.length; i++)
-            {
-              if($scope.students[i].stream_id == stream.id)
-              {
-                filtered_recepients.push($scope.students[i]);
-              }
+            function belongsToStream(student) {
+              return student.stream_id === stream.id
             }
+
+            filtered_recepients = $scope.students.filter(belongsToStream);
             updateRecepients(filtered_recepients);
             $scope.loading = false;
+
           }
           else {
             updateRecepients($scope.students);
@@ -111,6 +109,7 @@
           if(batch)
           {
             $scope.currentFilter = batch.name;
+
             var filtered_recepients = [];
             for(var i = 0; i < $scope.students.length; i++)
             {
@@ -126,6 +125,7 @@
                 }
               }
             }
+
             updateRecepients(filtered_recepients);
             $scope.loading = false;
           }
@@ -136,7 +136,19 @@
         }
 
         $scope.Send = function(isValid) {
-          alert(isValid);
+          if(isValid) {
+            var recepients_msg = {
+              'recepients': $scope.recepients,
+              'message'   : $scope.Message
+            }
+            console.log(recepients_msg);
+            $http.post('api/sms/send', recepients_msg).then(function(response){
+                $scope.success = response.data.msg;
+            }, function(response) {
+                console.log(response);
+                $scope.error = response.data.msg;
+            });
+          }
         }
 
         $scope.resetRecepientList = function() {
@@ -157,14 +169,11 @@
         }
 
         $scope.remove = function() {
-          for(var i = 0; i < $scope.students.length; i++)
-          {
-              console.log(i);
-              if($scope.recepients[i].selected) {
-                var index = $scope.recepients.indexOf($scope.recepients[i]);
-                $scope.recepients.splice(index, 1);
-              }
-          }
+
+          $scope.recepients = $scope.recepients.filter(function(recepient) {
+              return !recepient.selected
+          })
+
           $scope.recepientCount = $scope.recepients.length;
         }
 
@@ -173,10 +182,6 @@
           $scope.recepientCount = $scope.recepients.length;
         }
 
-        function resetFilterVariables() {
-          $scope.Stream = "";
-          $scope.Batch = "";
-        }
 
     });
 

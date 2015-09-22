@@ -4,7 +4,7 @@
 namespace mngr\Services\Mail;
 use Illuminate\Mail\Mailer;
 
-class EmailNotifier implements Notifier{
+class EmailNotifier implements Notifier {
 
     protected $mailer;
     protected $recipient;
@@ -42,4 +42,4 @@ class EmailNotifier implements Notifier{
 
         });
     }
-} 
+}
