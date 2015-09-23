@@ -11,7 +11,13 @@ class AuthController extends BaseController{
 
         if(Auth::attempt($credentials))
         {
-            return Response::json(['data'=>Auth::user(), 'msg'=>'Successfully Logged In!'], 200);
+            if(Auth::user()->isAdmin() || Auth::user()->isTeacher()) {
+              return Response::json(['data'=>Auth::user(), 'msg'=>'Successfully Logged In!'], 200);
+            }
+            else {
+              Auth::logout();
+              return Response::json(['msg' => 'You don\'t have enough privileges to access Admin Panel'], 403);
+            }
         }
         else
         {

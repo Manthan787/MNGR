@@ -15,7 +15,6 @@
                 $window.location.href = '/admin';
             }, function (response) {
                 $scope.msg = response.data.msg;
-                console.log($scope.msg);
             });
         }
 
