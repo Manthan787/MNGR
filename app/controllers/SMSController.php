@@ -22,7 +22,8 @@ class SMSController extends BaseController
         return Response::json(['msg' => 'SMS Notifications sent successfully.'], 200);
       }
       catch(Exception $e) {
-        return Response::json(['msg' => $e->getTrace()], 500);
+        
+        return Response::json(['msg' => $e->getMessage()], 500);
       }
 
     }

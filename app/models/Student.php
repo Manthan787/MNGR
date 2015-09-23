@@ -94,4 +94,18 @@ class Student extends Eloquent
             return $this->attributes['parents_mobile'];
         }
     }
+
+		public function isActivated()
+		{
+
+			if($this->getCorrespondingUser())
+				return true;
+
+			return false;
+		}
+
+		public function getCorrespondingUser()
+		{
+			return User::where('student_id', $this->id)->first();
+		}
 }

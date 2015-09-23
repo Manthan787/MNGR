@@ -55,6 +55,11 @@ class StudentController extends Controller
         {
             $student->subjects()->detach();
             $student->delete();
+						// Also DELETE corresponding user entry
+						if($student->isActivated())
+						{
+							$student->getCorrespondingUser()->delete();
+						}
             return Response::json(['msg' => 'Successfully Deleted Student From The System!'], 200);
         }
         else
