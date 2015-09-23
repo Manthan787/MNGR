@@ -22,13 +22,22 @@
 </head>
 <body class="login fixed">
 <div class="wrapper animated flipInY">
-    <div class="logo"><a href="#"><i class="fa fa-bolt"></i> <span>Acharya</span></a></div>
+    <div class="logo"><a href="#">
+      <i class="fa fa-bolt"></i>
+        <span>Acharya</span>
+      </a>
+    </div>
+
     <div class="box">
+
         <div class="header clearfix">
             <div class="pull-left"><i class="fa fa-sign-in"></i> Sign In</div>
 
         </div>
         <form ng-controller="LoginController" ng-submit="login()">
+          <div align="center" ng-show="loading">
+              <img src="{{URL::asset("app/admin/img/loader.gif")}}" height="45" width="45">
+          </div>
             <div class="alert alert-warning no-radius no-margin padding-sm" ng-if="msg">
               <i class="fa fa-info-circle"></i>
               @{{msg}}
