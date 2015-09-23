@@ -50,4 +50,4 @@ class MaterialController extends BaseController{
         $material->delete();
         return Response::json(['msg'=>'Successfully Deleted Material!'],200);
     }
-} 
+}

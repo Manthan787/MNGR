@@ -3,7 +3,7 @@
 use mngr\Repositories\User\UserRepository;
 use mngr\Services\Validation\ValidableInterface;
 
-class AddUserForm{
+class AddUserForm {
 
 	/**
 	 * User Instance
@@ -23,8 +23,8 @@ class AddUserForm{
 	}
 
 	/**
-	 * Process Form. 
-	 * 
+	 * Process Form.
+	 *
 	 * @return boolean
 	 */
 
@@ -39,7 +39,7 @@ class AddUserForm{
 	/**
 	 * Process Form For Updation
 	 *
-	 * @return  boolean 
+	 * @return  boolean
 	 */
 
 	public function update(array $input)
@@ -49,9 +49,9 @@ class AddUserForm{
 
 	public function valid(array $input)
 	{
-		if($this->validator->with($input)->passes()) 
+		if($this->validator->with($input)->passes())
 			return true;
-		
+
 		return false;
 	}
 

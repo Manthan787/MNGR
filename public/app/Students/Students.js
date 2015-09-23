@@ -47,7 +47,7 @@
 
 	});
 	app.controller('AddStudentController',function($scope,Student, SchoolFinder, FormHelper, $http, $filter){
-		
+
 		$scope.standards = [];
 		$scope.hasStreams = false;
 		$scope.loading = true;
@@ -65,7 +65,7 @@
 
 		FormHelper.getMediums().then(function(mediums){
 				$scope.mediums = mediums;
-                $scope.loading = false;
+        $scope.loading = false;
 		});
         $scope.prepareStreams = function(std)
         {
@@ -119,8 +119,8 @@
 		$scope.prepareSubjectsByStd = function(std){
 			if(std)
 			{
-                $scope.subjects = FormHelper.getSubjectsByStd(std.id, $scope.standards);
-                $scope.showSubjects = true;
+        $scope.subjects = FormHelper.getSubjectsByStd(std.id, $scope.standards);
+        $scope.showSubjects = true;
 			}
 			else
 			{
@@ -131,7 +131,7 @@
 
 		$scope.calculateFees = function(){
 
-            $scope.newStudent.fees = FormHelper.calculateFees($scope.newStudent.subjects);
+	      $scope.newStudent.fees = FormHelper.calculateFees($scope.newStudent.subjects);
 
 		}
 
@@ -139,7 +139,7 @@
 
 			if($scope.newStudent.school)
 			{
-		
+
 				SchoolFinder.search($scope.newStudent.school).then(function(response){
 
 					$scope.schools = response.data;
@@ -153,7 +153,7 @@
 		}
 
 		$scope.approveSuggestion = function(school){
-			//assign suggestion 
+			//assign suggestion
 			$scope.newStudent.school = school.name;
 			//clear suggestions
 			$scope.schools = null;
@@ -169,21 +169,24 @@
 		$scope.addStudent = function(isValid){
             $scope.submitted = true;
             if(isValid) {
+								$scope.loading = true;
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
                 $scope.loading = true;
                 prepare();
-                console.log($scope.newStudent);
                 $scope.newStudent.add().then(function (msg) {
                     $scope.loading = false;
+										$scope.error = '';
                     $scope.success = msg;
                     reset();
+										$scope.loading = false;
                 }, function (response) {
                     $scope.loading = false;
                     console.log(response);
+										$scope.success = '';
                     $scope.error = response.data.msg;
+										$scope.loading = false;
                 });
 
-                $scope.loading = false;
                 $scope.submitted = false;
                 $scope.addUserForm.$setPristine();
             }
@@ -196,7 +199,7 @@
             $scope.showSubjects = false;
             $scope.fees = 0;
 		}
-			
+
 
 	});
 
@@ -214,7 +217,7 @@
 		}
 
 		$scope.approveSuggestion = function(school){
-			//assign suggestion 
+			//assign suggestion
 			$scope.searchTerm = school.name;
 			//clear suggestions
 			$scope.schools = null;

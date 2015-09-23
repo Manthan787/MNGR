@@ -7,9 +7,7 @@ class AddUserFormValidator extends AbstractLaravelValidator
 	protected $rules = [
 		'firstname' => 'required',
 		'lastname'  => 'required',
-		'email'		=> 'required | email',
-		'password'  => 'required',
-		'password_again' => 'same:password'
+		'email'		=> 'required | email',		
 
 	];
 }

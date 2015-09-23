@@ -8,13 +8,13 @@ abstract class AbstractLaravelValidator implements ValidableInterface
 {
 	/**
 	 * Laravel Validator
-	 * 
+	 *
 	 * @var Illuminate\Validation\Factory
 	 */
 	protected $validator;
 	/**
 	 * Data to be validated.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $input;
@@ -23,7 +23,7 @@ abstract class AbstractLaravelValidator implements ValidableInterface
 	 * @var array
 	 */
 	protected $rules = [];
-	
+
 	public function __construct(Validator $validator)
 	{
 		$this->validator = $validator;
@@ -31,9 +31,9 @@ abstract class AbstractLaravelValidator implements ValidableInterface
 
 	/**
 	 * Setter for $input, used for chaining purposes.
-	 * 
+	 *
 	 * @param  array  $input User Input
-	 * 
+	 *
 	 * @return mngr\Services\Validation\LaravelValidator
 	 */
 	public function with(array $input)
@@ -44,8 +44,8 @@ abstract class AbstractLaravelValidator implements ValidableInterface
 	}
 
 	/**
-	 * Check Whether Validation Passes Or Not. 
-	 * 
+	 * Check Whether Validation Passes Or Not.
+	 *
 	 * @return boolean
 	 */
 	public function passes()
@@ -56,13 +56,13 @@ abstract class AbstractLaravelValidator implements ValidableInterface
 		{
 			return true;
 		}
-		
+
 		return false;
 	}
 	/**
 	 *Get Validation Errors
 	 *
-	 * @return MessageBag 
+	 * @return MessageBag
 	 */
 
 	public function getErrors()
