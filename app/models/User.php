@@ -47,10 +47,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return ($this->role_id == 2) ? true : false;
 	}
 
-    public function isStudent()
-    {
-        return ($this->role_id == 4) ? true : false;
-    }
+  public function isStudent()
+  {
+      return ($this->role_id == 4) ? true : false;
+  }
 
 	public function setPasswordAttribute($password)
 	{

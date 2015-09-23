@@ -99,28 +99,32 @@ class Auth extends BaseController{
 
         if($student)
         {
-          $user = User::where('student_id', $student->id)->first();
-          $password = \Str::random(8);
+            $user = User::where('student_id', $student->id)->first();
+            if($user) {
+              $password = \Str::random(8);
 
-          $user->temp_password = 1;
-          $user->password = $password;
-          $user->save();
+              $user->password      = $password;
+              $user->temp_password = 1;
+              $user->save();
 
-          $data = array(
-              'name'     => $student->name,
-              'password' => $password,
-              'base_url' => Config::get('preferences.BASE_URL')
-          );
+              $data = array(
+                  'name'     => $student->name,
+                  'password' => $password,
+                  'base_url' => Config::get('preferences.BASE_URL')
+              );
 
-          $this->notifier->from(Config::get('preferences.EMAIL'))
-                         ->subject("Password Reset")
-                         ->to($student->email)
-                         ->notify('EmailNotification.forgot',$data);
-          return \Redirect::back()->with('message','Password for your Student Desk account has been reset. You will shortly receive the newly generated password via email.');
-
+              $this->notifier->from(Config::get('preferences.EMAIL'))
+                             ->subject("Password Reset")
+                             ->to($student->email)
+                             ->notify('EmailNotification.forgot',$data);
+              return \Redirect::back()->with('message','Password for your Student Desk account has been reset. You will shortly receive the newly generated password via email.');
+          }
+          else {
+              return \Redirect::back()->with('error', 'This account has not been activated yet!');
+          }
         }
         else {
-          return \Redirect::back()->with('error', 'Invalid Email ID. Please enter correct Email!');
+            return \Redirect::back()->with('error', 'Invalid Email ID. Please enter correct Email!');
         }
     }
 }

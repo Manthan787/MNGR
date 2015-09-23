@@ -46,4 +46,4 @@ class Dashboard extends BaseController {
             return Redirect::back()->withErrors($validator);
         }
     }
-} 
+}

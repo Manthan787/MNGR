@@ -1,22 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "909ca1ad7826299e90702bc98e8df287",
+    "hash": "367f0c7fade3971438ff490ba54639c1",
+    "content-hash": "8c20a5b68a4c8c6047f44ae09902456e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mtdowling/ClassPreloader.git",
+                "url": "https://github.com/ClassPreloader/ClassPreloader.git",
                 "reference": "2c9f3bcbab329570c57339895bd11b5dd3b00877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/ClassPreloader/zipball/2c9f3bcbab329570c57339895bd11b5dd3b00877",
+                "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/2c9f3bcbab329570c57339895bd11b5dd3b00877",
                 "reference": "2c9f3bcbab329570c57339895bd11b5dd3b00877",
                 "shasum": ""
             },
@@ -58,12 +59,12 @@
             "version": "v1.0.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/d11wtq/boris.git",
+                "url": "https://github.com/borisrepl/boris.git",
                 "reference": "125dd4e5752639af7678a22ea597115646d89c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/d11wtq/boris/zipball/125dd4e5752639af7678a22ea597115646d89c6e",
+                "url": "https://api.github.com/repos/borisrepl/boris/zipball/125dd4e5752639af7678a22ea597115646d89c6e",
                 "reference": "125dd4e5752639af7678a22ea597115646d89c6e",
                 "shasum": ""
             },
@@ -447,16 +448,16 @@
         },
         {
             "name": "manthan/nuncio",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Manthan787/Nuncio.git",
-                "reference": "acd990c77a0de2f07c27b19e2177026340b0e564"
+                "reference": "7341996b1445559adfdca8816aeb3d50c533de4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/acd990c77a0de2f07c27b19e2177026340b0e564",
-                "reference": "acd990c77a0de2f07c27b19e2177026340b0e564",
+                "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/7341996b1445559adfdca8816aeb3d50c533de4a",
+                "reference": "7341996b1445559adfdca8816aeb3d50c533de4a",
                 "shasum": ""
             },
             "require": {
@@ -482,7 +483,7 @@
                 }
             ],
             "description": "Turn your customer messages/emails into mustache-style templates. Just create one template for your message and nuncio will replace tags with customer details.",
-            "time": "2015-08-26 10:07:25"
+            "time": "2015-09-23 09:43:15"
         },
         {
             "name": "monolog/monolog",

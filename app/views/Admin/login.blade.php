@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EduFocus - Login</title>
+    <title>Acharya - Login</title>
 
     <!-- Maniac stylesheets -->
     <link rel="stylesheet" href="{{URL::asset("app/admin/css/bootstrap.min.css")}}" />
@@ -22,7 +22,7 @@
 </head>
 <body class="login fixed">
 <div class="wrapper animated flipInY">
-    <div class="logo"><a href="#"><i class="fa fa-bolt"></i> <span>Academyn</span></a></div>
+    <div class="logo"><a href="#"><i class="fa fa-bolt"></i> <span>Acharya</span></a></div>
     <div class="box">
         <div class="header clearfix">
             <div class="pull-left"><i class="fa fa-sign-in"></i> Sign In</div>
@@ -37,9 +37,6 @@
                 <div class="form-group">
                     <input type="password" name="password" ng-model="password" class="form-control" placeholder="Password"/>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" /> <small>Remember me</small>
-                </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-success btn-block">Sign in</button>
                 </div>
@@ -51,16 +48,7 @@
     </div>
 
     <footer>
-        Copyright &copy; 2015. Created by Manthan Thakar & Ajay Shah.
-
-        <ul class="list-unstyled list-inline">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">UI Elements</a></li>
-            <li><a href="#">Charts</a></li>
-            <li><a href="#">Mobile Apps</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+        <a href="http://www.acharyapp.com">Powered By Acharya</a>
     </footer>
 </div>
 

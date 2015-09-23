@@ -6,8 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-    "thujohn/pdf": "dev-master",
-		"manthan/nuncio":"~1.0",
+    		"thujohn/pdf": "dev-master",
+		"manthan/nuncio":"1.0.*",
 		"plivo/plivo-php":"dev-master"
 	},
     "require-dev":{
