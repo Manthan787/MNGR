@@ -35,10 +35,10 @@
 
         </div>
         <form ng-controller="LoginController" ng-submit="login()">
-          <div align="center" ng-show="loading">
+          <div align="center" ng-show="loading" ng-cloak>
               <img src="{{URL::asset("app/admin/img/loader.gif")}}" height="45" width="45">
           </div>
-            <div class="alert alert-warning no-radius no-margin padding-sm" ng-if="msg">
+            <div class="alert alert-warning no-radius no-margin padding-sm" ng-if="msg" ng-cloak>
               <i class="fa fa-info-circle"></i>
               @{{msg}}
             </div>

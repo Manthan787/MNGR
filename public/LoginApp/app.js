@@ -9,6 +9,7 @@
 
         $scope.login = function() {
             $scope.loading = true;
+            $scope.msg = '';
             var credentials = {
                 'email' : $scope.email,
                 'password' : $scope.password
