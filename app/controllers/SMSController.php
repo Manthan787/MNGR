@@ -12,13 +12,19 @@ class SMSController extends BaseController
     public function send()
     {
 
-      $recepients = json_decode(json_encode(Input::get('recepients')),FALSE);      
+      $recepients = json_decode(json_encode(Input::get('recepients')),FALSE);
       $message    = Input::get('message');
 
       $plivo_src = Config::get('plivo.src');
 
-      $this->notifier->from($plivo_src)->to($recepients)->send('Regarding Attendance', $message);
-      return Response::json(['msg' => 'SMS Notifications sent successfully.'], 200);
+      try {
+        $this->notifier->from($plivo_src)->to($recepients)->send('Regarding Attendance', $message);
+        return Response::json(['msg' => 'SMS Notifications sent successfully.'], 200);
+      }
+      catch(Exception $e) {
+        return Response::json(['msg' => $e->getTrace()], 500);
+      }
+
     }
 }
 
