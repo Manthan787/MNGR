@@ -1,13 +1,21 @@
 (function(){
-    angular.module('Auth').
-        service('AuthService', function($http){
+    angular.module('Auth', []).
+        factory('AuthService', function($http){
 
-           this.login = function(credentials){
-               return $http.post('/api/auth/login', credentials);
-           }
+           var authservice = {}
 
-           this.logout = function(){
-                   return $http.get('api/auth/logout');
-           }
+           authservice.isAuthenticated = function() {
+              return sessionStorage.authenticated;
+           };
+
+           authservice.isAuthorized = function(authorizedRoles) {
+              if(!angular.isArray(authorizedRoles)) {
+                  authorizedRoles = [authorizedRoles];
+              }
+              var User = JSON.parse(sessionStorage.user);
+              return (authservice.isAuthenticated() && authorizedRoles.indexOf(User.data.role_id) !== -1 )
+           };
+
+           return authservice;
         });
 })();

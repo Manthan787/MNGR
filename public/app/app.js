@@ -2,300 +2,127 @@
 
 	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','ngRoute','ngSanitize']);
 
-	app.config(function($routeProvider){
+	app.constant('USER_ROLES', {
+			admin 			: 1,
+			teacher 		: 2,
+			accountant 	: 3
+	});
+
+	app.config(function($routeProvider, USER_ROLES){
 		$routeProvider
         .when('/', {
             templateUrl:'app/home.html',
             controller: 'HomeController',
-            resolve: {
-							load :  function($q, $window)
-							{
-									var deferred = $q.defer();
-									if (!sessionStorage.authenticated) {
-											$window.location.href = '/admin/login';
-											deferred.reject();
-									}
-									else {
-											deferred.resolve();
-									}
-									return deferred.promise;
-							}
-											}
-
+						data: {
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher, USER_ROLES.accountant]
+						}
         })
         .when('/Questions/all', {
-			templateUrl:'app/partials/Questions/allQuestions.html',
-			controller : 'QuestionsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-		})
-		.when('/Questions/add', {
-			templateUrl:'app/partials/Questions/addQuestion.html',
-			controller : 'AddQuestionsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-		})
+						templateUrl:'app/partials/Questions/allQuestions.html',
+						controller : 'QuestionsController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
+
+				})
+				.when('/Questions/add', {
+					templateUrl:'app/partials/Questions/addQuestion.html',
+					controller : 'AddQuestionsController',
+		      data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+				})
         .when('/Materials/add', {
             templateUrl:'app/partials/Materials/addMaterial.html',
             controller:'MaterialsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
-            .when('/Materials/recent', {
-                templateUrl:'app/partials/Materials/recentMaterial.html',
-                controller:'RecentMaterialController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-            })
-            .when('/Materials/:id', {
-                templateUrl:'app/partials/Materials/editMaterial.html',
-                controller:'MaterialsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-            })
-		.when('/Students/search', {
-			templateUrl:'app/partials/Students/searchStudents.html',
-			controller:'StudentsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-
-		})
-		.when('/Students/add', {
-			templateUrl:'app/partials/Students/addStudent.html',
-			controller:'AddStudentController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-            })
-
-    .when('/Students/:id', {
-            templateUrl:'app/partials/Students/showStudent.html',
-            controller:'StudentShowController',
-            resolve: {
-                load :  function($q, $window)
-                {
-                    var deferred = $q.defer();
-                    if (!sessionStorage.authenticated) {
-                        $window.location.href = '/admin/login';
-                        deferred.reject();
-                    }
-                    else {
-                        deferred.resolve();
-                    }
-                    return deferred.promise;
-                }
-            }
+        .when('/Materials/recent', {
+            templateUrl:'app/partials/Materials/recentMaterial.html',
+            controller:'RecentMaterialController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
+				})
+        .when('/Materials/:id', {
+            templateUrl:'app/partials/Materials/editMaterial.html',
+            controller:'MaterialsController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
-		.when('/Alerts/send', {
-			templateUrl:'app/partials/SMS/send.html',
-			controller:'SMSController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-		})
-		.when('/Settings/setup', {
-			templateUrl:'app/partials/Settings/setup.html',
-			controller:'SettingsController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-		})
+				.when('/Students/search', {
+					templateUrl:'app/partials/Students/searchStudents.html',
+					controller:'StudentsController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+				})
+				.when('/Students/add', {
+					templateUrl:'app/partials/Students/addStudent.html',
+					controller:'AddStudentController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+		    })
+
+    		.when('/Students/:id', {
+          templateUrl:'app/partials/Students/showStudent.html',
+          controller:'StudentShowController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+        })
+				.when('/Alerts/send', {
+					templateUrl:'app/partials/SMS/send.html',
+					controller:'SMSController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+				})
+				.when('/Settings/setup', {
+					templateUrl:'app/partials/Settings/setup.html',
+					controller:'SettingsController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin]
+					}
+				})
         .when('/Settings/staff', {
             templateUrl:'app/partials/Settings/staff.html',
             controller:'StaffController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
         .when('/Settings/financial-year', {
             templateUrl:'app/partials/Settings/year.html',
             controller:'YearController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
         .when('/Settings/batches', {
             templateUrl : 'app/partials/Settings/batches.html',
             controller: 'BatchController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
         .when('/Chapters', {
-                templateUrl:'app/partials/Chapters/all.html',
-                controller:'ChapterController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
+            templateUrl:'app/partials/Chapters/all.html',
+            controller:'ChapterController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
         .when('/Tests/create', {
-                templateUrl : 'app/partials/Tests/create.html',
-                controller : 'TestController',
-                resolve: {
-                    load :  function($q, $window)
-                    {
-                        var deferred = $q.defer();
-                        if (!sessionStorage.authenticated) {
-                            $window.location.href = '/admin/login';
-                            deferred.reject();
-                        }
-                        else {
-                            deferred.resolve();
-                        }
-                        return deferred.promise;
-                    }
-                }
-
+            templateUrl : 'app/partials/Tests/create.html',
+            controller : 'TestController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
+						}
         })
 		.otherwise({
 			redirectTo:'/'
@@ -326,18 +153,20 @@
     }]);
 
 
-		/*function load ($q, $window)
-		{
-				var deferred = $q.defer();
-				if (!sessionStorage.authenticated) {
-						$window.location.href = '/admin/login';
-						deferred.reject();
-				}
-				else {
-						deferred.resolve();
-				}
-				return deferred.promise;
-		} */
+		app.run(function($rootScope, AuthService, $window, $location) {
+				$rootScope.$on('$routeChangeStart', function(event, next, current) {
+						var authorizedRoles = next.data.authorizedRoles;
+						if(!AuthService.isAuthorized(authorizedRoles)) {
+							event.preventDefault();
+							if(AuthService.isAuthenticated()) {
+									$location.path('/');
+							}
+							else {
+									$window.location.href ='/admin/login'
+							}
+						}
 
+				});
+		});
 
 })();

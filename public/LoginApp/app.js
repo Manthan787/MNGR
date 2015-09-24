@@ -17,7 +17,7 @@
 
             $http.post('/api/auth/login', credentials).then(function (response) {
                 sessionStorage.authenticated = true;
-                sessionStorage.user = response.data;
+                sessionStorage.user = JSON.stringify(response.data);
                 $window.location.href = '/admin';
                 $scope.loading = false;
             }, function (response) {

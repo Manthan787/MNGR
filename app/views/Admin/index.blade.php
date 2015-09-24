@@ -173,8 +173,6 @@
         <script src="app/Settings/BatchController.js"></script>
         <script src="app/User/User.js"></script>
         <script src="app/Students/FormHelper.js"></script>
-        <script src="app/Auth/Auth.js"></script>
-        <script src="app/Auth/Authaid.js"></script>
         <script src="app/Auth/AuthService.js"></script>
         <script src="app/HomeController.js"></script>
         <script src="app/Chapters/Chapters.js"></script>
