@@ -47,7 +47,7 @@ Route::filter('teacher',function(){
 	{
 		if(! (Auth::user()->isAdmin() | Auth::user()->isTeacher()))
 			return Response::json(['msg' => 'You do not have enough privileges to access this page. ',
-								   'redirect' => '/'],403);
+								   'redirect' => '/'],401);
 	}
 	else
 	{
@@ -78,7 +78,7 @@ Route::filter('admin',function(){
 		if(!Auth::user()->isAdmin())
 		{
 			return Response::json(['msg' => 'You do not have enough privileges to access this page.',
-									'redirect'=>'/'],403 );
+									'redirect'=>'/'],401 );
 		}
 	}
 	else

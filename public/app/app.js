@@ -8,19 +8,19 @@
             templateUrl:'app/home.html',
             controller: 'HomeController',
             resolve: {
-                        load :  function($q, $window)
-                        {
-                            var deferred = $q.defer();
-                            if (!sessionStorage.authenticated) {
-                                $window.location.href = '/admin/login';
-                                deferred.reject();
-                            }
-                            else {
-                                deferred.resolve();
-                            }
-                            return deferred.promise;
-                        }
-                    }
+							load :  function($q, $window)
+							{
+									var deferred = $q.defer();
+									if (!sessionStorage.authenticated) {
+											$window.location.href = '/admin/login';
+											deferred.reject();
+									}
+									else {
+											deferred.resolve();
+									}
+									return deferred.promise;
+							}
+											}
 
         })
         .when('/Questions/all', {
@@ -325,14 +325,19 @@
            $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }]);
 
-    //Resolve is much better than this option!
-    /*app.run(function($rootScope, $window){
-        $rootScope.$on('$routeChangeStart', function(event){
-            if(!sessionStorage.authenticated) {
-                event.preventDefault();
-                $window.location.href = "/login";
-            }
-        });
-    }); */
+
+		/*function load ($q, $window)
+		{
+				var deferred = $q.defer();
+				if (!sessionStorage.authenticated) {
+						$window.location.href = '/admin/login';
+						deferred.reject();
+				}
+				else {
+						deferred.resolve();
+				}
+				return deferred.promise;
+		} */
+
 
 })();
