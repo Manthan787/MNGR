@@ -26,9 +26,9 @@
 		],
 
         "psr-4":{
-            "mngr\\":"app/mngr",
-            "Desk\\":"app/controllers/Desk"
-
+            "mngr\\"		:"app/mngr",
+            "Desk\\"		:"app/controllers/Desk",
+						"Landing\\"	:"app/controllers/Landing"
         }
 	},
 	"scripts": {

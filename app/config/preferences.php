@@ -2,11 +2,16 @@
 
 return array(
 
-  'BASE_URL' => 'http://ameecomputer.in',
+  'INSTITUTE_NAME'  => 'Amee Computer Class',
 
-  'EMAIL'    => 'manthant15@gmail.com'
+  'BASE_URL'        => 'http://ameecomputer.in',
 
+  'EMAIL'           => 'manthant15@gmail.com',
 
+  'CONTACT_NO'      => '+91-7600021127',
+
+  'CONTACT_EMAIL'  =>  'ajayshah8@yahoo.com'
+  
 );
 
 ?>

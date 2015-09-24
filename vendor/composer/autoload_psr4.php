@@ -13,5 +13,6 @@ return array(
     'Patchwork\\' => array($vendorDir . '/patchwork/utf8/src/Patchwork'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Manthan\\Nuncio\\' => array($vendorDir . '/manthan/nuncio/src'),
+    'Landing\\' => array($baseDir . '/app/controllers/Landing'),
     'Desk\\' => array($baseDir . '/app/controllers/Desk'),
 );

@@ -1,9 +1,12 @@
 <?php
 
-Route::get('/', function(){
-    return View::make("Landing.index");
-});
 
+// Landing Page
+Route::get('/', 'Landing\Page@index');
+
+
+
+// ACHARYA ADMIN PANEL
 Route::group(['before' => 'admin_redirect'], function(){
     Route::get('/admin', function()
     {
