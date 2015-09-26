@@ -126,7 +126,8 @@ return array(
     'Thujohn\Pdf\PdfServiceProvider',
     'mngr\Services\Mail\NotifierServiceProvider',
 		'mngr\Services\SMS\PlivoServiceProvider',
-		'mngr\Services\SMS\NotifierServiceProvider'
+		'mngr\Services\SMS\NotifierServiceProvider',
+		'mngr\Services\Landing\LandingServiceProvider'		
 	),
 
 	/*

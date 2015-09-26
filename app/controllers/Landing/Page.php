@@ -8,11 +8,13 @@ use Config;
 class Page extends BaseController {
 
   public function index() {
-      $preferences = Config::get('preferences');
-      return View::make('Landing.index')->with('preferences', $preferences);
+
+      return View::make('Landing.index');
   }
 
-
+  public function contact() {
+      return View::make('Landing.contact');
+  }
 }
 
 

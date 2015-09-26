@@ -17,4 +17,3 @@ class AuthAid
         return $user->firstname.' '.$user->lastname;
     }
 }
-

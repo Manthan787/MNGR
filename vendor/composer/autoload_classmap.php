@@ -46,6 +46,7 @@ return array(
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'LandingHelper' => $baseDir . '/app/helpers/LandingHelpers.php',
     'Landing\\Page' => $baseDir . '/app/controllers/Landing/Page.php',
     'MaterialController' => $baseDir . '/app/controllers/MaterialController.php',
     'Medium' => $baseDir . '/app/models/Medium.php',

@@ -3,7 +3,9 @@
 
 // Landing Page
 Route::get('/', 'Landing\Page@index');
-
+Route::get('/about', 'Landing\Page@about');
+Route::get('/contact', 'Landing\Page@contact');
+Route::post('/contact', 'Landing\Page@postContact');
 
 
 // ACHARYA ADMIN PANEL
