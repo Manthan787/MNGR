@@ -89,7 +89,7 @@
 								<p>Amee Computer Classes was established in 2005 by Mr. Ajay Shah, to make the computer education more accessible among students in Vadodara, Gujarat.
 			          Ever since its inception, Amee Computer Classes has been a huge proponent of "Learn By Doing". As a result, each student enrolled in
 			          class has access to a dedicated computer to apply their newly learned skills.<br>
-								<a href="#">Read More <i class="fa fa-angle-right"></i></a></p>
+								<a href="/about">Read More <i class="fa fa-angle-right"></i></a></p>
 							</div>
 						</div>
 					</div>
