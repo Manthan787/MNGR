@@ -8,14 +8,18 @@ use Config;
 class Page extends BaseController {
 
   public function index() {
+      $Landing_Config = Config::get('Landing');
+      return View::make('Landing.index')->with('Landing_Config', $Landing_Config);
+  }
 
-      return View::make('Landing.index');
+  public function about() {
+      return View::make('Landing.about');
   }
 
   public function contact() {
       return View::make('Landing.contact');
   }
-}
 
+}
 
 ?>

@@ -29,13 +29,13 @@
 			<div class="tools">
 				<div class="container">
 					<ul class="pull-left">
-						<li><a href="tel:1800123456"><i class="fa fa-phone"></i><span>{{ $preferences['CONTACT_NO'] }}</span></a></li>
-						<li><a href="mailto:info@smartway.com"><i class="fa fa-envelope"></i><span>{{ $preferences['CONTACT_EMAIL'] }}</span></a></li>
+						<li><a href="tel: {{ $preferences['CONTACT_NO'] }}"><i class="fa fa-phone"></i><span>{{ $preferences['CONTACT_NO'] }}</span></a></li>
+						<li><a href="mailto:{{ $preferences['CONTACT_EMAIL'] }}"><i class="fa fa-envelope"></i><span>{{ $preferences['CONTACT_EMAIL'] }}</span></a></li>
 					</ul>
 					<nav class="pull-right">
 						<ul>
 							<li><a href="/admin/login"><i class="fa fa-lock"></i><span>Log In</span></a></li>
-              <li><a href="/desk/login"><span class="icon icon-093"></span>  <span>Student Desk</span></a></li>
+              <li><a href="/desk/login"><span>Student Desk</span></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -51,13 +51,13 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a href="/" class="navbar-brand"></a>
+						<a href="/" class="navbar-brand"><img src="Landing/images/logo.png"></a>
 					</div>
 					<nav class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/about">About</a></li>
-							<li><a href="/contact">Contact</a></li>
+							<li id="Home"><a href="/">Home</a></li>
+							<li id="About"><a href="/about">About</a></li>
+							<li id="Contact"><a href="/contact">Contact</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -85,7 +85,9 @@
 								<p><img src="Landing/images/about.jpg" alt="" class="img-responsive" /></p>
 							</div>
 							<div class="col-sm-7">
-								<p>Morbi nec quam sed elit pharetra faucibus. Cras vel massa viverra ligula suscipit interdum eget nec est. Cras nibh mi, faucibus at ligula eu, eleifend tincidunt justo. Nunc porttitor massa at nisi condimentum fringilla. Nullam finibus, nibh eu hendrerit suscipit, tellus mi commodo lectus, sit amet dictum sem lorem sed neque.<br>
+								<p>Amee Computer Classes was established in 2005 by Mr. Ajay Shah, to make the computer education more accessible among students in Vadodara, Gujarat.
+			          Ever since its inception, Amee Computer Classes has been a huge proponent of "Learn By Doing". As a result, each student enrolled in
+			          class has access to a dedicated computer to apply their newly learned skills.<br>
 								<a href="#">Read More <i class="fa fa-angle-right"></i></a></p>
 							</div>
 						</div>
@@ -185,6 +187,9 @@
 
 		<!-- jQuery Settings -->
 		<script src="{{URL::asset("Landing/js/settings.js")}}"></script>
+
+		<!-- Activates the navbar tabs according to the page URL -->
+		<script src="{{URL::asset("Landing/js/activetabs.js")}}"></script>
 
 	</body>
 </html>

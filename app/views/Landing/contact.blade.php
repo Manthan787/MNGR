@@ -183,7 +183,7 @@ Contact Us
       </div>
       <div class="col-sm-7">
         <p>&nbsp;</p>
-        <img src="http://placehold.it/700x454.jpg" alt="" class="img-responsive" />
+        <img src="Landing/images/class.jpg" alt="" class="img-responsive" />
       </div>
     </div>
   </div>
