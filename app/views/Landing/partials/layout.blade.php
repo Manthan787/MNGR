@@ -6,7 +6,8 @@
 		<meta name="description" content="Smartway - HTML Template">
 		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
 		<title>@yield('title') | {{ $preferences['INSTITUTE_NAME'] }}</title>
-		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="shortcut icon" href="Landing/images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="Landing/images/favicon.ico" type="image/x-icon">
 
 		<!-- Main Stylesheet -->
 		<link href="{{URL::asset("Landing/css/style.css")}}" rel="stylesheet">
