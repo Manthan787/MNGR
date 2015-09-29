@@ -36,7 +36,7 @@
 					<nav class="pull-right">
 						<ul>
 							<li><a href="/admin/login"><i class="fa fa-lock"></i><span>Log In</span></a></li>
-              <li><a href="/desk/login"><span>Student Desk</span></a></li>
+              <li><a href="/desk/login"><span><i class="fa fa-user"></i>Student Desk</span></a></li>
 						</ul>
 					</nav>
 				</div>

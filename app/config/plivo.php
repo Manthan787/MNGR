@@ -1,9 +1,9 @@
 <?php
 
 return array(
-  'auth_id'    => 'MAYTYZNZUYN2EZMTY3NM',
+  'auth_id'    => 'MAYJY2ZWE5NTU3ZTLMZG',
 
-  'auth_token' => 'MGE4OGE2NTUzMGVmNDU0ZDc3ZDJlMjRjOWQyYTQ0',
+  'auth_token' => 'ZjdmZmJkNzVlYzI3YWZiNDBmMmRkZDFkYWNiN2Yz',
 
   'src'        => 'AMEE12'
 );

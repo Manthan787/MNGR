@@ -35,7 +35,7 @@ class PlivoMessenger implements MessengerInterface
         'text'=> $message
       );
 
-      $this->plivo->send_message($params);
+      return $this->plivo->send_message($params);
   }
 
 

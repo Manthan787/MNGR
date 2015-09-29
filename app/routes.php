@@ -418,7 +418,6 @@ Route::group(['before' => 'teacher'], function(){
 
 Route::get('/ex', function(){
 
-    $plivo = App::make('mngr\Services\SMS\PlivoMessenger');
-    $plivo->from("whatever")->to('+917698716148')->notify(null, "What up!");
+    return View::make("SMS");
 
 });
