@@ -7,7 +7,7 @@ use Manthan\Nuncio\MessengerInterface;
 
 class SMSNotifier extends Nuncio
 {
-    protected $keywords     = array('name');
+    protected $keywords     = array('name', 'email');
     protected $number_field = 'parents_mobile';
 
 
