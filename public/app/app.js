@@ -155,17 +155,18 @@
 
 		app.run(function($rootScope, AuthService, $window, $location) {
 				$rootScope.$on('$routeChangeStart', function(event, next, current) {
-						var authorizedRoles = next.data.authorizedRoles;
-						if(!AuthService.isAuthorized(authorizedRoles)) {
-							event.preventDefault();
-							if(AuthService.isAuthenticated()) {
-									$location.path('/');
-							}
-							else {
-									$window.location.href ='/admin/login'
+						if(next.data) {
+							var authorizedRoles = next.data.authorizedRoles;
+							if(!AuthService.isAuthorized(authorizedRoles)) {
+								event.preventDefault();
+								if(AuthService.isAuthenticated()) {
+										$location.path('/');
+								}
+								else {
+										$window.location.href ='/admin/login'
+								}
 							}
 						}
-
 				});
 		});
 

@@ -200,32 +200,32 @@ Contact Us
         <h2>Contact Form</h2>
       </div>
     </div>
-    <form role="form" name="contact-form" id="contact-form" action="process-contact.php">
+    <form name="contact-form" id="contact-form">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group" id="contact-name-group">
             <label for="contact-input-name">Name</label>
-            <input type="text" class="form-control" id="contact-input-name" placeholder="Enter your name">
+            <input type="text" name="name" class="form-control" id="contact-input-name" placeholder="Enter your name" required>
           </div>
           <div class="form-group" id="contact-email-group">
             <label for="contact-input-email">Email</label>
-            <input type="email" class="form-control" id="contact-input-email" placeholder="Enter your email">
+            <input type="email" name="email" class="form-control" id="contact-input-email" placeholder="Enter your email" required>
           </div>
           <div class="form-group" id="contact-subject-group">
             <label for="contact-input-subject">Subject</label>
-            <input type="text" class="form-control" id="contact-input-subject" placeholder="Enter your subject">
+            <input type="text" name="subject" class="form-control" id="contact-input-subject" placeholder="Enter your subject" required>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group" id="contact-message-group">
             <label for="contact-input-message">Message</label>
-            <textarea class="form-control" id="contact-input-message" rows="8"></textarea>
+            <textarea name="message" class="form-control" id="contact-input-message" rows="8" required></textarea>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <input type="submit" value="submit" class="btn btn-primary">
         </div>
       </div>
     </form>

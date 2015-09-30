@@ -16,8 +16,6 @@ class SMSNotifier extends Nuncio
       parent::__construct($messenger, $processor);
     }
 
-
-
 }
 
 ?>
