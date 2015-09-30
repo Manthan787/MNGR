@@ -10,6 +10,7 @@
         });
         // Functionality
         $scope.recepientCount = 0;
+        $scope.studentCount = 0;
         $scope.displayStreamsOption = false;
         $scope.displayBatchesOption = false;
 
@@ -25,12 +26,11 @@
             if($scope.RecepientTypes[i].id === typeID)
                 $scope.currentRecepientType = $scope.RecepientTypes[i];
           }
-
         }
 
         $scope.setRecepientType(2);
 
-        $scope.standardSelected = function(standard) {
+        $scope.fetchStudents = function(standard) {
             $scope.currentFilter = null;
             if(standard)
             {
@@ -39,15 +39,15 @@
               $http.get('api/Standards/'+standard.id+'/Students')
               .then(function(response) {
                   $scope.students = response.data;
-                  $scope.recepients = response.data;
-                  $scope.recepientCount = $scope.recepients.length;
+                  $scope.recepientCount = $scope.studentCount = $scope.students.length;
+                  $scope.checkAll($scope.students);
 
                   if(!$scope.hasRecepients()) {
                     $scope.error = "There are no students in standard " + standard.division +". Add students to this standard and try again later.";
                   }
                   $scope.loading = false;
-              }, function() {
-                  console.log("ERROR!");
+              }, function(response) {
+                  console.log(response.data);
                   $scope.loading = false;
               });
 
@@ -58,31 +58,29 @@
             }
           }
 
+        $scope.hasStudents = function() {
+            return $scope.studentCount > 0;
+        }
+
 
         $scope.hasRecepients = function() {
-          if($scope.recepientCount > 0)
-          {
-            return true;
-          }
-            return false;
+            return $scope.recepientCount > 0;
         }
 
         $scope.hasStreams = function(standard) {
-            if(!standard.streams || !standard.streams[0] )
-            {
-              return false;
-            }
-              return true;
+            if(!standard.streams || !standard.streams[0])
+              return false
+
+            return true
+
         }
 
         $scope.hasBatches = function(standard) {
-            if(!standard.batches || !standard.batches[0] )
-            {
-              return false;
-            }
-              return true;
-        }
+            if(!standard.batches || !standard.batches[0])
+              return false
 
+            return true
+        }
 
         $scope.filterByStream = function(stream) {
           $scope.loading = true;
@@ -93,13 +91,14 @@
               return student.stream_id === stream.id
             }
 
-            filtered_recepients = $scope.students.filter(belongsToStream);
-            updateRecepients(filtered_recepients);
+            $scope.students = $scope.students.filter(belongsToStream);
+            $scope.checkAll($scope.students)
+            updateRecepients();
             $scope.loading = false;
 
           }
           else {
-            updateRecepients($scope.students);
+            updateRecepients();
             $scope.loading = false;
           }
         }
@@ -109,7 +108,6 @@
           if(batch)
           {
             $scope.currentFilter = batch.name;
-
             var filtered_recepients = [];
             for(var i = 0; i < $scope.students.length; i++)
             {
@@ -126,7 +124,9 @@
               }
             }
 
-            updateRecepients(filtered_recepients);
+            $scope.students = filtered_recepients;
+            $scope.checkAll($scope.students)
+            updateRecepients();
             $scope.loading = false;
           }
           else {
@@ -135,13 +135,13 @@
           }
         }
 
-        $scope.Send = function(isValid) {
+        $scope.Send = function(isValid) {          
           if(isValid) {
             var recepients_msg = {
               'recepients': $scope.recepients,
               'message'   : $scope.Message
             }
-            console.log(recepients_msg);
+
             $http.post('api/sms/send', recepients_msg).then(function(response){
                 $scope.success = response.data.msg;
             }, function(response) {
@@ -153,36 +153,40 @@
 
         $scope.resetRecepientList = function() {
           $scope.currentFilter = null;
-          updateRecepients($scope.students);
+          $scope.fetchStudents($scope.Standard)
         }
 
-        $scope.checkAll = function() {
-          angular.forEach($scope.recepients, function (recepient) {
-            recepient.selected = true;
+        $scope.checkAll = function(students) {
+          angular.forEach(students, function (student) {
+            student.selected = true;
           });
+          updateRecepients()
         }
 
-        $scope.uncheckAll = function() {
-          angular.forEach($scope.recepients, function(recepient) {
-            recepient.selected = false;
+        $scope.uncheckAll = function(students) {
+          angular.forEach(students, function(student) {
+            student.selected = false;
           });
+          updateRecepients()
         }
 
-        $scope.remove = function() {
+        $scope.studentSelected = function() {
+          updateRecepients()
+        }
 
-          $scope.recepients = $scope.recepients.filter(function(recepient) {
-              return !recepient.selected
-          })
+        function updateRecepients() {
+          $scope.loading = true;
+          $scope.recepients = [];
+          $scope.recepientCount = 0;
 
+          for(var i = 0; i < $scope.students.length; i++)
+          {
+              if($scope.students[i].selected)
+                  $scope.recepients.push($scope.students[i])
+          }
           $scope.recepientCount = $scope.recepients.length;
+          $scope.loading = false;
         }
-
-        function updateRecepients(newRecepients) {
-          $scope.recepients = newRecepients;
-          $scope.recepientCount = $scope.recepients.length;
-        }
-
-
     });
 
 

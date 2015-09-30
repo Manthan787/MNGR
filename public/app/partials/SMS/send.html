@@ -28,7 +28,7 @@
                           name="standard"
                           ng-options="standard.division for standard in standards"
                           ng-model="Standard"
-                          ng-change="standardSelected(Standard)"
+                          ng-change="fetchStudents(Standard)"
                           required
                           >
                     <option value="">Select Standard</option>
@@ -85,7 +85,7 @@
            </div>
       </div>
 
-      <div class="box" ng-if="hasRecepients()">
+      <div class="box">
         <div class="box-title">
           <h3>Recepients ({{ recepientCount }})</h3>
         </div>
@@ -94,20 +94,20 @@
             <div class="col-md-12 col-sm-8">
               <div class="mailbox-tools clearfix">
                 <div class="pull-left">
-                  <div class="btn-group">
+                  <div class="btn-group" ng-if="hasStudents()">
                     <button type="button"
                             class="btn btn-info no-radius dropdown-toggle"
                             data-toggle="dropdown">Options
                             <i class="fa fa-caret-down"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a href="" ng-click="checkAll()">Select all</a></li>
-                      <li><a href="" ng-click="uncheckAll()">Select none</a></li>
-                      <li><a href="" ng-click="remove()">Remove</a></li>
+                      <li><a href="" ng-click="checkAll(students)">Select all</a></li>
+                      <li><a href="" ng-click="uncheckAll(students)">Select none</a></li>
                     </ul>
                   </div>
                   <button class="btn btn-primary"
-                          ng-click = "resetRecepientList()">
+                          ng-click = "resetRecepientList()"
+                          ng-if = "Standard">
                           <i class="fa fa-refresh"></i>
                           Reset
                   </button>
@@ -118,10 +118,10 @@
                           <i class="fa fa-trash-o"></i>
                   </button>
                 </div>
-                <div class="pull-right" ng-if="hasStreams(Standard)">
+                <div class="pull-right" ng-if="hasStudents()">
                   <!-- Current Filter -->
                   <span class="tag label label-primary" ng-if="currentFilter"><i class="fa fa-filter"></i> {{ currentFilter }}</span>
-                  <div class="btn-group">
+                  <div class="btn-group" ng-if="hasStreams(Standard)">
                     <button type="button"
                             class="btn btn-warning palette-carrot dropdown-toggle"
                             data-toggle="dropdown">Filter By Stream
@@ -138,7 +138,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="btn-group">
+                  <div class="btn-group" ng-if="hasBatches(Standard)">
                     <button type="button"
                             class="btn btn-info palette-sun-flower dropdown-toggle"
                             data-toggle="dropdown">Filter By Batch
@@ -159,13 +159,14 @@
               </div>
               <div class="table-responsive scroll">
                 <table class="table table-hover">
-                  <tr class="unread" ng-repeat = "recepient in recepients">
+                  <tr class="unread" ng-repeat = "student in students">
                       <td class="small"><input type="checkbox"
-                                               ng-model="recepient.selected"/></td>
-                      <td>{{ recepient.name }}</td>
-                      <td>{{ recepient.stream.stream }}</td>
+                                               ng-model="student.selected"
+                                               ng-change="studentSelected()"/></td>
+                      <td>{{ student.name }}</td>
+                      <td>{{ student.stream.stream }}</td>
                       <td>
-                        <span ng-repeat="batch in recepient.batches">
+                        <span ng-repeat="batch in student.batches">
                             {{ batch.name }} <br/>
                         </span>
                       </td>
