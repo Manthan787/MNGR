@@ -12,6 +12,8 @@ return array(
 
   'CONTACT_EMAIL'  =>  'ajayshah8@yahoo.com',
 
+  'LOGO'           =>   'http://ameecomputer.in/Landing/images/google_logo.jpg',
+
   'FACEBOOK'       =>  'https://www.facebook.com/AmeeComputerClasses',
 
   'TWITTER'        =>  '',

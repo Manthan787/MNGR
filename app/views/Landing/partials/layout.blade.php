@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
+	<head itemscope itemtype="http://schema.org/WebSite">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Smartway - HTML Template">
-		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
+		<meta name="description" content="Amee Computer Classes was established in 2005 by Mr. Ajay Shah, to make the computer education more accessible among students in Vadodara, Gujarat. Ever since its inception, Amee Computer Classes has been a huge proponent of 'Learn By Doing'.">
+		<meta name="author" content="Acharya School Management Software, hello@acharyapp.com">
 		<title>@yield('title') | {{ $preferences['INSTITUTE_NAME'] }}</title>
 		<link rel="shortcut icon" href="Landing/images/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="Landing/images/favicon.ico" type="image/x-icon">
@@ -17,15 +17,14 @@
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
-
+		<title itemprop='name'>{{ $preferences['INSTITUTE_NAME'] }}</title>
+		<link rel="canonical" href="{{ $preferences['BASE_URL'] }}" itemprop="url">
+		<span itemscope itemtype="http://schema.org/Organization">
+	  	<link itemprop="url" href="{{ $preferences['BASE_URL'] }}">
+	  	<a itemprop="sameAs" href="{{ $preferences['FACEBOOK'] }}"></a>
+		</span>
 	</head>
-	<head itemscope itemtype="http://schema.org/WebSite">
-	<title itemprop='name'>Ameecomputer</title>
-	<link rel="canonical" href="https://www.ameecomputer.in/" itemprop="url">
-	<span itemscope itemtype="http://schema.org/Organization">
-  	<link itemprop="url" href="http://www.ameecomputer.in">
-  	<a itemprop="sameAs" href="http://www.facebook.com/AmeeComputerClasses">FB</a>
-	</span>
+
 	<body>
 		@yield('pre-header')
 
@@ -203,12 +202,18 @@
 			{
 			  "@context" : "http://schema.org",
 			  "@type" : "WebSite",
-			  "name" : "Ameecomputer",
-			  "alternateName" : "Amee Computer Classes",
-			  "url" : "http://www.ameecomputer.in",
+			  "name" : "<?php echo $preferences['INSTITUTE_NAME']; ?>",
+			  "alternateName" : "Amee Computer Class",
+			  "url" : "<?php echo $preferences['BASE_URL']; ?>",
+				"logo": "<?php echo $preferences['LOGO']; ?>",
 				"sameAs" : [
-		    	"https://www.facebook.com/AmeeComputerClasses"
-		  	]
+		    	"<?php echo $preferences['FACEBOOK']; ?>"
+		  	],
+				"contactPoint" : [{
+			    "@type" : "ContactPoint",
+			    "telephone" : "<?php echo $preferences['CONTACT_NO']; ?>",
+			    "contactType" : "customer service"
+			  }]
 			}
 		</script>
 

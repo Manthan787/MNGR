@@ -12,7 +12,9 @@
 
           if(isValid) {
             $scope.$parent.loading = true;
-            var data = {'new': $scope.newPassword}
+            var data = {
+                          'new': $scope.newPassword
+                        }
             if($scope.newPassword == $scope.newPasswordAgain) {
               $http.post('api/auth/changePassword', data)
               .then(function(response) {
