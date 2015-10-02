@@ -19,6 +19,9 @@
 		<![endif]-->
 
 	</head>
+	<head itemscope itemtype="http://schema.org/WebSite">
+	<title itemprop='name'>Ameecomputer</title>
+	<link rel="canonical" href="https://www.ameecomputer.in/" itemprop="url">
 	<body>
 		@yield('pre-header')
 
@@ -191,6 +194,16 @@
 
 		<!-- Activates the navbar tabs according to the page URL -->
 		<script src="{{URL::asset("Landing/js/activetabs.js")}}"></script>
+
+		<script type="application/ld+json">
+			{
+			  "@context" : "http://schema.org",
+			  "@type" : "WebSite",
+			  "name" : "Ameecomputer",
+			  "alternateName" : "Amee Computer Classes",
+			  "url" : "http://www.ameecomputer.in"
+			}
+		</script>
 
 	</body>
 </html>
