@@ -93,12 +93,12 @@ Route::filter('hasAccessToAdminPanel',function(){
     {
         if(!Auth::user()->hasAccessToAdminPanel())
         {
-            return Response::json(['msg'=>'You do not have enough privileges to perform this action!'], 401);
+            return Redirect::to('/');
         }
     }
     else
     {
-        return Response::json(['msg'=>'You need to login to access this page'],401);
+        return Response::json('admin/login');
     }
 });
 
