@@ -201,7 +201,7 @@
 		<script type="application/ld+json">
 			{
 			  "@context" : "http://schema.org",
-			  "@type" : "WebSite",
+			  "@type" : "Organization",
 			  "name" : "<?php echo $preferences['INSTITUTE_NAME']; ?>",
 			  "alternateName" : "Amee Computer Class",
 			  "url" : "<?php echo $preferences['BASE_URL']; ?>",
