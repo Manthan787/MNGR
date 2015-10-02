@@ -98,7 +98,7 @@ Route::filter('hasAccessToAdminPanel',function(){
     }
     else
     {
-        return Response::to('admin/login');
+        return Redirect::to('/admin/login');
     }
 });
 
