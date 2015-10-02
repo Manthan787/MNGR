@@ -207,7 +207,7 @@
 			  "alternateName" : "Amee Computer Classes",
 			  "url" : "http://www.ameecomputer.in",
 				"sameAs" : [
-		    	"https://www.facebook.com/AmeeComputerClasses",
+		    	"https://www.facebook.com/AmeeComputerClasses"
 		  	]
 			}
 		</script>
