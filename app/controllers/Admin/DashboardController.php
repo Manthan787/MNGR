@@ -1,10 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 26/06/15
- * Time: 9:27 PM
- */
+namespace Admin;
+use BaseController;
+use Response;
+use Student;
+use User;
+use Question;
 
 class DashboardController extends BaseController{
 
@@ -21,4 +21,4 @@ class DashboardController extends BaseController{
                 'test_count'    => $test_count
             ],200);
     }
-} 
+}

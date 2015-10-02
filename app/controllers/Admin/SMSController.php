@@ -1,6 +1,11 @@
 <?php
+namespace Admin;
+use BaseController;
+use Input;
+use Config;
+use Exception;
+use Response;
 use mngr\Services\SMS\SMSNotifier;
-
 
 class SMSController extends BaseController
 {

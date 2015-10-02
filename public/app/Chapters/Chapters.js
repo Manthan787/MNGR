@@ -25,46 +25,10 @@
             $scope.subjectsError = false;
             $scope.$parent.showChapters = false;
         }
-        Standard.getAll().then(function(standards) {
-            $scope.standards = standards;
-            $scope.$parent.loading = false;
-        });
 
-        $scope.getStreams = function() {
-            $scope.$parent.loading = true;
-            resetStates();
-            $scope.streams = FormHelper.loadStreams($scope.selectedStandard);
-            if($scope.streams)
-            {
-                $scope.hasStreams = true;
-            }
-            else
-            {
+        
 
-                if($scope.streams !== null) {
-                    $scope.hasStreams = false;
-                    $scope.subjects = FormHelper.getSubjectsByStd($scope.selectedStandard.id, $scope.standards);
-                    $scope.hasSubjects = true;
-                }
-            }
-            $scope.$parent.loading = false;
-        };
 
-        $scope.getSubjects = function(stream) {
-            $scope.$parent.loading = true;
-            FormHelper.getSubjectsByStream(stream.id).then(function (subjects) {
-                $scope.subjects = subjects;
-                if ($scope.subjects[0] != undefined) {
-                    $scope.hasSubjects = true;
-                    $scope.subjectsError = false;
-                }
-                else {
-                    $scope.hasSubjects = false;
-                    $scope.subjectsError = true;
-                }
-                $scope.$parent.loading = false;
-            });
-        };
         $scope.showChapters = function(subjectID) {
             $scope.$parent.chaptersLoading = true;
             $scope.$parent.showChapters = true;

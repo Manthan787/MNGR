@@ -10,7 +10,7 @@
 
 </head>
 <body class="fixed"  ng-controller="AppController">
-  @if(Auth::check() && Auth::user()->isAdmin())
+  @if(Auth::check())
   <!-- Header -->
   <header>
     <a href="/admin#" class="logo"><i class="fa fa-bolt"></i> <span>Acharya</span></a>
@@ -34,7 +34,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                	<a href="#Settings/setup"><i class="fa fa-cog"></i>Settings</a>
+                	<a href="#Account/settings"><i class="fa fa-cog"></i>Account Settings</a>
                 </li>
                 <li class="footer">
                 	<a  href="" ng-click="logout()"><i class="fa fa-power-off"></i>Logout</a>
@@ -70,7 +70,9 @@
             </a>
             <ul class="sub-menu">
                 <li><a href="#/Students/search"><i class="fa fa-search"></i>Search Students</a></li>
-                <li><a href="#/Students/add"><i class="fa fa-plus"></i>Add Students</a></li>
+                @if(Auth::user()->isAdmin())
+                  <li><a href="#/Students/add"><i class="fa fa-plus"></i>Add Students</a></li>
+                @endif
             </ul>
         </li>
         <li class="sub-nav">
@@ -112,13 +114,13 @@
                 <span>Chapters</span>
             </a>
         </li>
+        @if(Auth::user()->isAdmin())
         <li>
           <a href="#/Alerts/send">
               <i class="fa fa-bullhorn"></i>
               <span>SMS Alerts</span>
           </a>
         </li>
-
         <li class="sub-nav">
             <a href="">
                 <i class="fa fa-cogs"></i>
@@ -132,6 +134,7 @@
                 <li><a href="#/Settings/batches"><i class="glyphicon glyphicon-bookmark"></i>Batches</a></li>
             </ul>
         </li>
+        @endif
     </ul>
 
 </div>
@@ -177,6 +180,7 @@
         <script src="app/HomeController.js"></script>
         <script src="app/Chapters/Chapters.js"></script>
         <script src="app/Tests/Tests.js"></script>
+        <script src="app/Account/Account.js"></script>
         <script src="app/admin/ckeditor/ckeditor.js"></script>
 
 

@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','ngRoute','ngSanitize']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','Account','ngRoute','ngSanitize']);
 
 	app.constant('USER_ROLES', {
 			admin 			: 1,
@@ -21,7 +21,7 @@
 						templateUrl:'app/partials/Questions/allQuestions.html',
 						controller : 'QuestionsController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
 
 				})
@@ -29,35 +29,35 @@
 					templateUrl:'app/partials/Questions/addQuestion.html',
 					controller : 'AddQuestionsController',
 		      data: {
-							authorizedRoles: [USER_ROLES.admin]
+							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 					}
 				})
         .when('/Materials/add', {
             templateUrl:'app/partials/Materials/addMaterial.html',
             controller:'MaterialsController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
         })
         .when('/Materials/recent', {
             templateUrl:'app/partials/Materials/recentMaterial.html',
             controller:'RecentMaterialController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
 				})
         .when('/Materials/:id', {
             templateUrl:'app/partials/Materials/editMaterial.html',
             controller:'MaterialsController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
         })
 				.when('/Students/search', {
 					templateUrl:'app/partials/Students/searchStudents.html',
 					controller:'StudentsController',
 					data: {
-							authorizedRoles: [USER_ROLES.admin]
+							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 					}
 				})
 				.when('/Students/add', {
@@ -114,19 +114,26 @@
             templateUrl:'app/partials/Chapters/all.html',
             controller:'ChapterController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
         })
         .when('/Tests/create', {
             templateUrl : 'app/partials/Tests/create.html',
             controller : 'TestController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin]
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
-        })
-		.otherwise({
-			redirectTo:'/'
-		});
+        }).
+				when('/Account/settings', {
+						templateUrl: 'app/partials/Account/settings.html',
+						controller: 'AccountSettings',
+						data: {
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher, USER_ROLES.accountant]
+						}
+				})
+				.otherwise({
+					redirectTo:'/'
+				});
 	}).factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
         return {
             response: function(response){
@@ -157,6 +164,7 @@
 				$rootScope.$on('$routeChangeStart', function(event, next, current) {
 						if(next.data) {
 							var authorizedRoles = next.data.authorizedRoles;
+
 							if(!AuthService.isAuthorized(authorizedRoles)) {
 								event.preventDefault();
 								if(AuthService.isAuthenticated()) {

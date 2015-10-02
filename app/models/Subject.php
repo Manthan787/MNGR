@@ -35,6 +35,6 @@ class Subject extends Eloquent
 		return $this->belongsToMany('Stream');
 	}
 
-	
-	
+
+
 }

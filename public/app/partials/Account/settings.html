@@ -1,0 +1,71 @@
+<div class="rightside">
+  <div class="page-head">
+    <h1>
+      <i class="fa fa-cog"> Account Settings</i>
+    </h1>
+  </div>
+  <div class="content">
+    <div class="row">
+      <div class="container" ng-controller="SettingsController">
+        <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+        <div class="alert alert-success" ng-show="success">{{ success }}</div>
+        <div align="center" ng-show="loading">
+            <img src="app/admin/img/loader.gif" height="45" width="45">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+              <!--Subject Panel -->
+              <section>
+                  <ul class="nav nav-tabs">
+                      <li role="presentation" class="active">
+                          <a href="#Settings/setup">
+                              <i class="fa fa-key"></i>
+                              Change Password
+                          </a>
+                      </li>
+                  </ul>
+              </section>
+              <div class="box">
+                  <div class="box-title">
+                      <h3>Change Your Existing Password</h3>
+                  </div>
+                  <div class="box-body">
+                      <!-- Standard Form -->
+                      <form  class="form-horizontal"
+                             autocomplete="off"
+                             name="changePasswordForm"
+                             ng-controller="ChangePassword"
+                             ng-submit="changePassword(changePasswordForm.$valid)"
+                             novalidate >
+
+                          <div class="form-group" ng-class="{'has-error': (changePasswordForm.newPassword.$invalid && changePasswordForm.$submitted)}">
+                              <label class="col-sm-3 control-label">New Password</label>
+                              <div class="col-sm-8">
+                                  <input type="password" name="newPassword" class="form-control" ng-model="newPassword" required>
+                                  <p class="help-block" ng-if="(changePasswordForm.newPassword.$invalid && changePasswordForm.$submitted)">
+                                    This field is required.
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="form-group" ng-class="{'has-error': (changePasswordForm.newPasswordAgain.$invalid && changePasswordForm.$submitted)}">
+                              <label class="col-sm-3 control-label">Retype New Password</label>
+                              <div class="col-sm-8">
+                                  <input type="password" name="newPasswordAgain" class="form-control" ng-model="newPasswordAgain" required>
+                                  <p class="help-block" ng-if="(changePasswordForm.newPasswordAgain.$invalid && changePasswordForm.$submitted)">
+                                    This field is required.
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="form-group" align="Center">
+                              <input type="submit" class="btn btn-primary" value="Done" >
+                          </div>
+                      </form>
+                      <!-- Standard Form Ends -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

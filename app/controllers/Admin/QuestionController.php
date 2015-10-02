@@ -1,5 +1,8 @@
-<?php 
-
+<?php
+namespace Admin;
+use BaseController;
+use Response;
+use Input;
 use mngr\Repositories\Questions\QuestionsRepository;
 use mngr\Exceptions\QuestionNotFoundException;
 
@@ -15,7 +18,7 @@ class QuestionController extends BaseController
 	public function getAll()
 	{
 		$allQuestions = $this->question->getAll();
-		
+
 		return Response::json($allQuestions, 200);
 	}
 

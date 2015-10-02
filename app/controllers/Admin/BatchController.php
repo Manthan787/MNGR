@@ -1,10 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 04/07/15
- * Time: 8:16 PM
- */
+namespace Admin;
+use BaseController;
+use Response;
+use Batch;
+use Exception;
+use Input;
 
 class BatchController extends BaseController {
 
@@ -36,4 +36,4 @@ class BatchController extends BaseController {
             return Response::json(['msg'=>$e],500);
         }
     }
-} 
+}

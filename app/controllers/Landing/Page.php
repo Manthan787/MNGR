@@ -1,5 +1,5 @@
 <?php
-namespace Landing;
+namespace Landing\Controller;
 use BaseController;
 use View;
 use Config;

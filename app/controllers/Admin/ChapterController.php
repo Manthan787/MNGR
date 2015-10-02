@@ -1,10 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 18/05/15
- * Time: 1:32 PM
- */
+namespace Admin;
+use BaseController;
+use Response;
+use Chapter;
+use Exception;
+use Input;
 
 class ChapterController extends BaseController{
 
@@ -42,4 +42,4 @@ class ChapterController extends BaseController{
         }
 
     }
-} 
+}

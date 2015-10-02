@@ -1,5 +1,10 @@
 <?php
-
+namespace Admin;
+use BaseController;
+use Response;
+use Input;
+use Crypt;
+use User;
 use mngr\Services\Mail\Notifier;
 
 class StaffController extends BaseController{
@@ -34,4 +39,4 @@ class StaffController extends BaseController{
         $this->notifier->to($user->email)->from('manthant15@gmail.com')->subject('You are now the staff Member!')->notify('EmailNotification.staff', $data);
         return Response::json(['msg'=>'Successfully Added Member To The System!'], 200);
     }
-} 
+}

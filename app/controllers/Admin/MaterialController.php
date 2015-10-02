@@ -1,4 +1,10 @@
 <?php
+namespace Admin;
+use BaseController;
+use Response;
+use Exception;
+use StudyMaterial;
+use Input;
 
 class MaterialController extends BaseController{
 

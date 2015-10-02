@@ -2,24 +2,26 @@
 
 
 // Landing Page
-Route::get('/', 'Landing\Page@index');
-Route::get('/about', 'Landing\Page@about');
-Route::get('/contact', 'Landing\Page@contact');
-Route::post('/contact', 'Landing\Page@postContact');
+Route::get('/', 'Landing\Controller\Page@index');
+Route::get('/about', 'Landing\Controller\Page@about');
+Route::get('/contact', 'Landing\Controller\Page@contact');
+Route::post('/contact', 'Landing\Controller\Page@postContact');
 
 
 // ACHARYA ADMIN PANEL
-Route::group(['before' => 'admin_redirect'], function(){
+Route::group(['before' => 'hasAccessToAdminPanel'], function(){
     Route::get('/admin', function()
     {
         $user = Auth::user();
         return View::make('Admin.index')->with('user',$user);
     });
+
+    Route::post('api/auth/changePassword', 'Admin\AuthController@changePassword');
+    Route::get('api/auth/logout','Admin\AuthController@logout');
 });
 
-
-Route::get('/admin/login', function() {
-    return View::make('Admin.login');
+Route::group(['before'=>'guest'] , function() {
+    Route::get('/admin/login', 'Admin\AuthController@getLogin');
 });
 
 Route::post("/upload", function(){
@@ -46,40 +48,43 @@ Route::post("/upload", function(){
     echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url');</script>";
 }); */
 
-Route::get('/stats', 'DashboardController@getStats');
+Route::get('/stats', 'Admin\DashboardController@getStats');
 Route::group(['before'=>'teacher'], function() {
-    Route::get('api/Chapters/all', 'ChapterController@getAll');
-    Route::post('api/Chapters/add', 'ChapterController@postChapter');
-    Route::get('api/Chapters/{id}/delete', 'ChapterController@getDelete');
-    Route::post('api/Chapters/{id}/edit', 'ChapterController@postEdit');
+    Route::get('api/Chapters/all', 'Admin\ChapterController@getAll');
+    Route::post('api/Chapters/add', 'Admin\ChapterController@postChapter');
+    Route::get('api/Chapters/{id}/delete', 'Admin\ChapterController@getDelete');
+    Route::post('api/Chapters/{id}/edit', 'Admin\ChapterController@postEdit');
 });
 
 Route::group(['before' => 'admin'], function() {
-    Route::post('api/sms/send', 'SMSController@send');
+    Route::post('api/sms/send', 'Admin\SMSController@send');
 });
 
-Route::post('form','UserController@store');
+Route::post('form','Admin\UserController@store');
 
-Route::post('api/auth/login', 'AuthController@login');
-Route::get('api/auth/logout','AuthController@logout');
+Route::post('api/auth/login', 'Admin\AuthController@login');
+
 
 Route::group(['before'=>'admin'], function() {
-    Route::get('api/years/all', 'YearController@getAll');
-    Route::post('api/years/add', 'YearController@postAdd');
-    Route::get('api/years/{id}/delete', 'YearController@getDelete');
-    Route::post('api/years/{id}/edit', 'YearController@postEdit');
+    Route::get('api/years/all', 'Admin\YearController@getAll');
+    Route::post('api/years/add', 'Admin\YearController@postAdd');
+    Route::get('api/years/{id}/delete', 'Admin\YearController@getDelete');
+    Route::post('api/years/{id}/edit', 'Admin\YearController@postEdit');
 
 });
-Route::get('api/years/current','YearController@getCurrent');
+Route::get('api/years/current','Admin\YearController@getCurrent');
 #API ROUTES
 Route::group(['before'=>'teacher'],function(){
 
 	#Questions
-	Route::get('api/Questions/all','QuestionController@getAll');
-	Route::post('api/Questions/add','QuestionController@postQuestion');
-    Route::post('api/Questions/{id}/edit', 'QuestionController@editQuestion');
-	Route::get('api/Questions/{id}','QuestionController@getById');
-    Route::get('api/Questions/{id}/delete','QuestionController@delete');
+	Route::get('api/Questions/all','Admin\QuestionController@getAll');
+	Route::post('api/Questions/add','Admin\QuestionController@postQuestion');
+  Route::post('api/Questions/{id}/edit', 'Admin\QuestionController@editQuestion');
+	Route::get('api/Questions/{id}','Admin\QuestionController@getById');
+  Route::get('api/Questions/{id}/delete','Admin\QuestionController@delete');
+
+  #subjects
+  Route::get('api/Subjects/all', 'Admin\SubjectController@all');
 
 });
 
@@ -91,14 +96,16 @@ Route::get('/h',function(){
 
 Route::group(['before'=>'teacher'],function(){
 
-	Route::get('api/Students/all','StudentController@getAll');
-	Route::post('api/Students/add','StudentController@postStudent');
-	Route::get('api/Students/{id}','StudentController@getById');
-    Route::get('api/Students/{studentID}/delete', 'StudentController@delete');
-    Route::post('api/Students/{studentID}/update', 'StudentController@update');
+	Route::get('api/Students/all','Admin\StudentController@getAll');
+	Route::post('api/Students/add','Admin\StudentController@postStudent');
+	Route::get('api/Students/{id}','Admin\StudentController@getById');
+    Route::get('api/Students/{studentID}/delete', 'Admin\StudentController@delete');
+    Route::post('api/Students/{studentID}/update', 'Admin\StudentController@update');
 
 });
 //TODO Create repositories for Standards and Streams and move them to seperate Controllers. Also Create form services.
+
+
 Route::get('/api/Standards/all',function(){
 	$standards = Standard::with(['streams','subjects','batches'])->get();
 	return $standards;
@@ -282,9 +289,7 @@ Route::post('/api/Subjects/delete', function(){
 	}
 });
 
-Route::get('api/Subjects/all', function(){
-    return Subject::with('standard','streams','chapters')->get();
-});
+Route::get('api/Subjects/all', 'Admin\SubjectController@all');
 
 Route::post('/api/Subjects/{id}/edit', function($id){
 	$subject = Subject::find($id);
@@ -352,17 +357,17 @@ Route::get('/api/mediums', function(){
 	return $mediums;
 });
 
-Route::post('api/members/add', 'StaffController@add');
+Route::post('api/members/add', 'Admin\StaffController@add');
 
 Route::group(['before'=>'admin'], function(){
-    Route::post('api/tests/create','TestController@create');
-    Route::get('back/tests/{id}/show', 'TestController@show');
+    Route::post('api/tests/create','Admin\TestController@create');
+    Route::get('back/tests/{id}/show', 'Admin\TestController@show');
 });
 
 Route::post('desk/test/practice/assess', 'Desk\Controller\Test@postAssess');
 
-Route::get('api/batches/all', 'BatchController@getAll');
-Route::post('api/batches/add','BatchController@postAdd');
+Route::get('api/batches/all', 'Admin\BatchController@getAll');
+Route::post('api/batches/add','Admin\BatchController@postAdd');
 
 
 //# STUDENT's APP
@@ -407,11 +412,11 @@ Route::group(['before'=>'student'], function() {
 });
 
 Route::group(['before' => 'teacher'], function(){
-    Route::post('api/materials/add', 'MaterialController@add');
-    Route::get('api/materials/recent', 'MaterialController@getRecent');
-    Route::get('api/materials/{id}', 'MaterialController@getById');
-    Route::post('api/materials/{id}/edit', 'MaterialController@edit');
-    Route::delete('api/materials/{id}/delete','MaterialController@delete');
+    Route::post('api/materials/add', 'Admin\MaterialController@add');
+    Route::get('api/materials/recent', 'Admin\MaterialController@getRecent');
+    Route::get('api/materials/{id}', 'Admin\MaterialController@getById');
+    Route::post('api/materials/{id}/edit', 'Admin\MaterialController@edit');
+    Route::delete('api/materials/{id}/delete','Admin\MaterialController@delete');
 });
 
 

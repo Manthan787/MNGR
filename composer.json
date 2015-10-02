@@ -27,6 +27,7 @@
 
         "psr-4":{
             "mngr\\"		:"app/mngr",
+						"Admin\\"		:"app/controllers/Admin",
             "Desk\\"		:"app/controllers/Desk",
 						"Landing\\"	:"app/controllers/Landing"
         }

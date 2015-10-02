@@ -1,6 +1,13 @@
 <?php
+namespace Admin;
+use BaseController;
+use Response;
+use Input;
+use Student;
+use Validator;
+use Exception;
 
-class StudentController extends Controller
+class StudentController extends BaseController
 {
 	public function getAll()
 	{

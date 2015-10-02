@@ -1,6 +1,16 @@
 <?php
+namespace Admin;
+use BaseController;
+use Response;
+use Input;
+use Exception;
+use Test;
+use Log;
+use PDF;
+use Redirect;
 use mngr\Services\Questionnaire\QuestionnaireInterface as Questionnaire;
 use mngr\Exceptions\QuestionnaireLimitMismatchException;
+
 class TestController extends BaseController{
     protected $questionnaire;
     public function __construct(Questionnaire $questionnaire)
@@ -25,7 +35,7 @@ class TestController extends BaseController{
         }
         catch(QuestionnaireLimitMismatchException $e)
         {
-            \Log::error('Error occurred while generating questionnaire.');
+            Log::error('Error occurred while generating questionnaire.');
             return Response::json(['msg'=>'There are not enough questions in the system to generate test. Please add sufficient amount of questions first and then try again.'],500);
         }
 
@@ -42,4 +52,4 @@ class TestController extends BaseController{
             return Redirect::to('/');
         }
     }
-} 
+}

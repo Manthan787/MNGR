@@ -135,8 +135,9 @@
           }
         }
 
-        $scope.Send = function(isValid) {          
+        $scope.Send = function(isValid) {
           if(isValid) {
+            $scope.loading = true;
             var recepients_msg = {
               'recepients': $scope.recepients,
               'message'   : $scope.Message
@@ -144,9 +145,10 @@
 
             $http.post('api/sms/send', recepients_msg).then(function(response){
                 $scope.success = response.data.msg;
+                $scope.loading = false;
             }, function(response) {
-                console.log(response);
                 $scope.error = response.data.msg;
+                $scope.loading = false;
             });
           }
         }

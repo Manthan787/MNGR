@@ -1,130 +1,119 @@
 
-    <div class="rightside">
-        <div class="content">
-            <div class="row">
-                <div class="container">
-                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
-                    <div align="center" ng-show="loading">
-                        <img src="app/admin/img/loader.gif" height="45" width="45">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="box">
-                                <div class="box-title">
-                                    <h3>Select Subject</h3>
-                                </div>
-                                <div class="box-body">
-                                    <form  class="form-horizontal" name="addChapterForm" ng-controller="AddChapterFormController" ng-submit="addChapter(addChapterForm.$valid)" novalidate>
-                                        <div class="form-group" ng-class="{'has-error' : (submitted && addChapterForm.standard.$invalid) || (addChapterForm.standard.$invalid && addChapterForm.standard.$dirty)}">
-                                            <label class="col-sm-2 control-label">Standard</label>
-                                            <div class="col-sm-10">
-                                                <select type="text" name="standard" class="form-control" ng-options="standard.division for standard in standards" ng-model="selectedStandard" ng-change="getStreams()" required>
-                                                    <option value="">Select Standard</option>
-                                                </select>
-                                                <p class="help-block" ng-if="(submitted && addChapterForm.standard.$invalid) || (addChapterForm.standard.$invalid && addChapterForm.standard.$dirty)">This field is required.</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-if="hasStreams" ng-class="{'has-error' : (submitted && addChapterForm.stream.$invalid) || (addChapterForm.stream.$invalid && addChapterForm.stream.$dirty)}">
-                                            <label class="col-sm-2 control-label">Stream</label>
-                                            <div class="col-sm-10">
-                                                <select type="text" name="stream" class="form-control" ng-options="stream.stream for stream in streams" ng-model="selectedStream" ng-change="getSubjects(selectedStream)" ng-required="hasStreams">
-                                                    <option value="">Select Stream</option>
-                                                </select>
-                                                <p class="help-block" ng-if="(submitted && addChapterForm.stream.$invalid) || (addChapterForm.stream.$invalid && addChapterForm.stream.$dirty)">This field is required.</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-if="hasSubjects" ng-class="{'has-error' : (submitted && addChapterForm.subject.$invalid) || (addChapterForm.subject.$invalid && addChapterForm.subject.$dirty)}">
-                                            <label class="col-sm-2 control-label">Subject</label>
-                                            <div class="col-sm-10">
-                                                <select type="text" name="subject" class="form-control" ng-options="subject.id as subject.name for subject in subjects" ng-model="newChapter.subject_id" ng-change="showChapters(newChapter.subject_id)" required>
-                                                    <option value="">Select Subject</option>
-                                                </select>
-                                                <p class="help-block" ng-if="(submitted && addChapterForm.subject.$invalid) || (addChapterForm.subject.$invalid && addChapterForm.subject.$dirty)">This field is required.</p>
-                                            </div>
-                                        </div>
+<div class="rightside">
+  <div class="page-head">
+      <h1>
+        <i class="fa fa-book"> Manage Chapters</i>
+        <small>Create, View, Update and Delete Chapters</small>
+      </h1>
+  </div>
+<div class="content">
+  <div class="row">
+      <div class="container">
+          <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+          <div class="alert alert-success" ng-show="success">{{ success }}</div>
+          <div align="center" ng-show="loading">
+              <img src="app/admin/img/loader.gif" height="45" width="45">
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="box">
+                      <div class="box-title">
+                          <h3>Select Subject</h3>
+                      </div>
+                      <div class="box-body">
+                          <form  class="form-horizontal" name="addChapterForm" ng-controller="AddChapterFormController" ng-submit="addChapter(addChapterForm.$valid)" novalidate>
+                              <div class="form-group" ng-class="{'has-error' : (submitted && addChapterForm.subject.$invalid) || (addChapterForm.subject.$invalid && addChapterForm.subject.$dirty)}">
+                                  <label class="col-sm-2 control-label">Subject</label>
+                                  <div class="col-sm-10">
+                                      <select type="text" name="subject" class="form-control" ng-options="subject.id as subject.name for subject in subjects" ng-model="newChapter.subject_id" ng-change="showChapters(newChapter.subject_id)" required>
+                                          <option value="">Select Subject</option>
+                                      </select>
+                                      <p class="help-block" ng-if="(submitted && addChapterForm.subject.$invalid) || (addChapterForm.subject.$invalid && addChapterForm.subject.$dirty)">This field is required.</p>
+                                  </div>
+                              </div>
 
-                                        <div class="form-group" ng-if="subjectsError">
-                                            <div class="col-sm-10">
-                                                <div class="alert alert-danger">Looks like there are no subjects in the system. Please add subjects in the settings section then try this operation!</div>
-                                            </div>
-                                        </div>
+                              <div class="form-group" ng-if="subjectsError">
+                                  <div class="col-sm-10">
+                                      <div class="alert alert-danger">Looks like there are no subjects in the system. Please add subjects in the settings section then try this operation!</div>
+                                  </div>
+                              </div>
 
-                                        <div class="form-group" ng-if="!subjectsError" ng-class="{'has-error' : (submitted && addChapterForm.title.$invalid) || (addChapterForm.title.$invalid && addChapterForm.title.$dirty)}">
-                                            <label class="col-sm-2 control-label">Chapter Title</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="title" class="form-control" ng-model="newChapter.title" required>
-                                                <p class="help-block" ng-if="(submitted && addChapterForm.title.$invalid) || (addChapterForm.title.$invalid && addChapterForm.title.$dirty)">Add a valid title for the chapter. This field can't be empty.</p>
-                                            </div>
-                                        </div>
-                                       <div class="form-group">
-                                           <div align="center">
-                                               <input type="submit" class="btn btn-primary" value="Add Chapter">
-                                           </div>
-                                       </div>
-                                    </form>
+                              <div class="form-group" ng-if="!subjectsError" ng-class="{'has-error' : (submitted && addChapterForm.title.$invalid) || (addChapterForm.title.$invalid && addChapterForm.title.$dirty)}">
+                                  <label class="col-sm-2 control-label">Chapter Title</label>
+                                  <div class="col-sm-10">
+                                      <input type="text" name="title" class="form-control" ng-model="newChapter.title" required>
+                                      <p class="help-block" ng-if="(submitted && addChapterForm.title.$invalid) || (addChapterForm.title.$invalid && addChapterForm.title.$dirty)">Add a valid title for the chapter. This field can't be empty.</p>
+                                  </div>
+                              </div>
+                             <div class="form-group">
+                                 <div align="center">
+                                     <input type="submit" class="btn btn-primary" value="Add Chapter">
                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" ng-if="showChapters">
-                            <div class="box" >
-                                <div class="box-title">
-                                    <h3>Chapters</h3>
-                                </div>
-                                <div class="box-body">
-                                    <div align="center" ng-show="chaptersLoading">
-                                        <img src="app/admin/img/loader.gif" height="45" width="45">
-                                    </div>
-                                    <table class="table" ng-hide="noChapters">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="chapter in chapters">
-                                            <td ng-if="!isEditable(chapter.id)">{{chapter.title}}</td>
-                                           <td ng-if="isEditable(chapter.id)">
-                                               <form class="form-inline">
-                                                   <div class="form-group">
-                                                       <div class="col-sm-4">
-                                                            <input type="text" class="form-control" ng-model="chapter.title" value="{{chapter.title}}">
-                                                       </div>
-                                                   </div>
-                                                   <div class="form-group">
-                                                       <div class="col-sm-4">
-                                                        <select ng-init="chapter.standard_id = chapter.standard_id" class="form-control" ng-model="chapter.standard_id">
-                                                            <option ng-repeat="subject in subjects" value="{{ subject.id }}">{{ subject.name }} ({{ subject.standard.division }} {{ subject.stream[0] ? "" : subject.stream.stream }})</option>
-                                                        </select>
-                                                       </div>
-                                                   </div>
-                                                   <div class="form-group">
+                             </div>
+                          </form>
+                       </div>
+                  </div>
+              </div>
+              <div class="col-md-6" ng-if="showChapters">
+                  <div class="box" >
+                      <div class="box-title">
+                          <h3>Chapters ({{ chapters.length }})</h3>
+                      </div>
+                      <div class="box-body">
+                          <div align="center" ng-show="chaptersLoading">
+                              <img src="app/admin/img/loader.gif" height="45" width="45">
+                          </div>
+                          <table class="table" ng-hide="noChapters">
+                              <thead>
+                                  <tr>
+                                      <th>Title</th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="chapter in chapters">
+                                  <td ng-if="!isEditable(chapter.id)">{{chapter.title}}</td>
+                                 <td ng-if="isEditable(chapter.id)">
+                                     <form class="form-inline">
+                                         <div class="form-group">
+                                             <div class="col-sm-4">
+                                                  <input type="text" class="form-control" ng-model="chapter.title" value="{{chapter.title}}">
+                                             </div>
+                                         </div>
+                                         <div class="form-group">
+                                             <div class="col-sm-4">
+                                              <select ng-init="chapter.standard_id = chapter.standard_id" class="form-control" ng-model="chapter.standard_id">
+                                                  <option value="">Select Subject</option>
+                                                  <option ng-repeat="subject in subjects" value="{{ subject.id }}">{{ subject.name }} ({{ subject.standard.division }} {{ subject.stream[0] ? "" : subject.stream.stream }})</option>
+                                              </select>
+                                             </div>
+                                         </div>
+                                         <div class="form-group">
 
-                                                   </div>
-                                               </form>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info btn-sm" ng-click="enableEditableChapter(chapter.id)">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-sm" ng-click="delete(chapter)">
-                                                    <i class="fa fa-trash-o "></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div ng-show="noChapters">
-                                        <div class="alert alert-info">
-                                            There are no chapters for this subject!
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                         </div>
+                                     </form>
+                                  </td>
+                                  <td>
+                                      <button class="btn btn-info btn-sm" ng-click="enableEditableChapter(chapter.id)">
+                                          <i class="fa fa-edit"></i>
+                                      </button>
+                                      <button class="btn btn-danger btn-sm" ng-click="delete(chapter)">
+                                          <i class="fa fa-trash-o "></i>
+                                      </button>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                          <div ng-show="noChapters">
+                              <div class="alert alert-info">
+                                  There are no chapters for this subject!
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>

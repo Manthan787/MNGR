@@ -15,4 +15,5 @@ return array(
     'Manthan\\Nuncio\\' => array($vendorDir . '/manthan/nuncio/src'),
     'Landing\\' => array($baseDir . '/app/controllers/Landing'),
     'Desk\\' => array($baseDir . '/app/controllers/Desk'),
+    'Admin\\' => array($baseDir . '/app/controllers/Admin'),
 );

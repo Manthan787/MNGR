@@ -1,6 +1,12 @@
 <?php
+namespace Admin;
+use BaseController;
+use Response;
+use Exception;
+use Year;
+use Input;
 
-class YearController extends Controller{
+class YearController extends BaseController{
     public function getAll() {
         $years = Year::all();
         if(count($years)==0) {
@@ -76,4 +82,4 @@ class YearController extends Controller{
         }
     }
 
-} 
+}

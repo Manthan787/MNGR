@@ -88,17 +88,17 @@ Route::filter('admin',function(){
 	}
 });
 
-Route::filter('admin_redirect',function(){
+Route::filter('hasAccessToAdminPanel',function(){
     if(Auth::check())
     {
-        if(!Auth::user()->isAdmin())
+        if(!Auth::user()->hasAccessToAdminPanel())
         {
-            return Redirect::to('/');
+            return Response::json(['msg'=>'You do not have enough privileges to perform this action!'], 401);
         }
     }
     else
     {
-        return Redirect::to('/admin/login');
+        return Response::json(['msg'=>'You need to login to access this page'],401);
     }
 });
 

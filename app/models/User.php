@@ -52,6 +52,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       return ($this->role_id == 4) ? true : false;
   }
 
+	public function hasAccessToAdminPanel()
+	{
+		if($this->isAdmin() || $this->isTeacher() || $this->isStudent())
+				return true;
+
+		return false;
+	}
+
 	public function setPasswordAttribute($password)
 	{
 		$this->attributes['password'] = Hash::make($password);
