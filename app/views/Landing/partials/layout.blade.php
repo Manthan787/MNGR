@@ -22,6 +22,10 @@
 	<head itemscope itemtype="http://schema.org/WebSite">
 	<title itemprop='name'>Ameecomputer</title>
 	<link rel="canonical" href="https://www.ameecomputer.in/" itemprop="url">
+	<span itemscope itemtype="http://schema.org/Organization">
+  	<link itemprop="url" href="http://www.ameecomputer.in">
+  	<a itemprop="sameAs" href="http://www.facebook.com/AmeeComputerClasses">FB</a>
+	</span>
 	<body>
 		@yield('pre-header')
 
@@ -201,9 +205,13 @@
 			  "@type" : "WebSite",
 			  "name" : "Ameecomputer",
 			  "alternateName" : "Amee Computer Classes",
-			  "url" : "http://www.ameecomputer.in"
+			  "url" : "http://www.ameecomputer.in",
+				"sameAs" : [
+		    	"https://www.facebook.com/AmeeComputerClasses",
+		  	]
 			}
 		</script>
+
 
 	</body>
 </html>
