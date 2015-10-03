@@ -142,13 +142,16 @@
                       </div>
                   </div>
                   <div class="box-body">
+                    <div align="center" ng-if="fetching">
+                        <img src="app/admin/img/loader.gif" height="45" width="45">
+                    </div>
                       <ul class="list-group" ng-repeat="student in recentlyActivatedStudents">
                           <li class="list-group-item" >
                               <span class="text"><a href="#Students/{{student.profile.id}}">{{student.profile.name}}</a></span>
                               <small class="label label-info"><i class="fa fa-clock-o"></i> {{ student.profile.created_at }}</small>
                           </li>
                       </ul>
-                  </div>                  
+                  </div>
               </div>
           </div>
         </div>

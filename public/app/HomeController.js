@@ -2,12 +2,14 @@
     angular.module('adminApp')
 
     .controller('HomeController', function($scope, $http){
+        $scope.fetching = true;
         $http.get('api/Students/activated/recent')
         .then(function(response) {
             $scope.recentlyActivatedStudents = response.data;
-            console.log(response.data);
+            $scope.fetching = false;
         }, function(response) {
-            console.log(response)
+            $scope.fail = "Error Fetching data";
+            $scope.fetching = false;
         })
     })
 
