@@ -2,15 +2,23 @@
     angular.module('adminApp')
 
     .controller('HomeController', function($scope, $http){
-        $scope.fetching = true;
-        $http.get('api/Students/activated/recent')
-        .then(function(response) {
-            $scope.recentlyActivatedStudents = response.data;
-            $scope.fetching = false;
-        }, function(response) {
-            $scope.fail = "Error Fetching data";
-            $scope.fetching = false;
-        })
+        var fetch = function() {
+          $scope.fetching = true;
+          $http.get('api/Students/activated/recent')
+          .then(function(response) {
+              $scope.recentlyActivatedStudents = response.data;
+              $scope.fetching = false;
+          }, function(response) {
+              $scope.fail = "Error Fetching data";
+              $scope.fetching = false;
+          })
+        }
+
+        fetch();
+
+        $scope.refresh = function() {
+          fetch()
+        }
     })
 
     .controller('SMSCtrl', function($scope, $http) {
