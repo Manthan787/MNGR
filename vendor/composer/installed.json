@@ -2362,17 +2362,17 @@
     },
     {
         "name": "manthan/nuncio",
-        "version": "1.1",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Manthan787/Nuncio.git",
-            "reference": "1376537ad3d656c7134ce0cf76922b6d51e276fa"
+            "reference": "b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/1376537ad3d656c7134ce0cf76922b6d51e276fa",
-            "reference": "1376537ad3d656c7134ce0cf76922b6d51e276fa",
+            "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e",
+            "reference": "b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e",
             "shasum": ""
         },
         "require": {
@@ -2381,7 +2381,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2015-09-29 10:57:59",
+        "time": "2015-10-03 09:21:15",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

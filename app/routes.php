@@ -57,7 +57,10 @@ Route::group(['before'=>'teacher'], function() {
 });
 
 Route::group(['before' => 'admin'], function() {
+    // Takes User objects as recepient [array]
     Route::post('api/sms/send', 'Admin\SMSController@send');
+    // Takes only one single number and a message
+    Route::post('api/sms/quick-send', 'Admin\SMSController@quick');
 });
 
 Route::post('form','Admin\UserController@store');
@@ -99,8 +102,9 @@ Route::group(['before'=>'teacher'],function(){
 	Route::get('api/Students/all','Admin\StudentController@getAll');
 	Route::post('api/Students/add','Admin\StudentController@postStudent');
 	Route::get('api/Students/{id}','Admin\StudentController@getById');
-    Route::get('api/Students/{studentID}/delete', 'Admin\StudentController@delete');
-    Route::post('api/Students/{studentID}/update', 'Admin\StudentController@update');
+  Route::get('api/Students/{studentID}/delete', 'Admin\StudentController@delete');
+  Route::post('api/Students/{studentID}/update', 'Admin\StudentController@update');
+  Route::get('api/Students/activated/recent', 'Admin\StudentController@recentlyActivated');
 
 });
 //TODO Create repositories for Standards and Streams and move them to seperate Controllers. Also Create form services.
@@ -423,6 +427,6 @@ Route::group(['before' => 'teacher'], function(){
 
 Route::get('/ex', function(){
 
-    return View::make("SMS");
+    return User::recentStudentAccounts();
 
 });

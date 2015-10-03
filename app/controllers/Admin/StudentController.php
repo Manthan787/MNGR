@@ -6,6 +6,7 @@ use Input;
 use Student;
 use Validator;
 use Exception;
+use User;
 
 class StudentController extends BaseController
 {
@@ -121,4 +122,9 @@ class StudentController extends BaseController
             return Response::json($e);
         }
     }
+
+		public function recentlyActivated()
+		{
+				return User::recentStudentAccounts();
+		}
 }

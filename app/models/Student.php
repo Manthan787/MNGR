@@ -35,6 +35,11 @@ class Student extends Eloquent
         return $this->belongsToMany('Batch');
     }
 
+		public function account()
+		{
+				return $this->hasOne('User');
+		}
+
     public function setPhoneAttribute($phone)
 	{
 		if(is_null($phone))

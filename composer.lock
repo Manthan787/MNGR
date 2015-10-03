@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b106de885f26f1c9d14a84ac6232de5",
-    "content-hash": "8c20a5b68a4c8c6047f44ae09902456e",
+    "hash": "8d8ef97f8124cb43bb66e74fc3385236",
+    "content-hash": "d78ee00eaae4daa9cc8bc8854a0fe6d8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -448,16 +448,16 @@
         },
         {
             "name": "manthan/nuncio",
-            "version": "1.0.3",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Manthan787/Nuncio.git",
-                "reference": "7341996b1445559adfdca8816aeb3d50c533de4a"
+                "reference": "b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/7341996b1445559adfdca8816aeb3d50c533de4a",
-                "reference": "7341996b1445559adfdca8816aeb3d50c533de4a",
+                "url": "https://api.github.com/repos/Manthan787/Nuncio/zipball/b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e",
+                "reference": "b0d0a0127661cc8d7c09384a96b14fc6bfe21c1e",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
                 }
             ],
             "description": "Turn your customer messages/emails into mustache-style templates. Just create one template for your message and nuncio will replace tags with customer details.",
-            "time": "2015-09-23 09:43:15"
+            "time": "2015-10-03 09:21:15"
         },
         {
             "name": "monolog/monolog",

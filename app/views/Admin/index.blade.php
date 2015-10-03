@@ -144,13 +144,16 @@
 </div>
 
 
-        <!-- Interface -->
-
         <script src="app/admin/js/plugins/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
         <script src="app/admin/js/plugins/jquery-ui/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
         <script src="app/admin/js/plugins/jquery-countTo/jquery.countTo.js"></script>
 
         <script src="app/admin/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+        <script src="app/admin/js/plugins/gritter/jquery.gritter.min.js" type="text/javascript"></script>
+        <script src="app/admin/js/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+        <script src="app/admin/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="app/admin/js/custom.js" type="text/javascript"></script>
 
         <script src="app/admin/js/plugins/pace/pace.min.js" type="text/javascript"></script>
         <script src="app/admin/js/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>

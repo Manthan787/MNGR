@@ -1,114 +1,191 @@
-
-    <div class="rightside">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="custom-box palette-alizarin">
-                        <h3 class="timer" data-start="0" data-from="0"  data-speed="1000" data-refresh-interval="10">0</h3>
-                        <p>Students</p>
-                        <i class="fa fa-child"></i>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="custom-box palette-nephritis">
-                        <h3 class="timer" data-start="0" data-from="0" data-speed="1000" data-refresh-interval="10">0</h3>
-                        <p>Student Desk Users</p>
-                        <i class="fa fa-users"></i>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="custom-box palette-peter-river">
-                        <h3 class="timer" data-start="0" data-from="0" data-to="stats.question_count" data-speed="3000" data-refresh-interval="10">0</h3>
-                        <p>Questions</p>
-                        <i class="fa fa-question"></i>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="custom-box palette-wet-asphalt">
-                        <h3 class="timer" data-start="0" data-from="0" data-to="45" data-speed="3000" data-refresh-interval="10">0</h3>
-                        <p>Tests</p>
-                        <i class="fa fa-pencil-square-o"></i>
-                    </div>
+<div class="rightside">
+    <div class="page-head">
+      <h1>
+          Dashboard
+          <small>Your data at your fingertips</small>
+      </h1>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="custom-box palette-alizarin">
+                    <h3 class="timer" data-start="0" data-from="0"  data-speed="1000" data-refresh-interval="10">0</h3>
+                    <p>Students</p>
+                    <i class="fa fa-child"></i>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="box" style="height: 360px">
-                        <div class="box-title">
-                            <i class="fa fa-check-square-o"></i>
-                            <h3>ToDo List</h3>
-                            <div class="pull-right box-toolbar">
-                                <button class="btn btn-link btn-xs remove-box" data-toggle="modal" data-target="#taskModal"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <ul class="todo">
-                                <li class="check">
-                                    <input type="checkbox"  id="checkbox">
-                                    <span class="text">Write new article</span>
-                                    <small class="label label-info"><i class="fa fa-clock-o"></i> 1 mins</small>
-                                </li>
-                                <li>
-                                    <div class="icheckbox_minimal" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                    <span class="text">Test new item page</span>
-                                    <small class="label label-warning"><i class="fa fa-clock-o"></i> 3 mins</small>
-                                </li>
-                                <li>
-                                    <div class="icheckbox_minimal" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                    <span class="text">Create new plugins for theme</span>
-                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> 42 mins</small>
-                                </li>
-                                <li>
-                                    <div class="icheckbox_minimal" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                    <span class="text">Check mailbox and new mails</span>
-                                    <small class="label label-default"><i class="fa fa-clock-o"></i> 3 hours</small>
-                                </li>
-                                <li>
-                                    <div class="icheckbox_minimal" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                    <span class="text">Setup the new theme</span>
-                                    <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 day</small>
-                                </li>
-                                <li>
-                                    <div class="icheckbox_minimal" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                    <span class="text">Buy a goat</span>
-                                    <small class="label label-success"><i class="fa fa-clock-o"></i> 1 week</small>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="box-footer clearfix no-border no-padding-top">
-                            <button class="btn btn-block btn-danger">See all tasks</button>
-                        </div>
-                    </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="custom-box palette-nephritis">
+                    <h3 class="timer" data-start="0" data-from="0" data-speed="1000" data-refresh-interval="10">0</h3>
+                    <p>Student Desk Users</p>
+                    <i class="fa fa-users"></i>
                 </div>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="taskModal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add New Task</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Your Task Here!">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="add-task" class="btn btn-success">Add</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="custom-box palette-peter-river">
+                    <h3 class="timer" data-start="0" data-from="0" data-to="stats.question_count" data-speed="3000" data-refresh-interval="10">0</h3>
+                    <p>Questions</p>
+                    <i class="fa fa-question"></i>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="custom-box palette-wet-asphalt">
+                    <h3 class="timer" data-start="0" data-from="0" data-to="45" data-speed="3000" data-refresh-interval="10">0</h3>
+                    <p>Tests</p>
+                    <i class="fa fa-pencil-square-o"></i>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="box" style="height: 360px">
+                    <div class="box-title">
+                        <i class="fa fa-check-square-o"></i>
+                        <h3>ToDo List</h3>
+                        <div class="pull-right box-toolbar">
+                            <button class="btn btn-link btn-xs remove-box" data-toggle="modal" data-target="#taskModal"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <ul class="todo">
+                            <li class="check">
+                                <input type="checkbox"  id="checkbox">
+                                <span class="text">Write new article</span>
+                                <small class="label label-info"><i class="fa fa-clock-o"></i> 1 mins</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" >
+                                <span class="text">Test new item page</span>
+                                <small class="label label-warning"><i class="fa fa-clock-o"></i> 3 mins</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" >
+                                <span class="text">Create new plugins for theme</span>
+                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 42 mins</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" >
+                                <span class="text">Check mailbox and new mails</span>
+                                <small class="label label-default"><i class="fa fa-clock-o"></i> 3 hours</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" >
+                                <span class="text">Setup the new theme</span>
+                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 day</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" >
+                                <span class="text">Buy a goat</span>
+                                <small class="label label-success"><i class="fa fa-clock-o"></i> 1 week</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="box-footer clearfix no-border no-padding-top">
+                        <button class="btn btn-block btn-danger">See all tasks</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="box" style="height: 360px" ng-controller="SMSCtrl">
+                  <div class="box-title">
+                      <i class="fa fa-envelope"></i>
+                      <h3>Quick SMS</h3>
+                  </div>
+                  <div class="box-body">
+                      <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                      <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                      <div align="center" ng-show="loading">
+                          <img src="app/admin/img/loader.gif" height="45" width="45">
+                      </div>
+                      <form name="sendForm"
+                            novalidate>
+                          <div class="form-group"
+                               ng-class="{'has-error': (sendForm.number.$invaild && sendForm.number.$dirty) || (sendForm.$submitted && sendForm.number.$invalid)}">
+                              <input name="number"
+                                     type="number"
+                                     class="form-control"
+                                     placeholder="Enter a 10-digit Mobile Number"
+                                     ng-minlength ="10"
+                                     ng-maxlength ="10"
+                                     ng-model="Number" required/>
+                                     <p
+                                       ng-if="(sendForm.$submitted && sendForm.number.$invalid) || (sendForm.number.$invalid && !sendForm.number.$pristine)" class="help-block">
+                                       Enter a Valid Mobile Number.
+                                     </p>
+                          </div>
+                          <div class="form-group" ng-class="{'has-error':(sendForm.$submitted && sendForm.message.$invalid) || (sendForm.message.$dirty && sendForm.message.$invalid)}">
+                              <textarea placeholder="Message to be sent"
+                                        name="message"
+                                        ng-model="Message"
+                                        class="form-control"
+                                        rows="6" required></textarea>
+                              <p class="help-block"
+                                 ng-if="(sendForm.$submitted && sendForm.message.$invalid) || (!sendForm.message.$pristine && sendForm.message.$invaild) ">
+                                    Oops! You forgot the main part. Type in the message to be sent.
+                              </p>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="box-footer clearfix">
+                      <button class="pull-left btn btn-success" ng-click="send(sendForm.$valid)">Send<i class="fa fa-arrow-circle-righ"></i></button>
+                      <button class="pull-right btn btn-default" ng-click="reset()">Reset <i class="fa fa-times"></i></button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="box" style="height: 360px">
+                  <div class="box-title">
+                      <i class="fa fa-clock-o"></i>
+                      <h3>Recently Activated Student Desks</h3>
+                      <div class="pull-right box-toolbar">
+                          <a href="#" class="btn btn-link btn-xs remove-box"><i class="fa fa-refresh"></i></a>
+                      </div>
+                  </div>
+                  <div class="box-body">
+                      <ul class="list-group" ng-repeat="student in recentlyActivatedStudents">
+                          <li class="list-group-item" >
+                              <span class="text"><a href="#Students/{{student.profile.id}}">{{student.profile.name}}</a></span>
+                              <small class="label label-info"><i class="fa fa-clock-o"></i> {{ student.profile.created_at }}</small>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="box-footer clearfix no-border no-padding-top">
+                      <button class="btn btn-block btn-danger">See all tasks</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+        <!-- Modal -->
+        <div class="modal fade" id="taskModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Your Task Here!">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="add-task" class="btn btn-success">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
+
+
 
 <script type="text/javascript">
-    (function() {
+    (function($) {
         "use strict";
 
         $.ajax(
@@ -136,5 +213,5 @@
         });
 
 
-    })();
+    })(jQuery);
 </script>

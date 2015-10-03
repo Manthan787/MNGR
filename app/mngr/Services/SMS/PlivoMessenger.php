@@ -23,7 +23,7 @@ class PlivoMessenger implements MessengerInterface
 
   public function to($recepient)
   {
-      $this->recepient = $recepient;
+      $this->recepient = $this->addCountryCode($recepient);
       return $this;
   }
 
@@ -36,6 +36,17 @@ class PlivoMessenger implements MessengerInterface
       );
 
       return $this->plivo->send_message($params);
+  }
+
+  private function addCountryCode($number)
+  {
+      $number_length = strlen($number);
+      if($number_length === 10)
+      {
+        return "+91".$number;
+      }
+
+      return $number;
   }
 
 

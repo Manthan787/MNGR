@@ -14,6 +14,8 @@ class NotifierServiceProvider extends ServiceProvider
                   new MessageProcessor()
               );
         });
+
+        $this->app->bind('Manthan\Nuncio\MessengerInterface', 'mngr\Services\SMS\PlivoMessenger');
     }
 }
 

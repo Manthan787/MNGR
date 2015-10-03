@@ -33,10 +33,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Subject');
 	}
 
-    public function profile()
-    {
-        return $this->belongsTo('Student','student_id');
-    }
+  public function profile()
+  {
+    return $this->belongsTo('Student','student_id');
+  }
+
+	public static function recentStudentAccounts()
+	{
+		return User::where('role_id', 4)->with('profile')->limit(10)->get();
+	}
+
 	public function isAdmin()
 	{
         return ($this->role_id == 1) ? true : false;
