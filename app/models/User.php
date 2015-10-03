@@ -40,7 +40,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function recentStudentAccounts()
 	{
-		return User::where('role_id', 4)->with('profile')->limit(10)->get();
+		return User::where('role_id', 4)->with('profile')->orderBy('created_at','DESC')->limit(5)->get();
 	}
 
 	public function isAdmin()
