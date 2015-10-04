@@ -3,7 +3,6 @@
 	var app = angular.module('Questions',[]);
 
 	app.controller('QuestionsController',function($scope, Question, $location, $sce){
-		
 		$scope.questions = [];
 		$scope.error;
 		$scope.fetchedQuestion;
@@ -55,14 +54,32 @@
 
     });
 	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce){
-        var ck = CKEDITOR.replace('question');
-        ck.on('pasteState',function(){
-            var elm = document.getElementById('AddForm');
-            var scope = angular.element(elm).scope();
-            scope.$apply(function(){
-               $scope.newQuestion.question = ck.getData();
-            });
-        });
+        // var ck = CKEDITOR.replace('question');
+        // ck.on('pasteState',function(){
+        //     var elm = document.getElementById('AddForm');
+        //     var scope = angular.element(elm).scope();
+        //     scope.$apply(function(){
+        //        $scope.newQuestion.question = ck.getData();
+        //     });
+        // });
+        tinymce.init({
+					selector: '#question',
+					menubar: false,
+					plugins:['image'],
+					file_browser_callback: function(field_name, url, type, win) {
+            if(type=='image') $('#my_form input').click();
+        	},
+					setup: function(editor) {
+										editor.on('keyup', function(e) {
+												var elm = document.getElementById('AddForm')
+												var scope = angular.element(elm).scope()
+												scope.$apply(function() {
+														$scope.newQuestion.question = editor.getContent()
+												})
+										})
+								}
+				})
+				console.log(tinymce)
         $scope.newQuestion = new Question();
         var counter = 4;
         $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
@@ -137,11 +154,11 @@
 
 		$scope.addQuestion = function(){
             $scope.loading = true;
-			var addQuestionPromise = $scope.newQuestion.add();
-			addQuestionPromise.then(function(msg){
+						var addQuestionPromise = $scope.newQuestion.add();
+						addQuestionPromise.then(function(msg){
                 console.log(msg);
                 $scope.$parent.success = msg;
-				reset();
+								reset();
                 $scope.loading = false;
 			}, function(response){
 				console.log(response);
@@ -151,10 +168,10 @@
 		var reset = function(){
 			counter =  4;
             var prevChapter = $scope.newQuestion.chapter_id;
-			$scope.newQuestion = new Question();
+						$scope.newQuestion = new Question();
             $scope.newQuestion.chapter_id = prevChapter;
             $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
-		    ck.setData('');
+		    		tinymce.get('question').setContent('');
 		};
 
         $scope.selectAnswer = function(option) {

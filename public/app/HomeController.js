@@ -14,7 +14,7 @@
           })
         }
 
-        fetch();
+        fetch()
 
         $scope.refresh = function() {
           fetch()

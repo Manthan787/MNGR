@@ -16,18 +16,14 @@
             editableID = chapterID;
         }
     });
-    app.controller('AddChapterFormController', function($scope, FormHelper, $http, Question, Standard){
+    app.controller('AddChapterFormController', function($scope, $http, Question, Standard){
         $scope.newChapter = {};
         $scope.$parent.loading = true;
         var resetStates = function() {
-            $scope.hasStreams = false;
-            $scope.hasSubjects = false;
             $scope.subjectsError = false;
             $scope.$parent.showChapters = false;
+            $scope.newChapter = {}
         }
-
-        
-
 
         $scope.showChapters = function(subjectID) {
             $scope.$parent.chaptersLoading = true;
@@ -52,7 +48,6 @@
                 $http.post("api/Chapters/add", $scope.newChapter).then(function (response) {
                     $scope.$parent.success = response.data.msg;
                     $scope.showChapters($scope.newChapter.subject_id);
-                    $scope.newChapter.title = null;
                     resetStates();
                     $scope.newChapter = false;
                     $scope.submitted = false;
@@ -69,4 +64,14 @@
         }
 
     });
+
+    app.controller('EditChapterController', function($scope, $http) {
+
+        $scope.edit = function(isValid, chapter) {
+          if(isValid) {
+
+          }
+        }
+
+    })
 })();

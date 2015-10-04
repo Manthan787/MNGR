@@ -175,6 +175,9 @@
 								}
 							}
 						}
+						if(tinymce != undefined) {
+							tinymce.activeEditor.remove()
+						}
 				});
 		});
 

@@ -185,6 +185,7 @@
         <script src="app/Tests/Tests.js"></script>
         <script src="app/Account/Account.js"></script>
         <script src="app/admin/ckeditor/ckeditor.js"></script>
+        <script src="app/admin/tinymce/tinymce.min.js"></script>
 
 
 

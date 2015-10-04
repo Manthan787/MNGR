@@ -5,6 +5,9 @@ use Response;
 use Input;
 use mngr\Repositories\Questions\QuestionsRepository;
 use mngr\Exceptions\QuestionNotFoundException;
+use Question;
+use Option;
+use Answer;
 
 class QuestionController extends BaseController
 {
@@ -41,9 +44,9 @@ class QuestionController extends BaseController
 	{
 		$question = new Question();
 		$question->question = Input::get('question');
-        $question->chapter_id = Input::get('chapter_id');
+    $question->chapter_id = Input::get('chapter_id');
 		$question->save();
-        $options = Input::get('options');
+    $options = Input::get('options');
 		try{
 
 			foreach($options as $option)
