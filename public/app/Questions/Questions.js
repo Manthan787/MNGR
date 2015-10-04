@@ -54,32 +54,7 @@
 
     });
 	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce){
-        // var ck = CKEDITOR.replace('question');
-        // ck.on('pasteState',function(){
-        //     var elm = document.getElementById('AddForm');
-        //     var scope = angular.element(elm).scope();
-        //     scope.$apply(function(){
-        //        $scope.newQuestion.question = ck.getData();
-        //     });
-        // });
-        tinymce.init({
-					selector: '#question',
-					menubar: false,
-					plugins:['image'],
-					file_browser_callback: function(field_name, url, type, win) {
-            if(type=='image') $('#my_form input').click();
-        	},
-					setup: function(editor) {
-										editor.on('keyup', function(e) {
-												var elm = document.getElementById('AddForm')
-												var scope = angular.element(elm).scope()
-												scope.$apply(function() {
-														$scope.newQuestion.question = editor.getContent()
-												})
-										})
-								}
-				})
-				console.log(tinymce)
+        init_editor()
         $scope.newQuestion = new Question();
         var counter = 4;
         $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
@@ -190,6 +165,31 @@
         $scope.promptNoChapterError = function() {
             $scope.$parent.error = "Please select a chapter first to enable adding question.";
         }
+
+			function init_editor() {
+				tinymce.init({
+					selector: '#question',
+					menubar: false,
+					plugins: [
+			        "advlist autolink lists link image charmap print preview anchor",
+			        "searchreplace visualblocks code fullscreen",
+			        "insertdatetime media table contextmenu paste youTube"
+			    ],
+    			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image youTube",
+					file_browser_callback: function(field_name, url, type, win) {
+            if(type=='image') $('#my_form input').click();
+        	},
+					setup: function(editor) {
+										editor.on('keyup', function(e) {
+												var elm = document.getElementById('AddForm')
+												var scope = angular.element(elm).scope()
+												scope.$apply(function() {
+														$scope.newQuestion.question = editor.getContent()
+												})
+										})
+								}
+				})
+			}
 	});
 
 

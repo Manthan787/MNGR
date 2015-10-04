@@ -175,7 +175,7 @@
 								}
 							}
 						}
-						if(tinymce != undefined) {
+						if(tinymce != undefined && tinymce.activeEditor != undefined) {
 							tinymce.activeEditor.remove()
 						}
 				});

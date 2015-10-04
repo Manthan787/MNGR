@@ -14,23 +14,14 @@
         })
         .controller('AddMaterialController', function($scope, Standard, FormHelper, $http){
             $scope.newMaterial = {};
-            var ck = CKEDITOR.replace('material_text',{
-                'extraPlugins': 'pastefromword,oembed,widget',
-                'height': '500px'
-            });
-            ck.on('pasteState',function(){
-                var elm = document.getElementById('AddForm');
-                var scope = angular.element(elm).scope();
-                scope.$apply(function(){
-                    $scope.newMaterial.text = ck.getData();
-                });
-            });
+            init_editor()
             $scope.loading = true;
             var resetStates = function() {
                 $scope.hasStreams = false;
                 $scope.hasSubjects = false;
                 $scope.subjectsError = false;
                 $scope.hasChapters = false;
+                tinymce.get('material_text').setContent('')
             }
             Standard.getAll().then(function(standards){
                 $scope.standards = standards;
@@ -85,11 +76,34 @@
                     $scope.$parent.success = response.data.msg;
                     resetStates();
                     $scope.newMaterial = {};
-                    ck.setData('');
                 }, function(response){
                     console.log(response);
                 });
             }
+            function init_editor() {
+      				tinymce.init({
+      					selector: '#material_text',
+      					menubar: false,
+      					plugins: [
+      			        "advlist autolink lists link image charmap print preview anchor",
+      			        "searchreplace visualblocks code fullscreen",
+      			        "insertdatetime media table contextmenu paste youTube"
+      			    ],
+          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image youTube",
+      					file_browser_callback: function(field_name, url, type, win) {
+                  if(type=='image') $('#my_form input').click();
+              	},
+      					setup: function(editor) {
+      										editor.on('keyup', function(e) {
+      												var elm = document.getElementById('AddForm')
+      												var scope = angular.element(elm).scope()
+      												scope.$apply(function() {
+      														$scope.newMaterial.text = editor.getContent()
+      												})
+      										})
+      								}
+      				})
+      			}
         })
 
         .controller('RecentMaterialController', function($scope, $http, $sce) {
@@ -131,33 +145,19 @@
         })
         .controller('EditMaterialController', function($scope, $http, $routeParams){
             $scope.$parent.loading = true;
-            var ck;
             $http.get('api/materials/'+$routeParams.id).then(function(response){
-
                 $scope.material = response.data;
                 $scope.selectedSubject = response.data.subject.id;
                 $scope.getChapters($scope.selectedSubject);
-                ck = CKEDITOR.replace('material_text_edit', {
-                    'extraPlugins': 'pastefromword,oembed,widget',
-                    'height': '500px'
-                });
-                ck.setData($scope.material.text);
-                ck.on('pasteState', pasteStateHandler);
+                init_editor()
                 $scope.$parent.loading = false;
+
             });
             $scope.$parent.loading = true;
             $http.get('api/Subjects/all').then(function(response){
                 $scope.subjects = response.data;
                 $scope.$parent.loading = false;
             });
-            function pasteStateHandler() {
-                console.log('called!');
-                var elm = document.getElementById('EditForm');
-                var scope = angular.element(elm).scope();
-                scope.$apply(function () {
-                    $scope.material.text = ck.getData();
-                });
-            }
 
             $scope.isSelected = function(check, reference){
                 if(check === reference)
@@ -185,6 +185,38 @@
                         });
                 }
             }
+
+            function init_editor() {
+      				tinymce.init({
+      					selector: '#material_text_edit',
+      					menubar: false,
+      					plugins: [
+      			        "advlist autolink lists link image charmap print preview anchor",
+      			        "searchreplace visualblocks code fullscreen",
+      			        "insertdatetime media table contextmenu paste youTube"
+      			    ],
+          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image youTube",
+      					file_browser_callback: function(field_name, url, type, win) {
+                  if(type=='image') $('#my_form input').click();
+              	},
+      					setup: function(editor) {
+      										editor.on('keyup', function(e) {
+      												var elm = document.getElementById('EditForm')
+      												var scope = angular.element(elm).scope()
+      												scope.$apply(function() {
+      														$scope.material.text = editor.getContent()
+      												})
+      										})
+
+                          editor.on('LoadContent', LoadWithData)
+      								}
+      				})
+      			}
+
+            function LoadWithData() {
+              tinymce.get('material_text_edit').setContent($scope.material.text)
+            }
+
         });
 
 })();
