@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 			preview_link = preview_link.replace('watch?v=','embed/');
 			$('#pre_preview_img').hide()
 			$('#message').hide()
-			$('#video_preview').html('<iframe width="500" height="352" src="'+preview_link+'" frameborder="0" allowfullscreen></iframe>');
+			$('#video_preview').html('<iframe width="345" height="242" src="'+preview_link+'" frameborder="0" allowfullscreen></iframe>');
 		}
 	});
 
