@@ -70,6 +70,7 @@ $(document).ready(function() {
 					$('input#contact-input-email').val(""),
 					$('input#contact-input-subject').val(""),
 					$('textarea#contact-input-message').val("")
+					$('input#contact-input-number').val("")
 
 				}
 			})

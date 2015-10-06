@@ -34,7 +34,8 @@ class Page extends BaseController {
           'name'    => Input::get('name'),
           'email'   => Input::get('email'),
           'subject' => Input::get('subject'),
-          'msg' => Input::get('message')
+          'number'  => Input::get('number'),
+          'msg'     => Input::get('message')
       );
 
       $sender   = Config::get('preferences.EMAIL');

@@ -211,15 +211,19 @@ Contact Us
             <label for="contact-input-email">Email</label>
             <input type="email" name="email" class="form-control" id="contact-input-email" placeholder="Enter your email" required>
           </div>
+          <div class="form-group" id="contact-number-group">
+            <label for="contact-input-number">Contact No.</label>
+            <input type="number" name="number" class="form-control" id="contact-input-number" pattern="[0-9]{10}" oninvalid="setCustomValidity('Plz enter on Alphabets ')"  placeholder="Enter your contact number">
+          </div>
           <div class="form-group" id="contact-subject-group">
             <label for="contact-input-subject">Subject</label>
-            <input type="text" name="subject" class="form-control" id="contact-input-subject" placeholder="Enter your subject" required>
+            <input type="text" name="subject" class="form-control" id="contact-input-subject" placeholder="Enter your subject"  required>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group" id="contact-message-group">
             <label for="contact-input-message">Message</label>
-            <textarea name="message" class="form-control" id="contact-input-message" rows="8" required></textarea>
+            <textarea name="message" class="form-control" id="contact-input-message" rows="12" required></textarea>
           </div>
         </div>
       </div>
