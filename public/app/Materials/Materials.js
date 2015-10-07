@@ -155,6 +155,7 @@
             });
 
             $scope.getChapters = function(subjectID) {
+                $scope.materials = {}
                 $scope.loading = true;
                 $http.get("api/Subjects/"+subjectID+"/Chapters").then(function(response){
                     $scope.chapters = response.data;
@@ -174,6 +175,7 @@
             };
 
             $scope.getMaterials = function(chapterID) {
+                  $scope.loading = true;
                   $http.get('api/Chapters/'+chapterID+'/material')
                   .then(function(response) {
                       $scope.materials = response.data;
@@ -181,9 +183,13 @@
                         $scope.error = "You haven't added any Study Material to this chapter yet."
                         $scope.success = '';
                       }
-                      $scope.error = ''
+                      else {
+                        $scope.error = ''
+                      }
+                      $scope.loading = false;
                   }, function(response) {
                       $scope.error = "Oops! We were unable to perform this task right now. Please try again later."
+                      $scope.loading = false;
                   })
             }
 
