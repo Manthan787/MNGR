@@ -1,0 +1,84 @@
+<div class="rightside">
+    <div class="page-head">
+      <h1>
+          <i class="fa fa-search"> Search Materials</i>
+          <small>Showing your most recent material entries</small>
+      </h1>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
+                <div class="alert alert-success" ng-show="success">{{ success }}</div>
+                <div align="center" ng-show="loading">
+                    <img src="app/admin/img/loader.gif" height="45" width="45">
+                </div>
+                <br>
+                <div class="box">
+                    <div class="box-title">
+                        <h3>Select Chapter</h3>
+                    </div>
+                    <div class="box-body">
+                      <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-offset-3 control-label">Subject</label>
+                            <div class="col-sm-8">
+                                <select type="text"
+                                        class="form-control"
+                                        ng-model="selectedSubject"
+                                        ng-change="getChapters(selectedSubject)"
+                                >
+                                    <option value="">Select Subject</option>
+                                    <option ng-repeat="subject in subjects"
+                                            value="{{ subject.id }}"
+                                    >
+                                        {{ subject.name }} ({{ subject.standard.division }})
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="subjectsError">
+                            <div class="col-sm-8">
+                                <div class="alert alert-danger">Looks like there are no subjects in the system. Please add subjects in the settings section then try this operation!</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group"
+                             ng-if="hasChapters">
+                            <label class="col-sm-2 col-offset-3 control-label">Chapter</label>
+                            <div class="col-sm-8">
+                                <select type="text"
+                                        class="form-control"
+                                        ng-model="chapterID"
+                                        ng-change="getMaterials(chapterID)"
+                                        ng-options="chapter.id as chapter.title for chapter in chapters "
+                                >
+                                    <option value="">Select Chapter</option>
+                                </select>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+                <div class="row" ng-repeat="material in materials">
+                    <div class="col-md-12">
+                        <div class="custom-box-material palette-white">
+                            <div class="controls">
+                                <button class="btn btn-danger btn-circle btn-outline" ng-click="delete(material)"><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+                            <a href="#/Materials/{{material.id}}">
+                                <h1>{{ material.topic }}</h1>
+                            </a>
+                            <div class="meta">
+                                <span class="tag label label-danger">{{ material.subject.name }}</span>
+                                <span class="tag label label-success">{{ material.chapter.title }}</span>
+                            </div>
+                            <p ng-bind-html="material.text | limitHtml:500"></p>
+                            <p ><b>...</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

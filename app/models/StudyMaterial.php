@@ -13,4 +13,4 @@ class StudyMaterial extends Eloquent{
     {
         return $this->chapter->subject;
     }
-} 
+}

@@ -46,6 +46,13 @@
 								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
 				})
+				.when('/Materials/search', {
+            templateUrl:'app/partials/Materials/searchMaterial.html',
+            controller:'SearchMaterialController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+						}
+				})
         .when('/Materials/:id', {
             templateUrl:'app/partials/Materials/editMaterial.html',
             controller:'MaterialsController',

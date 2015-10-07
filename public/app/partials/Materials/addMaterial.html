@@ -1,4 +1,10 @@
 <div class="rightside">
+    <div class="page-head">
+      <h1>
+        <i class="fa fa-plus"> Add Material</i>
+        <small>Add new study material to your chapters, so that students can read them online!</small>
+      </h1>
+    </div>
     <div class="content">
         <div class="row">
             <div class="container">
@@ -7,12 +13,6 @@
                 <div align="center" ng-show="loading">
                     <img src="app/admin/img/loader.gif" height="45" width="45">
                 </div>
-                <section>
-                    <ul class="nav nav-tabs">
-                        <li><a href="#Materials/recent"><i class="fa fa-clock-o"></i> Recently Added</a></li>
-                        <li class="active"><a href="#Materials/add"><i class="glyphicon glyphicon-plus"></i> Add Material</a></li>
-                    </ul>
-                </section>
                 <form  class="form-horizontal" id="AddForm" ng-controller="AddMaterialController" ng-submit="addMaterial()">
                     <div class="box">
                         <div class="box-title">

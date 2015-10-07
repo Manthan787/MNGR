@@ -54,6 +54,7 @@ Route::group(['before'=>'teacher'], function() {
     Route::post('api/Chapters/add', 'Admin\ChapterController@postChapter');
     Route::get('api/Chapters/{id}/delete', 'Admin\ChapterController@getDelete');
     Route::post('api/Chapters/{id}/edit', 'Admin\ChapterController@postEdit');
+    Route::get('api/Chapters/{id}/material', 'Admin\ChapterController@getMaterial');
 });
 
 Route::group(['before' => 'admin'], function() {
@@ -419,6 +420,7 @@ Route::group(['before' => 'teacher'], function(){
     Route::post('api/materials/add', 'Admin\MaterialController@add');
     Route::get('api/materials/recent', 'Admin\MaterialController@getRecent');
     Route::get('api/materials/{id}', 'Admin\MaterialController@getById');
+    Route::get('api/materials/{chapterID}', 'Admin\MaterialController@getByChapterId');
     Route::post('api/materials/{id}/edit', 'Admin\MaterialController@edit');
     Route::delete('api/materials/{id}/delete','Admin\MaterialController@delete');
 });

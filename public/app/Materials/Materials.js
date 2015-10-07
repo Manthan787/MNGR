@@ -143,6 +143,72 @@
             }
 
         })
+        .controller('SearchMaterialController', function($scope, $http, $sce) {
+            $scope.$parent.loading = true;
+            $http.get('api/Subjects/all').then(function(response){
+                $scope.subjects = response.data;
+                if($scope.subjects.length === 0) $scope.subjectsError = true;
+                $scope.$parent.loading = false;
+            }, function(response) {
+                $scope.subjectsError = true;
+                $scope.$parent.loading = false;
+            });
+
+            $scope.getChapters = function(subjectID) {
+                $scope.loading = true;
+                $http.get("api/Subjects/"+subjectID+"/Chapters").then(function(response){
+                    $scope.chapters = response.data;
+                    if($scope.chapters.length > 0) {
+                      $scope.hasChapters = true
+                      $scope.error = ''
+                    }
+                    else {
+                      $scope.error = 'You have not added any Chapters in the selected Subject!';
+                      $scope.success = ''
+                    }
+                    $scope.loading = false;
+                }, function(response) {
+                    $scope.hasChapters = false;
+                    $scope.loading = false;
+                });
+            };
+
+            $scope.getMaterials = function(chapterID) {
+                  $http.get('api/Chapters/'+chapterID+'/material')
+                  .then(function(response) {
+                      $scope.materials = response.data;
+                      if($scope.materials.length === 0) {
+                        $scope.error = "You haven't added any Study Material to this chapter yet."
+                        $scope.success = '';
+                      }
+                      $scope.error = ''
+                  }, function(response) {
+                      $scope.error = "Oops! We were unable to perform this task right now. Please try again later."
+                  })
+            }
+
+            $scope.delete = function(material) {
+                var ans = confirm('Are you sure you want to delete this item?');
+                if(ans === true)
+                {
+                    $scope.loading = true;
+                    $http.delete('api/materials/'+material.id+'/delete')
+                        .then(function(response){
+                            $scope.success = response.data.msg;
+                            $scope.error = ''
+                            $scope.getMaterials(material.chapter_id)
+                            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                            $scope.loading = false;
+                        },function(response){
+                            $scope.error = response.data;
+                            $scope.success = '';
+                            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                            $scope.loading = false;
+                    });
+                }
+            }
+
+        })
         .controller('EditMaterialController', function($scope, $http, $routeParams){
             $scope.$parent.loading = true;
             $http.get('api/materials/'+$routeParams.id).then(function(response){
