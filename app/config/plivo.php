@@ -5,7 +5,7 @@ return array(
 
   'auth_token' => 'ZjdmZmJkNzVlYzI3YWZiNDBmMmRkZDFkYWNiN2Yz',
 
-  'src'        => 'AMEE12'
+  'src'        => 'AMEECC'
 );
 
 ?>
