@@ -1,0 +1,14 @@
+<div class="col-md-12">
+    <div class="custom-box-material palette-white">
+        <div class="controls">
+            <button class="btn btn-danger btn-circle btn-outline" ng-click="delete(material.id)"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+        <a href="#/Materials/{{material.id}}">
+          <h3>{{ material.topic }}</h3>
+        </a>
+        <div class="meta">
+            <span class="tag label label-danger">{{ material.subject.name }}</span>
+            <span class="tag label label-success">{{ material.chapter.title }}</span>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,9 @@
 (function(){
     angular.module('Materials', [])
-        .filter('limitHtml', function() {
-            return function(text, limit) {
-
-                var changedString = String(text).replace(/<[^>]+>/gm, '');
-                var length = changedString.length;
-
-                return changedString.length > limit ? changedString.substr(0, limit - 1) : changedString;
+        .directive("materialCard", function() {
+            return {
+              restrict : 'E',
+              templateUrl: 'app/partials/Materials/Directives/material-card.html'
             }
         })
         .controller("MaterialsController", function(){
@@ -16,6 +13,7 @@
             $scope.newMaterial = {};
             init_editor()
             $scope.loading = true;
+
             var resetStates = function() {
                 $scope.hasStreams = false;
                 $scope.hasSubjects = false;
@@ -23,6 +21,7 @@
                 $scope.hasChapters = false;
                 tinymce.get('material_text').setContent('')
             }
+
             Standard.getAll().then(function(standards){
                 $scope.standards = standards;
                 $scope.loading = false;

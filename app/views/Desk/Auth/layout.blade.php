@@ -12,7 +12,7 @@
     <link href="{{URL::asset("studentApp/css/bootstrap-responsive.min.css")}}" rel="stylesheet" type="text/css" />
 
     <link href="{{URL::asset("studentApp/css/font-awesome.css")}}" rel="stylesheet">
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
 
     <link href="{{URL::asset("studentApp/css/style.css")}}" rel="stylesheet" type="text/css">
     <link href="{{URL::asset("studentApp/css/pages/signin.css")}}" rel="stylesheet" type="text/css">

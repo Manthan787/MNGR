@@ -61,22 +61,7 @@
                     </div>
                 </div>
                 <div class="row" ng-repeat="material in materials">
-                    <div class="col-md-12">
-                        <div class="custom-box-material palette-white">
-                            <div class="controls">
-                                <button class="btn btn-danger btn-circle btn-outline" ng-click="delete(material)"><i class="glyphicon glyphicon-remove"></i></button>
-                            </div>
-                            <a href="#/Materials/{{material.id}}">
-                                <h1>{{ material.topic }}</h1>
-                            </a>
-                            <div class="meta">
-                                <span class="tag label label-danger">{{ material.subject.name }}</span>
-                                <span class="tag label label-success">{{ material.chapter.title }}</span>
-                            </div>
-                            <p ng-bind-html="material.text | limitHtml:500"></p>
-                            <p ><b>...</b></p>
-                        </div>
-                    </div>
+                    <material-card></material-card>
                 </div>
             </div>
         </div>

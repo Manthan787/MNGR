@@ -28,6 +28,7 @@
         $scope.showChapters = function(subjectID) {
             $scope.$parent.chaptersLoading = true;
             $scope.$parent.showChapters = true;
+
             $http.get("api/Subjects/"+subjectID+"/Chapters").then(function(response){
                 $scope.$parent.chapters = response.data;
                 if($scope.$parent.chapters[0] != undefined) {
