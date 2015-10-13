@@ -18,7 +18,7 @@
                   }
 
                   var User = JSON.parse(sessionStorage.user)
-                  return (authservice.isAuthenticated() && authorizedRoles.indexOf(User.data.role_id) !== -1 )
+                  return (authservice.isAuthenticated() && authorizedRoles.indexOf(Number(User.data.role_id)) !== -1 )
               }
            };
 
