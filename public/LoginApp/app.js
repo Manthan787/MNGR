@@ -1,10 +1,10 @@
 (function(){
-    var app = angular.module('login',[]);
+    var app = angular.module('login',['Auth']);
 
-    app.controller('LoginController', function($scope,$http,$window){
+    app.controller('LoginController', function($scope,$http,$window, AuthService){
 
-        if(sessionStorage.authenticated) {
-            $window.location.href = '/#/';
+        if(AuthService.isAuthenticated()) {
+            $window.location.href = '/admin#/';
         }
 
         $scope.login = function() {

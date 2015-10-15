@@ -80,7 +80,7 @@
 <!-- Angular -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
 <script src="{{URL::asset("LoginApp/app.js")}}"></script>
-
+<script src="{{URL::asset("app/Auth/AuthService.js")}}"></script>
 <script type="text/javascript">
 
 //iCheck
