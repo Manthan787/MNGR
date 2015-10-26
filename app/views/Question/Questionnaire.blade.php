@@ -1,25 +1,55 @@
 <html>
 <head>
-    <title>{{ $test->name }}</title>
+    <title>{{ $test->name }} | Test</title>
     <meta http-equiv="Content-Type"/>
-   <style>
-
-   </style>
+     <style type="text/css" media="print">
+        .print {
+          visibility: hidden;
+          display: none;
+        }
+     </style>
+     <style type="text/css">
+         .print {
+           margin-top: 4px;
+         }
+         .count
+         {
+             float: left;
+             margin-right: 2px;
+         }
+         .question-title
+         {
+             display: block;
+             overflow: hidden;
+         }
+     </style>
+     <link rel="stylesheet" href="{{ URL::asset("app/admin/css/bootstrap.min.css") }}" />
 </head>
 <body>
-    <h3>{{ $test->name }}</h3>
-    <h4>{{ $test->marks }}</h4>
-    <ul>
-        @foreach($questions as $question)
-        <br>
-        <li>
-            <b>Q</b>{{ $question->question }}
+    <div class="container">
+      <div align="center">
+        <div class="print">
+            <button type="button" onclick="window.print()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-print"></span>
+              Print
+            </button>
+        </div>
+        <h3>{{ $test->name }}</h3>
+        <h4>Marks: {{ $test->marks }}</h4>
+      </div>
+      <?php $i = 1; ?>
+      @foreach($questions as $question)
+      <div>
+        <span class="count"><h4>{{ $i.")" }}</h4></span>
+        <span class="question-title"><h4>{{ $question->question }}</h4></span>
+      </div>
+          <ol type="A" style="display:inline-list-item">
             @foreach($question->options as $option)
-            <li>{{ $option->option }}</li>
+            <li >{{ $option->option }}</li>
             @endforeach
-        </li>
-        <br>
-        @endforeach
-    </ul>
+          </ol>
+      <?php $i++ ?>
+      @endforeach
+    </div>
 </body>
 </html>

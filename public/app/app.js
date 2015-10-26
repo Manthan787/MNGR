@@ -130,8 +130,8 @@
 						data: {
 								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
-        }).
-				when('/Account/settings', {
+        })
+				.when('/Account/settings', {
 						templateUrl: 'app/partials/Account/settings.html',
 						controller: 'AccountSettings',
 						data: {

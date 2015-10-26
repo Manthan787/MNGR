@@ -2,7 +2,7 @@
 namespace mngr\Services\Questionnaire;
 use \mngr\Exceptions\QuestionnaireLimitMismatchException as QuestionnaireLimitMismatchException;
 
-class Questionnaire implements QuestionnaireInterface{
+class Questionnaire implements QuestionnaireInterface {
     protected $chapters = array();
     protected $limit;
     protected $indices;
@@ -48,4 +48,4 @@ class Questionnaire implements QuestionnaireInterface{
         return \DB::table('questions')->whereIn('chapter_id',$this->chapters)->get();
     }
 
-} 
+}

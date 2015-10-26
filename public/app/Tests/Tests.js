@@ -5,7 +5,7 @@
 
     });
 
-    app.controller('CreateTestController', function($scope, $http, $window){
+    app.controller('CreateTestController', function($scope, $http, $window) {
         $scope.loading = true;
         $http.get('api/Subjects/all').then(function(response){
             $scope.subjects = response.data;
@@ -49,9 +49,7 @@
                     $scope.hasChapters = false;
                     $scope.loading = false;
                     $scope.$parent.success = "Redirecting To Test PDF";
-                    setTimeout(function(){
-                        $window.location.href=response.data.redirect;
-                    },2000);
+                    $window.open(response.data.redirect, "_blank")
 
                 },function(response){
                     $scope.$parent.success = null;
@@ -63,5 +61,9 @@
                 $scope.createTestForm.$setPristine();
             }
         }
-    });
+    })
+
+    app.controller('ShowTestController', function($scope, $http) {
+
+    })
 })();

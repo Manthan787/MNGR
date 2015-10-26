@@ -11,7 +11,7 @@ class Report
 
     /**
      * @return array
-     */
+     */ 
     public function getCorrect()
     {
         return $this->correct;
@@ -93,4 +93,4 @@ class Report
     {
         return json_encode(get_object_vars($this));
     }
-} 
+}

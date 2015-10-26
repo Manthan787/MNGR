@@ -32,21 +32,20 @@ class TestController extends BaseController{
             $test->is_online = Input::get('is_online');
             $test->save();
             $test->questions()->attach($questions);
-            return Response::json(['msg'=>'Successfully Generated Test.','redirect'=>'back/tests/'.$test->id.'/show'],200);
+            return Response::json(['msg'=>'Successfully Generated Test.','redirect'=>'tests/'.$test->id.'/show'],200);
         }
         catch(QuestionnaireLimitMismatchException $e)
         {
             Log::error('Error occurred while generating questionnaire.');
             return Response::json(['msg'=>'There are not enough questions in the system to generate test. Please add sufficient amount of questions first and then try again.'],500);
         }
-
     }
 
     public function show($id) {
         if($test = Test::find($id))
         {
             $questions = $test->questions()->with('options')->get();
-            return PDF::load(View::make('Question.Questionnaire')->with('questions',$questions)->with('test',$test))->show();
+            return View::make('Question.Questionnaire')->with('questions',$questions)->with('test',$test);
         }
         else
         {
