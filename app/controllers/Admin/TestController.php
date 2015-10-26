@@ -8,6 +8,7 @@ use Test;
 use Log;
 use PDF;
 use Redirect;
+use View;
 use mngr\Services\Questionnaire\QuestionnaireInterface as Questionnaire;
 use mngr\Exceptions\QuestionnaireLimitMismatchException;
 
