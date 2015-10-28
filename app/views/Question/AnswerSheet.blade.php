@@ -22,7 +22,17 @@
              display: block;
              overflow: hidden;
          }
-
+         table, td, th {
+            border: 1px solid #999;
+        }
+        table {
+            display:inline-block;
+        }
+        td {
+            width:6rem;
+            height:3rem;
+            text-align: center;
+        }
      </style>
      <link rel="stylesheet" href="{{ URL::asset("app/admin/css/bootstrap.min.css") }}" />
 </head>
@@ -39,14 +49,14 @@
               Question Paper
             </a>
         </div>
+      </div>
+      <div align="left">
         <h3>{{ $test->name }}</h3>
         <h4>Marks: {{ $test->marks }}</h4>
      </div>
-        <ul>
-            @foreach($answers as $index => $answer)
-            <li style="display:inline; margin-right:10px">{{++$index.". ".chr(65+$answer)}}</li>
-            @endforeach
-        </ul>
+     <table>
+       {{ AnswersheetHelper::displayTables($answers) }}
+     </table>
     </div>
 </body>
 </html>

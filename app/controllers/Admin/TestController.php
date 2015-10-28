@@ -64,7 +64,7 @@ class TestController extends BaseController{
               foreach($question->options as $index => $option)
               {
                   if($option->id == $question->answer->option_id)
-                      $answers[] = $index;
+                      $answers[$i] = $index;
               }
           }
           return View::make('Question.AnswerSheet')->with('answers', $answers)->with('test', $test);
