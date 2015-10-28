@@ -105,7 +105,7 @@
                         <i class="fa fa-angle-right pull-right"></i>
             </a>
             <ul class="sub-menu">
-                <li><a href="#/Tests/create"><i class="glyphicon glyphicon-plus"></i>Create Test</a></li>
+                <li><a href="#/Tests/create"><i class="fa fa-print"></i>Create Test</a></li>
             </ul>
         </li>
         <li>

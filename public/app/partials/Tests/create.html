@@ -1,8 +1,9 @@
 <div class="rightside">
   <div class="page-head">
       <h1>
-        <i class="fa fa-s"> </i>
-        <small>Create, View, Update and Delete Chapters</small>
+        <i class="fa fa-print"> </i>
+        Create Test
+        <small>Create Printable Offline Tests</small>
       </h1>
   </div>
   <div class="content">
@@ -64,14 +65,18 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Layout</label>
                             <div class="col-sm-10" ng-init="newTest.layout = 'horizontal'">
-                              <label>
-                                <input type="radio" name="layout" ng-model="newTest.layout" value="horizontal" checked> Horizontal Options
-                                <img src="app/admin/img/horizontal.png" class="img-responsive" width="400px">
-                              </label>
-                              <label>
-                                <input type="radio" name="layout" ng-model="newTest.layout" value="vertical"> Vertical Options
-                                <img src="app/admin/img/vertical.png" class="img-responsive" width="400px">
-                              </label>
+                              <div class="col-md-6">
+                                <label>
+                                  <input type="radio" name="layout" ng-model="newTest.layout" value="horizontal" checked> Horizontal Options
+                                  <img src="app/admin/img/horizontal.png" class="img-responsive" width="250px">
+                                </label>
+                              </div>
+                              <div class="col-md-6">
+                                <label>
+                                  <input type="radio" name="layout" ng-model="newTest.layout" value="vertical"> Vertical Options
+                                  <img src="app/admin/img/vertical.png" class="img-responsive" width="250px" border="1">
+                                </label>
+                              </div>
                             </div>
                         </div>
                         <div class="form-group">
