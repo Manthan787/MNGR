@@ -44,11 +44,21 @@
         <span class="question-title"><h5>{{ $question->question }}</h5></span>
       </div>
           <ol type="A" style="margin-bottom: 0">
-            @foreach($question->options as $index => $option)
-              <li style="display:inline; margin-right:4px">
-                {{ chr(65+$index)."." }} {{ $option->option }}
-              </li>
-            @endforeach
+            @if($test->layout === 'horizontal')
+              @foreach($question->options as $index => $option)
+                <li style="display:inline; margin-right:10px">
+                  {{ chr(65+$index)."."." ".$option->option }}
+                </li>
+              @endforeach
+            @endif
+            @if($test->layout === 'vertical')
+              @foreach($question->options as $index => $option)
+                <li>
+                  {{ chr(65+$index)."."." ".$option->option }}
+                </li>
+              @endforeach
+            @endif
+
           </ol>
       <?php $i++ ?>
       @endforeach

@@ -9,6 +9,29 @@
 @import url("font-awesome.min.css");
 @import url("school-icons.css");
 
+.test-layout > input[type="radio"]{
+    display:none;
+}
+
+.test-layout > input[type="radio"] + label
+{
+    background: #999;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+
+.test-layout > input[type="radio"]:checked + label
+{
+    background: #0080FF;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+
+
 /*------------------------------------------------------------------
 
 [Master Stylesheet]

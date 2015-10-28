@@ -122,12 +122,11 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
     'mngr\Repositories\BackendServiceProvider',
     'mngr\Services\Forms\FormServiceProvider',
-    'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
-    'Thujohn\Pdf\PdfServiceProvider',
+    'mngr\Services\Questionnaire\QuestionnaireServiceProvider',    
     'mngr\Services\Mail\NotifierServiceProvider',
 		'mngr\Services\SMS\PlivoServiceProvider',
 		'mngr\Services\SMS\NotifierServiceProvider',
-		'mngr\Services\Landing\LandingServiceProvider'		
+		'mngr\Services\Landing\LandingServiceProvider'
 	),
 
 	/*
@@ -194,8 +193,6 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-        'PDF'               => 'Thujohn\Pdf\PdfFacade',
-
 	),
 
 );

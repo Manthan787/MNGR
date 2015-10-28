@@ -46,11 +46,11 @@
                     $scope.$parent.success = response.data.msg;
                     $scope.submitted = false;
                     $scope.newTest = {}
+                    $scope.newTest.layout = "horizontal"
                     $scope.hasChapters = false;
                     $scope.loading = false;
-                    $scope.$parent.success = "Redirecting To Test PDF";
-                    $window.open(response.data.redirect, "_blank")
-
+                    $scope.$parent.success = "Redirecting To Test Paper";
+                    $window.location.href = response.data.redirect 
                 },function(response){
                     $scope.$parent.success = null;
                     $scope.$parent.error = response.data.msg;
@@ -63,7 +63,4 @@
         }
     })
 
-    app.controller('ShowTestController', function($scope, $http) {
-
-    })
 })();

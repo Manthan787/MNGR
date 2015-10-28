@@ -423,6 +423,7 @@ return array(
     'Plivo\\User' => $vendorDir . '/plivo/plivo-php/plivo.php',
     'Plivo\\Wait' => $vendorDir . '/plivo/plivo-php/plivo.php',
     'Question' => $baseDir . '/app/models/Question.php',
+    'RenameFilenameToLayoutInTestsTable' => $baseDir . '/app/database/migrations/2015_10_28_175420_rename_filename_to_layout_in_tests_table.php',
     'Role' => $baseDir . '/app/models/Role.php',
     'RolesTableSeeder' => $baseDir . '/app/database/seeds/RolesTableSeeder.php',
     'School' => $baseDir . '/app/models/School.php',

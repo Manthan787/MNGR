@@ -14,6 +14,7 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Manthan\\Nuncio\\' => array($vendorDir . '/manthan/nuncio/src'),
     'Landing\\' => array($baseDir . '/app/controllers/Landing'),
+    'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'Desk\\' => array($baseDir . '/app/controllers/Desk'),
     'Admin\\' => array($baseDir . '/app/controllers/Admin'),
 );

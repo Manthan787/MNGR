@@ -30,6 +30,7 @@ class TestController extends BaseController{
             $test->subject_id = Input::get('subject_id');
             $test->marks = $marks;
             $test->is_online = Input::get('is_online');
+            $test->layout = Input::get('layout');
             $test->save();
             $test->questions()->attach($questions);
             return Response::json(['msg'=>'Successfully Generated Test.','redirect'=>'tests/'.$test->id.'/show'],200);
