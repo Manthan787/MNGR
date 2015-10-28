@@ -53,4 +53,25 @@ class TestController extends BaseController{
             return Redirect::to('/');
         }
     }
+
+    public function showAnswerSheet($id) {
+      if($test = Test::find($id))
+      {
+          $questions = $test->questions()->with(['options', 'answer'])->get();
+          $answers = [];
+          foreach($questions as $i => $question)
+          {
+              foreach($question->options as $index => $option)
+              {
+                  if($option->id == $question->answer->option_id)
+                      $answers[] = $index;
+              }
+          }
+          return View::make('Question.AnswerSheet')->with('answers', $answers)->with('test', $test);
+      }
+      else
+      {
+          return Redirect::to('/');
+      }
+    }
 }

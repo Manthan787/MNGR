@@ -33,6 +33,10 @@
               <span class="glyphicon glyphicon-print"></span>
               Print
             </button>
+            <a href="/tests/{{ $test->id }}/answers" class="btn btn-success">
+              <span class="glyphicon glyphicon-check"></span>
+              Answer Sheet
+            </a>
         </div>
         <h3>{{ $test->name }}</h3>
         <h4>Marks: {{ $test->marks }}</h4>
@@ -58,7 +62,6 @@
                 </li>
               @endforeach
             @endif
-
           </ol>
       <?php $i++ ?>
       @endforeach

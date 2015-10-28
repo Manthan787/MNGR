@@ -47,5 +47,4 @@ class Questionnaire implements QuestionnaireInterface {
     {
         return \DB::table('questions')->whereIn('chapter_id',$this->chapters)->get();
     }
-
 }
