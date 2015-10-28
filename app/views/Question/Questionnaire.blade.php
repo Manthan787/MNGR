@@ -54,7 +54,7 @@
             @if($test->layout === 'vertical')
               @foreach($question->options as $index => $option)
                 <li>
-                  {{ chr(65+$index)."."." ".$option->option }}
+                  {{ $option->option }}
                 </li>
               @endforeach
             @endif

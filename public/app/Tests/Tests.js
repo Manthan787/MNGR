@@ -50,7 +50,7 @@
                     $scope.hasChapters = false;
                     $scope.loading = false;
                     $scope.$parent.success = "Redirecting To Test Paper";
-                    $window.location.href = response.data.redirect 
+                    $window.location.href = response.data.redirect
                 },function(response){
                     $scope.$parent.success = null;
                     $scope.$parent.error = response.data.msg;
