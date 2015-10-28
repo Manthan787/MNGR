@@ -40,8 +40,8 @@
       <?php $i = 1; ?>
       @foreach($questions as $question)
       <div>
-        <span class="count"><h4>{{ $i.")" }}</h4></span>
-        <span class="question-title"><h4>{{ $question->question }}</h4></span>
+        <span class="count"><h5>{{ $i.")" }}</h5></span>
+        <span class="question-title"><h5>{{ $question->question }}</h5></span>
       </div>
           <ol type="A" style="display:inline-list-item">
             @foreach($question->options as $option)
