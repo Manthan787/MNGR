@@ -5,7 +5,7 @@ class AnswersheetHelper {
     public static function displayTables($answers) {
         $output = '';
         foreach($answers as $index => $answer) {
-            if($index % 30 == 0) {
+            if($index % 25 == 0) {
               $output .= '</table><table>';
               $output .= '
                <tbody>
