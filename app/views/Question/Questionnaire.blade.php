@@ -43,9 +43,11 @@
         <span class="count"><h5>{{ $i.")" }}</h5></span>
         <span class="question-title"><h5>{{ $question->question }}</h5></span>
       </div>
-          <ol type="A" style="display:inline-list-item">
-            @foreach($question->options as $option)
-            <li >{{ $option->option }}</li>
+          <ol type="A" style="margin-bottom: 0">
+            @foreach($question->options as $index => $option)
+              <li style="display:inline; margin-right:4px">
+                {{ chr(65+$index)."." }} {{ $option->option }}
+              </li>
             @endforeach
           </ol>
       <?php $i++ ?>
