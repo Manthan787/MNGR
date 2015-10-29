@@ -365,6 +365,8 @@ Route::post('api/members/add', 'Admin\StaffController@add');
 
 Route::group(['before'=>'admin'], function(){
     Route::post('api/tests/create','Admin\TestController@create');
+    Route::get('api/tests/all', 'Admin\TestController@getAll');
+    Route::delete('api/tests/{id}/delete', 'Admin\TestController@delete');
     Route::get('tests/{id}/show', 'Admin\TestController@show');
     Route::get('tests/{id}/answers', 'Admin\TestController@showAnswerSheet');
 });

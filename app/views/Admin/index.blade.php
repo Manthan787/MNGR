@@ -106,6 +106,7 @@
             </a>
             <ul class="sub-menu">
                 <li><a href="#/Tests/create"><i class="fa fa-print"></i>Create Test</a></li>
+                <li><a href="#/Tests/all"><i class="glyphicon glyphicon-folder-open"></i>All Tests</a></li>
             </ul>
         </li>
         <li>

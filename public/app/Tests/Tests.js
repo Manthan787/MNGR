@@ -63,4 +63,61 @@
         }
     })
 
+    app.directive('testsPagination', function(){
+     return{
+        restrict: 'E',
+        template: '<ul class="pagination" ng-if="totalPages">'+
+          '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getTests(1)">&laquo;</a></li>'+
+          '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getTests(currentPage-1)">&lsaquo; Prev</a></li>'+
+          '<li ng-repeat="i in range" ng-class="{active : currentPage == i}">'+
+              '<a href="javascript:void(0)" ng-click="getTests(i)">{{i}}</a>'+
+          '</li>'+
+          '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getTests(currentPage+1)">Next &rsaquo;</a></li>'+
+          '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getTests(totalPages)">&raquo;</a></li>'+
+        '</ul>'
+     };
+   });
+
+   app.controller('AllTestsController', function($scope, $http) {
+      $scope.tests = []
+      $scope.currentPage = 1;
+      $scope.totalPages = 0;
+      $scope.range = [];
+
+      $scope.getTests = function(pageNumber){
+
+        if(pageNumber===undefined){
+          pageNumber = '1';
+        }
+        $http.get('/api/tests/all?page='+pageNumber).success(function(response) {
+          if(response.total) {
+            $scope.tests        = response.data;
+            $scope.totalPages   = response.last_page;
+            $scope.currentPage  = response.current_page;
+            var pages = [];
+
+            for(var i=1;i<=response.last_page;i++) {
+              pages.push(i);
+            }
+
+            $scope.range = pages;
+          }
+          else {
+            $scope.info = "There are no Tests to display. Create a test first and then visit this page again.";
+            $scope.error = $scope.success = ''
+          }
+
+        });
+
+      };
+
+      $scope.delete = function(testID) {
+        $http.delete('/api/tests/'+testID+'/delete').success(function(response) {
+            $scope.getTests($scope.currentPage);
+            $scope.success = response.msg;
+        })
+      }
+
+   })
+
 })();

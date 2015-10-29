@@ -128,7 +128,14 @@
             templateUrl : 'app/partials/Tests/create.html',
             controller : 'TestController',
 						data: {
-								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+								authorizedRoles: [USER_ROLES.admin]
+						}
+        })
+				.when('/Tests/all', {
+            templateUrl : 'app/partials/Tests/all.html',
+            controller : 'AllTestsController',
+						data: {
+								authorizedRoles: [USER_ROLES.admin]
 						}
         })
 				.when('/Account/settings', {

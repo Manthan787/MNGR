@@ -5,4 +5,8 @@ class Test extends Eloquent {
     public function questions() {
         return $this->belongsToMany('Question');
     }
+
+    public function subject() {
+        return $this->belongsTo('Subject');
+    }
 }

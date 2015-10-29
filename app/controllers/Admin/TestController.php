@@ -74,4 +74,18 @@ class TestController extends BaseController{
           return Redirect::to('/');
       }
     }
+
+    public function getAll() {
+        $tests = Test::with(['subject'])->paginate(10);
+        return $tests;
+    }
+
+    public function delete($testID) {
+        $test = Test::find($testID);
+        if($test) {
+            $test->questions()->detach();
+            $test->delete();
+            return Response::json(['msg' => 'Successfully Deleted Test From The System.'], 200);
+        }
+    }
 }

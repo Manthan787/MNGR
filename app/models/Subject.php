@@ -35,6 +35,10 @@ class Subject extends Eloquent
 		return $this->belongsToMany('Stream');
 	}
 
+	public function tests()
+	{
+		return $this->hasMany('Test');
+	}
 
 
 }
