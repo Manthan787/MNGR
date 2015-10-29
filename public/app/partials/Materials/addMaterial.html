@@ -8,12 +8,9 @@
     <div class="content">
         <div class="row">
             <div class="container">
-                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-                <div class="alert alert-success" ng-show="success">{{ success }}</div>
-                <div align="center" ng-show="loading">
-                    <img src="app/admin/img/loader.gif" height="45" width="45">
-                </div>
-                <form  class="form-horizontal" id="AddForm" ng-controller="AddMaterialController" ng-submit="addMaterial()">
+                <feedback></feedback>
+                <loading></loading>
+                <form  class="form-horizontal" id="AddForm" ng-submit="addMaterial()">
                     <div class="box">
                         <div class="box-title">
                             <h3>Select Chapter</h3>

@@ -1,40 +1,29 @@
-
-    <div class="rightside">
-        <div class="content">
-            <div class="row">
-                <div class="container">
-                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
-                    <div align="center" ng-show="loading">
-                        <img src="app/admin/img/loader.gif" height="45" width="45">
-                    </div>
-                    <section>
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#Questions/all">All Questions</a></li>
-                            <li><a href="#Questions/add">Add Questions</a></li>
+<div class="rightside">
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <feedback></feedback>
+                <loading></loading>
+                <ul class="list-group" ng-hide="fetchedQuestion">
+                    <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b><span ng-bind-html="Question.question"></span></b>
+                        <span>
+                            <button class="btn btn-danger" ng-click="delete(Question)"><i class="fa fa-trash-o"></i></button>
+                        </span>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="Option in Question.options">
+                                {{ Option.option }}
+                                <i class="glyphicon glyphicon-ok" ng-if="Option.id == Question.answer.option_id"></i>
+                            </li>
                         </ul>
-                    </section>
-                    <ul class="list-group" ng-hide="fetchedQuestion">
-                        <li class="list-group-item" ng-repeat="Question in questions" ng-hide="editEnabled"><b><span ng-bind-html="Question.question"></span></b>
-                            <span>
-                                <button class="btn btn-danger" ng-click="delete(Question)"><i class="fa fa-trash-o"></i></button>
-                            </span>
-                            <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="Option in Question.options">
-                                    {{ Option.option }}
-                                    <i class="glyphicon glyphicon-ok" ng-if="Option.id == Question.answer.option_id"></i>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    </li>
+                </ul>
 
-                    <p ng-show="fetchedQuestion">
-                        {{ fetchedQuestion.question }}
-                        <a href="" ng-click="fetchedQuestion=false">Back</a>
-                    </p>
-                    <span class="alert alert-warning" ng-show="error">{{ error }}</span>
-                </div>
+                <p ng-show="fetchedQuestion">
+                    {{ fetchedQuestion.question }}
+                    <a href="" ng-click="fetchedQuestion=false">Back</a>
+                </p>
+                <span class="alert alert-warning" ng-show="error">{{ error }}</span>
             </div>
         </div>
     </div>
-
+</div>

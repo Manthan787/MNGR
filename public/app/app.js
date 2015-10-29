@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','Account','ngRoute','ngSanitize']);
+	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','Account','ngRoute','ngSanitize','Utils']);
 
 	app.constant('USER_ROLES', {
 			admin 			: 1,
@@ -34,7 +34,7 @@
 				})
         .when('/Materials/add', {
             templateUrl:'app/partials/Materials/addMaterial.html',
-            controller:'MaterialsController',
+            controller:'AddMaterialController',
 						data: {
 								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}
@@ -112,7 +112,7 @@
         })
         .when('/Settings/batches', {
             templateUrl : 'app/partials/Settings/batches.html',
-            controller: 'BatchController',
+            controller: 'AddBatchController',
 						data: {
 								authorizedRoles: [USER_ROLES.admin]
 						}
@@ -126,7 +126,7 @@
         })
         .when('/Tests/create', {
             templateUrl : 'app/partials/Tests/create.html',
-            controller : 'TestController',
+            controller : 'CreateTestController',
 						data: {
 								authorizedRoles: [USER_ROLES.admin]
 						}

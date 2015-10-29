@@ -34,7 +34,6 @@
             $scope.currentFilter = null;
             if(standard)
             {
-              $scope.error = "";
               $scope.loading = true;
               $http.get('api/Standards/'+standard.id+'/Students')
               .then(function(response) {
@@ -43,17 +42,15 @@
                   $scope.checkAll($scope.students);
 
                   if(!$scope.hasRecepients()) {
-                    $scope.error = "There are no students in standard " + standard.division +". Add students to this standard and try again later.";
+                    $scope.info = "There are no students in standard " + standard.division +". Add students to this standard and try again later.";
                   }
                   $scope.loading = false;
               }, function(response) {
-                  console.log(response.data);
                   $scope.loading = false;
               });
 
             }
             else {
-              $scope.error = '';
               updateRecepients([]);
             }
           }

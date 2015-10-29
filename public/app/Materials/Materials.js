@@ -1,13 +1,10 @@
 (function(){
-    angular.module('Materials', [])
+    angular.module('Materials', ['Utils'])
         .directive("materialCard", function() {
             return {
               restrict : 'E',
               templateUrl: 'app/partials/Materials/Directives/material-card.html'
             }
-        })
-        .controller("MaterialsController", function(){
-
         })
         .controller('AddMaterialController', function($scope, Standard, FormHelper, $http){
             $scope.newMaterial = {};
@@ -25,7 +22,7 @@
             Standard.getAll().then(function(standards){
                 $scope.standards = standards;
                 $scope.loading = false;
-            });
+            })
 
             $scope.getStreams = function() {
                 $scope.loading = true;
@@ -42,7 +39,7 @@
                     $scope.hasSubjects = true;
                 }
                 $scope.loading = false;
-            };
+            }
 
             $scope.getSubjects = function(stream) {
                 $scope.loading = true;
@@ -58,7 +55,8 @@
                     }
                     $scope.loading = false;
                 });
-            };
+            }
+
             $scope.getChapters = function(subject) {
                 $scope.loading = true;
                 $http.get("api/Subjects/"+subject.id+"/Chapters").then(function(response){
@@ -68,17 +66,17 @@
                     }
                     $scope.loading = false;
                 });
-            };
+            }
 
             $scope.addMaterial = function() {
                 $http.post('api/materials/add', $scope.newMaterial).then(function(response){
-                    $scope.$parent.success = response.data.msg;
+                    $scope.success = response.data.msg;
                     resetStates();
-                    $scope.newMaterial = {};
                 }, function(response){
-                    console.log(response);
+                    $scope.error = response.data.msg;
                 });
             }
+
             function init_editor() {
       				tinymce.init({
       					selector: '#material_text',
@@ -143,14 +141,14 @@
 
         })
         .controller('SearchMaterialController', function($scope, $http, $sce) {
-            $scope.$parent.loading = true;
+            $scope.loading = true;
             $http.get('api/Subjects/all').then(function(response){
                 $scope.subjects = response.data;
                 if($scope.subjects.length === 0) $scope.subjectsError = true;
-                $scope.$parent.loading = false;
+                $scope.loading = false;
             }, function(response) {
                 $scope.subjectsError = true;
-                $scope.$parent.loading = false;
+                $scope.loading = false;
             });
 
             $scope.getChapters = function(subjectID) {
@@ -160,11 +158,9 @@
                     $scope.chapters = response.data;
                     if($scope.chapters.length > 0) {
                       $scope.hasChapters = true
-                      $scope.error = ''
                     }
                     else {
-                      $scope.error = 'You have not added any Chapters in the selected Subject!';
-                      $scope.success = ''
+                      $scope.info = 'You have not added any Chapters in this Subject! Add chapters to this subject, create amazing study material and then come back here.';
                     }
                     $scope.loading = false;
                 }, function(response) {
@@ -179,7 +175,7 @@
                   .then(function(response) {
                       $scope.materials = response.data;
                       if($scope.materials.length === 0) {
-                        $scope.error = "You haven't added any Study Material to this chapter yet."
+                        $scope.info = "You haven't added any Study Material to this chapter yet. Add study material to this chapter and check back later."
                         $scope.success = '';
                       }
                       else {

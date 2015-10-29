@@ -20,10 +20,8 @@
 
 
             }, function(response){
-                console.log("ERROR!");
-                $scope.success = null;
-                $scope.loading = false;
                 $scope.error = response.data.msg;
+								$scope.loading = false;
             });
 
         }
@@ -37,7 +35,6 @@
             {
                 var deletePromise = Student.delete(id);
                 deletePromise.then(function(msg){
-                    $scope.error = null;
                     $scope.success = msg;
                     loadStudents();
                 });
@@ -52,12 +49,12 @@
 		$scope.hasStreams = false;
 		$scope.loading = true;
 		$scope.newStudent =  new Student;
-        $scope.addUserForm;
-        $scope.submitted = false;
-        $http.get('api/years/current').then(function(response){
-            $scope.currentYear = response.data;
-        });
-        $scope.newStudent.entry_date = new Date();
+    $scope.addUserForm;
+    $scope.submitted = false;
+    $http.get('api/years/current').then(function(response){
+        $scope.currentYear = response.data;
+    });
+    $scope.newStudent.entry_date = new Date();
 		//Get all the available standards from the API
 		FormHelper.getStandards().then(function(standards){
 				$scope.standards = standards;
@@ -175,14 +172,10 @@
                 prepare();
                 $scope.newStudent.add().then(function (msg) {
                     $scope.loading = false;
-										$scope.error = '';
                     $scope.success = msg;
                     reset();
 										$scope.loading = false;
                 }, function (response) {
-                    $scope.loading = false;
-                    console.log(response);
-										$scope.success = '';
                     $scope.error = response.data.msg;
 										$scope.loading = false;
                 });
@@ -295,13 +288,10 @@
                 prepare();
                 $scope.Student.update().then(function (msg) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
-                    $scope.error = null;
                     $scope.success = msg;
                     $scope.submitted = false;
                     $scope.editUserForm.$setPristine();
                 }, function (response) {
-                    console.log(response);
-                    $scope.success = null;
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                     $scope.error = "There was an error while updating this record.";
                     $scope.submitted = false;

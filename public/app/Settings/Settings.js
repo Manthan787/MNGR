@@ -34,13 +34,13 @@
 
 		$scope.populateData = function(standard){
 			//console.log(standard);
-	
+
 				$scope.currentStd = standard;
 				$scope.populator = true;
-				
+
 				checkAndAssignStreams(standard);
-				checkAndAssignSubjects(standard);	
-			
+				checkAndAssignSubjects(standard);
+
 		}
 
 		$scope.fetchStandard = function(standard){
@@ -83,7 +83,7 @@
 		}
 
 		$scope.removeStandard = function(standard){
-			
+
 			var ans = confirm("Deleting the standard will result in deletion of all the streams, subjects and students associated with it. Are you sure you want to do this?")
 			if(ans == true)
 			{
@@ -125,13 +125,13 @@
 			});
 		}
 
-		
 
-		
+
+
 	});
 
 	app.controller('StdFormController',function($scope, Standard){
-		
+
 		$scope.reset = function(){
 
 			$scope.newStandard = new Standard;
@@ -173,7 +173,7 @@
 				document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 			});
-			
+
 		}
 
 
@@ -194,11 +194,11 @@
 			counter--;
 
 		}
-	
+
 		$scope.save = function(){
 			$http.post('/api/Standards/'+$scope.currentStd.id+'/Streams/add', $scope.streams)
 			.then(function(response){
-			
+
 				$scope.$parent.success = response.data.msg;
 				$scope.streams = [];
 				$scope.loadStandards();
@@ -210,7 +210,7 @@
 			});
 		}
 
-		
+
 
 		$scope.submittable = function(){
 			if(counter>0)
@@ -226,7 +226,7 @@
 		$scope.removeStream = function(stream){
 			var ans = confirm("Deleting Streams will result in deletion of all the subjects and students associated with this stream. Are you sure you want to do this?");
 			if(ans == true)
-			{	
+			{
 				$http.post('/api/Streams/delete', stream).then(function(response){
 					$scope.$parent.success = response.data.msg;
 					$scope.loadStandards();
@@ -289,7 +289,7 @@
 			});
 		}
 
-		
+
 	});
 
 	app.controller('SubjectsTableController', function($scope, $http){
@@ -300,11 +300,11 @@
 			{
 				$http.post('/api/Subjects/delete', subject)
 				.then(function(response){
-					
+
 						$scope.loadStandards();
 						$scope.fetchStandard($scope.currentStd);
 						$scope.$parent.success = response.data.msg;
-					
+
 
 				}, function(response){
 					$scope.$parent.error = response.data.msg;

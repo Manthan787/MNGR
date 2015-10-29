@@ -3,6 +3,7 @@ namespace Admin;
 use BaseController;
 use Response;
 use Batch;
+use Timing;
 use Exception;
 use Input;
 

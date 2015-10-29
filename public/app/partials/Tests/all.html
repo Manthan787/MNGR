@@ -9,12 +9,8 @@
   <div class="content">
     <div class="row">
       <div class="container">
-        <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-        <div class="alert alert-success" ng-show="success">{{ success }}</div>
-        <div class="alert alert-info" ng-show="info">{{ info }}</div>
-        <div align="center" ng-show="loading">
-            <img src="app/admin/img/loader.gif" height="45" width="45">
-        </div>
+        <feedback></feedback>
+        <loading></loading>
         <tests-pagination></tests-pagination>
         <div class="row">
             <div class="col-md-12" ng-repeat="test in tests">

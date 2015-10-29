@@ -1,10 +1,11 @@
 (function(){
 
-	var app = angular.module('Questions',[]);
+	var app = angular.module('Questions',['Utils']);
 
 	app.controller('QuestionsController',function($scope, Question, $location, $sce){
 		$scope.questions = [];
-		$scope.error;
+		$scope.error = '';
+		$scope.success = '';
 		$scope.fetchedQuestion;
         $scope.loading = true;
         loadQuestions();
@@ -40,12 +41,14 @@
             }
         }
         $scope.delete = function(question) {
-            $scope.loading = true;
-            question.delete().then(function(msg){
-                $scope.success = msg;
-                loadQuestions();
-                $scope.loading = false;
-            });
+						$scope.success = 'Here it is!';
+						$scope.error = 'cannot delete!';
+            // $scope.loading = true;
+            // question.delete().then(function(msg){
+            //     $scope.success = msg;
+            //     loadQuestions();
+            //     $scope.loading = false;
+            // });
         }
 	});
 

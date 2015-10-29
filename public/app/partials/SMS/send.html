@@ -9,12 +9,8 @@
   <div class="content">
     <div class="row">
       <div class="container">
-        <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-        <div class="alert alert-success" ng-show="success">{{ success }}</div>
-        <div align="center" ng-show="loading">
-            <img src="app/admin/img/loader.gif" height="45" width="45">
-        </div>
-
+        <feedback></feedback>
+        <loading></loading>
         <div class="box" style="margin-bottom: 30px">
            <div class="box-title">
                <i class="fa fa-envelope-square"></i>

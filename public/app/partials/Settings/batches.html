@@ -1,13 +1,9 @@
-
 <div class="rightside">
     <div class="content">
         <div class="row">
             <div class="container">
-                <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-                <div class="alert alert-success" ng-show="success">{{ success }}</div>
-                <div align="center" ng-show="loading">
-                    <img src="app/admin/img/loader.gif" height="45" width="45">
-                </div>
+                <feedback></feedback>
+                <loading></loading>
                 <div class="row">
                     <div class="col-md-8">
                         <section>
@@ -43,7 +39,7 @@
                                 <h3>Add New Batch</h3>
                             </div>
                             <div class="box-body">
-                                <form class="form-horizontal" name="addBatchForm" ng-controller="AddBatchController" ng-submit="add(addBatchForm.$valid)" autocomplete="off" novalidate>
+                                <form class="form-horizontal" name="addBatchForm" ng-submit="add(addBatchForm.$valid)" autocomplete="off" novalidate>
                                     <div class="form-group" ng-class="{'has-error':(submitted && addBatchForm.name.$invalid) || (addBatchForm.name.$invalid && addBatchForm.name.$dirty)}">
                                         <label class="col-sm-2 control-label">Name</label>
                                         <div class="col-sm-10">
@@ -97,4 +93,3 @@
         </div>
     </div>
 </div>
-

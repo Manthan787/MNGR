@@ -1,9 +1,5 @@
 (function(){
-    var app = angular.module('Tests', []);
-
-    app.controller('TestController', function($scope){
-
-    });
+    var app = angular.module('Tests', ['Utils']);
 
     app.controller('CreateTestController', function($scope, $http, $window) {
         $scope.loading = true;
@@ -31,6 +27,7 @@
                 $scope.hasChapters = false;
                 $scope.noChaptersError = true;
             }
+            $scope.loading = false;
 
         }
 
@@ -42,18 +39,16 @@
                 $http.post('api/tests/create',$scope.newTest).then(function(response){
                     console.log(response.data);
                     $scope.questions = response.data.questions;
-                    $scope.$parent.error = null;
-                    $scope.$parent.success = response.data.msg;
                     $scope.submitted = false;
                     $scope.newTest = {}
                     $scope.newTest.layout = "horizontal"
                     $scope.hasChapters = false;
                     $scope.loading = false;
-                    $scope.$parent.success = "Redirecting To Test Paper";
+                    $scope.success = "Redirecting To Test Paper";
                     $window.location.href = response.data.redirect
                 },function(response){
-                    $scope.$parent.success = null;
-                    $scope.$parent.error = response.data.msg;
+                    console.log(response)
+                    $scope.error = response.data.msg;
                     $scope.loading = false;
                 });
 
@@ -125,14 +120,12 @@
             for(var i=1;i<=response.last_page;i++) {
               pages.push(i);
             }
-
             $scope.range = pages;
           }
           else {
             $scope.info = "There are no Tests to display. Create a test first and then visit this page again.";
             $scope.tests = []
             $scope.totalPages = 0
-            $scope.error = $scope.success = ''
           }
 
         });

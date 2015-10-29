@@ -68,7 +68,6 @@
                 console.log($scope.newYear);
                 $http.post('api/years/add', $scope.newYear).then(function(response){
                     $scope.success = response.data.msg;
-                    $scope.error = false;
                     reset();
                     fetchYears();
                     $scope.loading = false;
@@ -77,7 +76,6 @@
 
                 }, function(response){
                     $scope.error = response.data.msg;
-                    $scope.success = false;
                     $scope.loading = false;
                 });
             }
