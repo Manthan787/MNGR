@@ -76,7 +76,7 @@ class TestController extends BaseController{
     }
 
     public function getAll() {
-        $tests = Test::with(['subject'])->paginate(10);
+        $tests = Test::with(['subject'])->orderBy('created_at','DESC')->paginate(10);
         return $tests;
     }
 

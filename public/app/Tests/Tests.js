@@ -90,11 +90,11 @@
             '</a>'+
             '<div class="meta">'+
                 '<a href="/tests/{{ test.id }}/show" class="tag label label-warning">'+
-                  '<i class="glyphicon glyphicon-list-alt"></i>'+
+                  '<i class="glyphicon glyphicon-list-alt"></i> '+
                   'Question Paper'+
                 '</a>'+
                 '<a href="/tests/{{ test.id }}/answers" class="tag label label-success">'+
-                  '<i class="glyphicon glyphicon-check"></i>'+
+                  '<i class="glyphicon glyphicon-check"></i> '+
                   'Answer Sheet'+
                 '</a>'+
                 '<span class="tag label label-info pull-right">{{ test.subject.name }}</span>'+
