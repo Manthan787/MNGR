@@ -37,6 +37,10 @@
               <span class="glyphicon glyphicon-check"></span>
               Answer Sheet
             </a>
+            <a href="/admin#/Tests/all" class="btn btn-info">
+              <span class="glyphicon glyphicon-folder-open"></span>
+               View All
+            </a>
         </div>
         <h3>{{ $test->name }}</h3>
         <h4>Marks: {{ $test->marks }}</h4>

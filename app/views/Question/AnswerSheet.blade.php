@@ -48,6 +48,10 @@
               <span class="glyphicon glyphicon-list-alt"></span>
               Question Paper
             </a>
+            <a href="/admin#/Tests/all" class="btn btn-info">
+              <span class="glyphicon glyphicon-folder-open"></span>
+               View All
+            </a>
         </div>
       </div>
       <div align="left">

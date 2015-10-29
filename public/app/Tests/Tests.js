@@ -78,6 +78,32 @@
      };
    });
 
+   app.directive('testCard', function() {
+     return {
+        restrict: 'E',
+        template: '<div class="custom-box-material palette-white">'+
+            '<div class="controls">'+
+                '<button class="btn btn-danger btn-circle btn-outline" ng-click="delete(test.id)"><i class="glyphicon glyphicon-remove"></i></button>'+
+            '</div>'+
+            '<a href="/tests/{{ test.id }}/show">'+
+              '<h3>{{ test.name }}</h3>'+
+            '</a>'+
+            '<div class="meta">'+
+                '<a href="/tests/{{ test.id }}/show" class="tag label label-warning">'+
+                  '<i class="glyphicon glyphicon-list-alt"></i>'+
+                  'Question Paper'+
+                '</a>'+
+                '<a href="/tests/{{ test.id }}/answers" class="tag label label-success">'+
+                  '<i class="glyphicon glyphicon-check"></i>'+
+                  'Answer Sheet'+
+                '</a>'+
+                '<span class="tag label label-info pull-right">{{ test.subject.name }}</span>'+
+                '<span class="tag label label-primary pull-right">Marks: {{ test.marks }}</span>'+
+            '</div>'+
+        '</div>'
+     }
+   })
+
    app.controller('AllTestsController', function($scope, $http) {
       $scope.tests = []
       $scope.currentPage = 1;
@@ -104,6 +130,8 @@
           }
           else {
             $scope.info = "There are no Tests to display. Create a test first and then visit this page again.";
+            $scope.tests = []
+            $scope.totalPages = 0
             $scope.error = $scope.success = ''
           }
 
@@ -112,9 +140,11 @@
       };
 
       $scope.delete = function(testID) {
+        $scope.loading = true;
         $http.delete('/api/tests/'+testID+'/delete').success(function(response) {
             $scope.getTests($scope.currentPage);
             $scope.success = response.msg;
+            $scope.loading = false;
         })
       }
 
