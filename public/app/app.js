@@ -55,7 +55,7 @@
 				})
         .when('/Materials/:id', {
             templateUrl:'app/partials/Materials/editMaterial.html',
-            controller:'MaterialsController',
+            controller:'EditMaterialController',
 						data: {
 								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 						}

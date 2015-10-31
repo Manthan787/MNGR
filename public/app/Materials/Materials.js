@@ -152,6 +152,7 @@
             });
 
             $scope.getChapters = function(subjectID) {
+                $scope.resetFeedback()
                 $scope.materials = {}
                 $scope.loading = true;
                 $http.get("api/Subjects/"+subjectID+"/Chapters").then(function(response){
@@ -196,13 +197,11 @@
                     $http.delete('api/materials/'+material.id+'/delete')
                         .then(function(response){
                             $scope.success = response.data.msg;
-                            $scope.error = ''
                             $scope.getMaterials(material.chapter_id)
                             document.body.scrollTop = document.documentElement.scrollTop = 0;
                             $scope.loading = false;
                         },function(response){
                             $scope.error = response.data;
-                            $scope.success = '';
                             document.body.scrollTop = document.documentElement.scrollTop = 0;
                             $scope.loading = false;
                     });
@@ -211,19 +210,19 @@
 
         })
         .controller('EditMaterialController', function($scope, $http, $routeParams){
-            $scope.$parent.loading = true;
+            $scope.loading = true;
             $http.get('api/materials/'+$routeParams.id).then(function(response){
                 $scope.material = response.data;
                 $scope.selectedSubject = response.data.subject.id;
                 $scope.getChapters($scope.selectedSubject);
                 init_editor()
-                $scope.$parent.loading = false;
+                $scope.loading = false;
 
             });
-            $scope.$parent.loading = true;
+            $scope.loading = true;
             $http.get('api/Subjects/all').then(function(response){
                 $scope.subjects = response.data;
-                $scope.$parent.loading = false;
+                $scope.loading = false;
             });
 
             $scope.isSelected = function(check, reference){
@@ -246,9 +245,9 @@
                 if(isValid) {
                     $http.post('api/materials/'+$scope.material.id+'/edit', $scope.material)
                         .then(function(response){
-                            $scope.$parent.success = response.data.msg;
+                            $scope.success = response.data.msg;
                         }, function(response){
-                            $scope.$parent.error = response.data;
+                            $scope.error = response.data;
                         });
                 }
             }

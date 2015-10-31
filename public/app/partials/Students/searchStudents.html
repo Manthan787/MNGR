@@ -3,11 +3,8 @@
         <div class="content">
             <div class="row">
                 <div class="container" ng-controller="StudentsController">
-                    <div class="alert alert-danger" ng-show="error">{{ error }}</div>
-                    <div class="alert alert-success" ng-show="success">{{ success }}</div>
-                    <div align="center" ng-show="loading">
-                        <img src="app/admin/img/loader.gif" height="45" width="45">
-                    </div>
+                    <feedback></feedback>
+                    <loading></loading>
                     <section>
                         <ul class="nav nav-tabs">
                             <li role="presentation" class="active">
@@ -74,5 +71,3 @@
             </div>
         </div>
     </div>
-
-

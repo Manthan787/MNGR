@@ -19,10 +19,14 @@
   							$scope.error  = ''
                 $scope.success   = ''
   					})
+            // Resets feedbacks incase any of them are set. Helps removing the alert!
+            $scope.resetFeedback = function() {
+                $scope.error = $scope.success = $scope.info = ''
+            }
   			},
-        template: '<div class="alert alert-danger" ng-show="error">{{ error }}</div>'+
-        '<div class="alert alert-success" ng-show="success">{{ success }}</div>'+
-        '<div class="alert alert-info" ng-show="info">{{ info }}</div>'
+        template: '<div class="alert alert-danger" ng-show="error"><button class="glyphicon glyphicon-remove pull-right" ng-click="resetFeedback()"></button>{{ error }}</div>'+
+        '<div class="alert alert-success" ng-show="success"><button class="glyphicon glyphicon-remove pull-right" ng-click="resetFeedback()"></button>{{ success }}</div>'+
+        '<div class="alert alert-info" ng-show="info"><button class="glyphicon glyphicon-remove pull-right" ng-click="resetFeedback()"></button>{{ info }}</div>'
   		}
   	})
 
