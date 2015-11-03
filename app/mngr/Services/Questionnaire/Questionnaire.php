@@ -3,9 +3,22 @@ namespace mngr\Services\Questionnaire;
 use \mngr\Exceptions\QuestionnaireLimitMismatchException as QuestionnaireLimitMismatchException;
 
 class Questionnaire implements QuestionnaireInterface {
+    /**
+     * [$chapters Chapters to generate test from]
+     * @var array
+     */
     protected $chapters = array();
+    /**
+     * [$limit marks]
+     * @var int
+     */
     protected $limit;
+    /**
+     * [$indices Indices of the questions]
+     * @var array
+     */
     protected $indices;
+
     public function make(array $chapters)
     {
         $this->chapters = $chapters;

@@ -6,7 +6,6 @@ use Input;
 use Exception;
 use Test;
 use Log;
-use PDF;
 use Redirect;
 use View;
 use mngr\Services\Questionnaire\QuestionnaireInterface as Questionnaire;
@@ -14,10 +13,12 @@ use mngr\Exceptions\QuestionnaireLimitMismatchException;
 
 class TestController extends BaseController{
     protected $questionnaire;
+
     public function __construct(Questionnaire $questionnaire)
     {
         $this->questionnaire = $questionnaire;
     }
+
     public function create()
     {
         try

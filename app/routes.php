@@ -39,14 +39,6 @@ Route::post("/upload", function(){
 
 });
 
-/*Route::get('/browse', function(){
-
-    $files = File::files(public_path().'/Uploads');
-    $funcNum = Input::get('CKEditorFuncNum');
-    $url = Public_path().'/Uploads/IMAG0196.jpg';
-    echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url');</script>";
-}); */
-
 Route::get('/stats', 'Admin\DashboardController@getStats');
 Route::group(['before'=>'teacher'], function() {
     Route::get('api/Chapters/all', 'Admin\ChapterController@getAll');
@@ -88,6 +80,14 @@ Route::group(['before'=>'teacher'],function(){
 
   #subjects
   Route::get('api/Subjects/all', 'Admin\SubjectController@all');
+
+  #Attendance
+  Route::post('api/attendances/create', 'Admin\AttendanceController@create');
+
+  #Batches
+  Route::get('api/batches/all', 'Admin\BatchController@getAll');
+  Route::post('api/batches/add','Admin\BatchController@postAdd');
+  Route::get('api/batches/{id}/students', 'Admin\BatchController@getStudents');
 
 });
 
@@ -373,8 +373,7 @@ Route::group(['before'=>'admin'], function(){
 
 Route::post('desk/test/practice/assess', 'Desk\Controller\Test@postAssess');
 
-Route::get('api/batches/all', 'Admin\BatchController@getAll');
-Route::post('api/batches/add','Admin\BatchController@postAdd');
+
 
 
 //# STUDENT's APP
@@ -431,6 +430,10 @@ Route::group(['before' => 'teacher'], function(){
 
 Route::get('/ex', function(){
 
-    return User::recentStudentAccounts();
+    $attendance = new Attendance;
+    $attendance->date = date("yyyy-mm-dd");
+    $attendance->batch_id = 1;
+    $attendance->save();
+    $attendance->students()->attach([10,11,12], ['present' => 1]);
 
 });

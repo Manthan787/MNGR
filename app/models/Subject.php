@@ -15,10 +15,10 @@ class Subject extends Eloquent
 		return $this->hasMany('Chapter');
 	}
 
-    public function materials()
-    {
-        return $this->hasManyThrough('StudyMaterial', 'Chapter', 'subject_id', 'chapter_id');
-    }
+  public function materials()
+  {
+      return $this->hasManyThrough('StudyMaterial', 'Chapter', 'subject_id', 'chapter_id');
+  }
 
 	public function questions()
 	{

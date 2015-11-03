@@ -1,0 +1,96 @@
+<div class="rightside">
+    <div class="page-head">
+      <h1>
+        <i class="glyphicon glyphicon-check"></i>
+        Mark Attendance
+        <small>Mark Attendance Of Your Students</small>
+      </h1>
+    </div>
+    <div class="content">
+        <div class="row">
+          <div class="container">
+          <feedback></feedback>
+          <loading></loading>
+          <div class="col-md-10 col-md-offset-1">
+          <div class="box">
+              <div class="box-title">
+                  <h3>Attendance Sheet</h3>
+              </div>
+              <div class="box-body">
+                <form  class="form-horizontal" id="AttendanceForm" ng-submit="save()">
+                  <div class="form-group">
+                      <label class="col-sm-2 col-offset-3 control-label">Standard</label>
+                      <div class="col-sm-8">
+                          <select type="text" class="form-control" ng-options="standard.division for standard in standards" ng-model="selectedStandard" ng-change="getBatches(selectedStandard)">
+                              <option value="">Select Standard</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="form-group" ng-if = "hasBatches">
+                      <label class="col-sm-2 col-offset-3 control-label">Batch</label>
+                      <div class="col-sm-8">
+                          <select type="text" class="form-control" ng-options="batch.id as batch.name for batch in batches" ng-model="attendance.batch" ng-change="getStudents(attendance.batch)">
+                              <option value="">Select Batch</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-2 col-offset-3 control-label">Date</label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" ng-model="attendance.date">
+                      </div>
+                  </div>
+
+                  <div class="mailbox row" ng-if="attendance.students">
+                    <div class="col-md-12">
+                      <div class="mailbox-tools clearfix">
+                        <div class="pull-left">
+                          <div class="btn-group">
+                            <button type="button"
+                                    class="btn btn-info no-radius dropdown-toggle"
+                                    data-toggle="dropdown">Options
+                                    <i class="fa fa-caret-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a href="" ng-click="checkAll()">Select all</a></li>
+                              <li><a href="" ng-click="uncheckAll()">Select none</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div align="center">
+                            <div class="col-md-4">
+                              <input type="text" placeholder="Search Student" class="form-control" ng-model="search">
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                          <button class="btn btn-success" type="submit">
+                              Save
+                          </button>
+                        </div>
+                      </div>
+                      <div class="table-responsive scroll">
+                        <table class="table table-hover">
+                          <tr class="unread" ng-repeat = "student in attendance.students | filter : search">
+                              <td class="small"><input type="checkbox"
+                                                       ng-model="student.present"
+                                                       ng-change="togglePresent(student)"/></td>
+                              <td>{{ student.name }}</td>
+                              <td>{{ student.stream.stream }}</td>
+                              <td>
+                                <span ng-repeat="batch in student.batches">
+                                    {{ batch.name }} <br/>
+                                </span>
+                              </td>
+                          </tr>
+                        </table>                        
+                     </div><!-- /.table-responsive -->
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

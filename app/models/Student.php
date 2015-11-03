@@ -25,22 +25,27 @@ class Student extends Eloquent
 		return $this->belongsTo('School');
 	}
 
-    public function subjects()
-    {
-        return $this->belongsToMany('Subject');
-    }
+  public function subjects()
+  {
+      return $this->belongsToMany('Subject');
+  }
 
-    public function batches()
-    {
-        return $this->belongsToMany('Batch');
-    }
+  public function batches()
+  {
+      return $this->belongsToMany('Batch');
+  }
 
-		public function account()
-		{
-				return $this->hasOne('User');
-		}
+	public function account()
+	{
+			return $this->hasOne('User');
+	}
 
-    public function setPhoneAttribute($phone)
+	public function attendances()
+	{
+			return $this->belongsToMany('Attendance');
+	}
+
+  public function setPhoneAttribute($phone)
 	{
 		if(is_null($phone))
 		{
@@ -64,53 +69,53 @@ class Student extends Eloquent
 		}
 	}
 
-    public function getPhoneAttribute()
-    {
-        if(!$this->attributes['phone'])
-        {
-            return null;
-        }
-        else
-        {
-            return $this->attributes['phone'];
-        }
-    }
+  public function getPhoneAttribute()
+  {
+      if(!$this->attributes['phone'])
+      {
+          return null;
+      }
+      else
+      {
+          return $this->attributes['phone'];
+      }
+  }
 
-    public function getStudentMobileAttribute()
-    {
-        if(!$this->attributes['student_mobile'])
-        {
-           return null;
-        }
-        else
-        {
-            return $this->attributes['student_mobile'];
-        }
-    }
+  public function getStudentMobileAttribute()
+  {
+      if(!$this->attributes['student_mobile'])
+      {
+         return null;
+      }
+      else
+      {
+          return $this->attributes['student_mobile'];
+      }
+  }
 
-    public function getParentsMobileAttribute()
-    {
-        if(!$this->attributes['parents_mobile'])
-        {
-            return null;
-        }
-        else
-        {
-            return $this->attributes['parents_mobile'];
-        }
-    }
+  public function getParentsMobileAttribute()
+  {
+      if(!$this->attributes['parents_mobile'])
+      {
+          return null;
+      }
+      else
+      {
+          return $this->attributes['parents_mobile'];
+      }
+  }
 
-		public function isActivated()
-		{
+	public function isActivated()
+	{
 
-			if($this->getCorrespondingUser())
-				return true;
+		if($this->getCorrespondingUser())
+			return true;
 
-			return false;
-		}
+		return false;
+	}
 
-		public function getCorrespondingUser()
-		{
-			return User::where('student_id', $this->id)->first();
-		}
+	public function getCorrespondingUser()
+	{
+		return User::where('student_id', $this->id)->first();
+	}
 }

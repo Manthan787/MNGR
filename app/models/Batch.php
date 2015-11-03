@@ -14,4 +14,14 @@ class Batch extends Eloquent{
     {
         return $this->hasMany('Timing');
     }
-} 
+
+    public function attendances()
+    {
+        return $this->hasMany('Attendance');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany('Student');
+    }
+}

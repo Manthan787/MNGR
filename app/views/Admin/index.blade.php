@@ -77,6 +77,17 @@
         </li>
         <li class="sub-nav">
             <a href="">
+                <i class="glyphicon glyphicon-ok-circle"></i>
+                <span>Attendance</span>
+                <i class="fa fa-angle-right pull-right"></i>
+            </a>
+            <ul class="sub-menu">
+                <li><a href="#/Attendance/mark"><i class="glyphicon glyphicon-check"></i>Mark Attendance</a></li>
+                <li><a href="#/Attendance/view"><i class="glyphicon glyphicon-calendar"></i>View Attendance</a></li>
+            </ul>
+        </li>
+        <li class="sub-nav">
+            <a href="">
                 <i class="fa fa-question"></i>
                     <span>Questions</span>
                     <i class="fa fa-angle-right pull-right"></i>
@@ -166,12 +177,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
         <script src="app/app.js"> </script>
         <script src="app/Utils.js"> </script>
+        <script src="app/Services/Standard.factory.js"> </script>
         <script src="app/AppController.js"> </script>
         <script src="app/Questions/Questions.js"></script>
         <script src="app/Questions/Questions.factory.js"></script>
         <script src="app/Materials/Materials.js"></script>
         <script src="app/Students/Students.js"></script>
         <script src="app/Students/Students.factory.js"></script>
+        <script src="app/Attendances/Attendance.js"></script>
+        <script src="app/Attendances/Attendance.factory.js"></script>
         <script src="app/Services/SchoolFinder.js"></script>
         <script src="app/SMS/SMS.js"></script>
         <script src="app/Settings/Settings.js"></script>

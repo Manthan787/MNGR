@@ -96,7 +96,8 @@
                 '<span class="tag label label-primary pull-right">Marks: {{ test.marks }}</span>'+
             '</div>'+
         '</div>'
-     }
+      }
+
    })
 
    app.controller('AllTestsController', function($scope, $http) {

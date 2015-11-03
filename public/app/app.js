@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('adminApp',['Questions','Students','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','Account','ngRoute','ngSanitize','Utils']);
+	var app = angular.module('adminApp',['Questions','Students','Attendances','Services','Settings','Chapters','Auth','User','Tests','Materials','SMS','Account','ngRoute','ngSanitize','Utils']);
 
 	app.constant('USER_ROLES', {
 			admin 			: 1,
@@ -74,7 +74,20 @@
 							authorizedRoles: [USER_ROLES.admin]
 					}
 		    })
-
+				.when('/Attendance/mark', {
+					templateUrl:'app/partials/Attendance/mark.html',
+					controller:'MarkAttendanceController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+					}
+				})
+				.when('/Attendance/view', {
+					templateUrl:'app/partials/Attendance/view.html',
+					controller:'ViewAttendanceController',
+					data: {
+							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+					}
+				})
     		.when('/Students/:id', {
           templateUrl:'app/partials/Students/showStudent.html',
           controller:'StudentShowController',

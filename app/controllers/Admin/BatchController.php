@@ -37,4 +37,14 @@ class BatchController extends BaseController {
             return Response::json(['msg'=>$e],500);
         }
     }
+
+    public function getStudents($batchID)
+    {
+        if($batch = Batch::find($batchID)) {
+            return $batch->students;
+        }
+        else {
+            return Response::json(['msg' => 'The batch you have selected does not exist.'],500);
+        }
+    }
 }

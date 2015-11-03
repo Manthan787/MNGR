@@ -26,7 +26,7 @@ class SMSController extends BaseController
       $recepients = json_decode(json_encode(Input::get('recepients')),FALSE);
       $message    = Input::get('message');
 
-      $plivo_src = Config::get('plivo.src');
+      $plivo_src  = Config::get('plivo.src');
 
       try {
         $this->notifier->from($plivo_src)->to($recepients)->send('Regarding Attendance', $message);
