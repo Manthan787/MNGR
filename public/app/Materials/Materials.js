@@ -82,16 +82,16 @@
       					selector: '#material_text',
       					menubar: false,
       					plugins: [
-      			        "advlist autolink lists link image charmap print preview anchor",
+      			        "advlist autolink lists link charmap print preview anchor",
       			        "searchreplace visualblocks code fullscreen",
-      			        "insertdatetime media table contextmenu paste youtube"
+      			        "insertdatetime media table contextmenu paste youtube jbimages"
       			    ],
-          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image youtube",
+          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link youtube jbimages",
       					file_browser_callback: function(field_name, url, type, win) {
                   if(type=='image') $('#my_form input').click();
               	},
       					setup: function(editor) {
-      										editor.on('keyup', function(e) {
+      										editor.on('change', function(e) {
       												var elm = document.getElementById('AddForm')
       												var scope = angular.element(elm).scope()
       												scope.$apply(function() {
@@ -257,16 +257,16 @@
       					selector: '#material_text_edit',
       					menubar: false,
       					plugins: [
-      			        "advlist autolink lists link image charmap print preview anchor",
+      			        "advlist autolink lists link charmap print preview anchor",
       			        "searchreplace visualblocks code fullscreen",
-      			        "insertdatetime media table contextmenu paste youtube"
+      			        "insertdatetime media table contextmenu paste youtube jbimages"
       			    ],
-          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image youtube",
+          			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link youtube jbimages",
       					file_browser_callback: function(field_name, url, type, win) {
                   if(type=='image') $('#my_form input').click();
               	},
       					setup: function(editor) {
-      										editor.on('keyup', function(e) {
+      										editor.on('change', function(e) {
       												var elm = document.getElementById('EditForm')
       												var scope = angular.element(elm).scope()
       												scope.$apply(function() {

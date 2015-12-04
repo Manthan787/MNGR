@@ -48,6 +48,10 @@ class AttendanceController extends BaseController {
       }
   }
 
+  public function getAll() {
+        return Attendance::with('batch')->orderBy('created_at', 'DESC')->paginate(10);
+  }
+
 }
 
 

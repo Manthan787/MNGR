@@ -53,7 +53,7 @@
                 $scope.loading = false
             })
         }
-        
+
         // Save attendance
         $scope.save = function() {
           $scope.loading = true
@@ -80,7 +80,6 @@
                 student.present = false
             })
         }
-
 
         function attendance_init() {
           $scope.selectedStandard = null

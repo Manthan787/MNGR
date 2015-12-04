@@ -78,11 +78,12 @@ Route::group(['before'=>'teacher'],function(){
 	Route::get('api/Questions/{id}','Admin\QuestionController@getById');
   Route::get('api/Questions/{id}/delete','Admin\QuestionController@delete');
 
-  #subjects
+  #Subjects
   Route::get('api/Subjects/all', 'Admin\SubjectController@all');
 
   #Attendance
   Route::post('api/attendances/create', 'Admin\AttendanceController@create');
+  Route::get('api/attendances/all', 'Admin\AttendanceController@getAll');
 
   #Batches
   Route::get('api/batches/all', 'Admin\BatchController@getAll');
