@@ -81,6 +81,8 @@
       				tinymce.init({
       					selector: '#material_text',
       					menubar: false,
+                relative_urls: false,
+                remove_script_host: false,
       					plugins: [
       			        "advlist autolink lists link charmap print preview anchor",
       			        "searchreplace visualblocks code fullscreen",
@@ -256,6 +258,8 @@
       				tinymce.init({
       					selector: '#material_text_edit',
       					menubar: false,
+                relative_urls: false,
+                remove_script_host: false,
       					plugins: [
       			        "advlist autolink lists link charmap print preview anchor",
       			        "searchreplace visualblocks code fullscreen",
