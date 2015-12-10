@@ -55,6 +55,7 @@ Compile Online
   <div class="span4">
     <div class="styled">
       <h4> Output </h4>
+      <p ng-if="loading">Loading...</p>
       <p ng-repeat="line in output track by $index">@{{ line }}</p>
     </div>
   </div>
