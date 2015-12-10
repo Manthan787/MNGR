@@ -8,7 +8,7 @@ use Student;
 use User;
 use Config;
 
-class Auth extends BaseController{
+class Auth extends BaseController {
 
     protected $notifier;
 

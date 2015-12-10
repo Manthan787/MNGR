@@ -1,5 +1,13 @@
 <?php
-
+Route::get('/c', function() {
+    return View::make('Desk.Compiler.compiler');
+});
+Route::post('/c', function() {
+    $compiler = new Manthan\Webcompile\WebcompileMaker();
+    $args = explode(',', Input::get('inputs'));
+    $response = $compiler->type('c')->with(Input::get('program'), $args)->executeProgram();
+    return $response;
+});
 
 // Landing Page
 Route::get('/', 'Landing\Controller\Page@index');
@@ -398,8 +406,9 @@ Route::group(['before'=>'student'], function() {
     Route::get('desk/study','Desk\Controller\Study@getIndex');
     Route::get('desk/change-password', 'Desk\Controller\Dashboard@getChangePassword');
     Route::post('desk/change-password', 'Desk\Controller\Dashboard@postChangePassword');
-
+    Route::get('desk/compile', 'Desk\Controller\Compiler@getCompiler');
     ## STUDENT DESK API ROUTES
+    Route::post('api/desk/compiler/compile', 'Desk\Controller\Compiler@compile');
     Route::post('api/desk/test/practice/generate','Desk\Controller\Test@generatePractice');
     Route::get('api/desk/chapters/{id}/material', function($id){
         $chapter = Chapter::find($id);

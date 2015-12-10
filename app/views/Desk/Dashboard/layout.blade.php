@@ -12,6 +12,7 @@
     <link href="{{URL::asset("studentApp/css/font-awesome.css")}}" rel="stylesheet">
     <link href="{{URL::asset("studentApp/css/style.css")}}" rel="stylesheet">
     <link href="{{URL::asset("studentApp/css/pages/dashboard.css")}}" rel="stylesheet">
+    @yield('extra-css')
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -44,6 +45,7 @@
         <li class="active"><a href="/desk"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li class="active"><a href="/desk/test/practice"><i class="icon-list-alt"></i><span>Practice Test</span> </a> </li>
         <li class="active"><a href="/desk/study/"><i class="icon-file"></i><span>Online Study</span> </a> </li>
+        <li class="active"><a href="/desk/compile/"><i class="icon-play"></i><span>Run Program</span> </a> </li>
       </ul>
     </div>
     <!-- /container -->
@@ -77,6 +79,7 @@
 <script src="{{URL::asset("studentApp/js/base.js")}}"></script>
 <script src="{{URL::asset("studentApp/app.js")}}"></script>
 <script src="{{URL::asset("studentApp/StudyController.js")}}"></script>
+<script src="{{URL::asset("studentApp/CompilerController.js")}}"></script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
