@@ -14,6 +14,7 @@ Compile Online
     font-family: Tahoma, sans-serif;
     outline: none;
     color: white;
+    overflow: scroll;
     /*color: #DF635B;*/
     background: #464646;
     background-position: bottom right;
