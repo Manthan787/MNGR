@@ -2987,23 +2987,23 @@
     },
     {
         "name": "manthan/webcompile",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "0.3",
+        "version_normalized": "0.3.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Manthan787/Webcompile.git",
-            "reference": "ea8314fea8c4ce610512cd06207f536029d0c1a5"
+            "reference": "8e054eb5e247ca2647b06def9e4310efb16d2d7c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Manthan787/Webcompile/zipball/ea8314fea8c4ce610512cd06207f536029d0c1a5",
-            "reference": "ea8314fea8c4ce610512cd06207f536029d0c1a5",
+            "url": "https://api.github.com/repos/Manthan787/Webcompile/zipball/8e054eb5e247ca2647b06def9e4310efb16d2d7c",
+            "reference": "8e054eb5e247ca2647b06def9e4310efb16d2d7c",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2015-12-09 13:23:02",
+        "time": "2015-12-11 11:19:17",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

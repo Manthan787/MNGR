@@ -22,8 +22,5 @@ class CProgram extends Program {
     protected function getRunCommand() {
         return './a.out 2>&1';
     }
-
-
 }
-
 ?>

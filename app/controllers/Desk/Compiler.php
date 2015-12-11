@@ -19,9 +19,11 @@ class Compiler extends BaseController {
       if(empty(Input::get('program'))) {
         return ['You must write a program first in order to execute!'];
       }
-        $program = Input::get('program');
-        $args    = explode(',', Input::get('inputs'));
-        $result = $this->compiler->type('c')->with($program, $args)->executeProgram();
+        $language = Input::get('language');
+        $program  = Input::get('program');
+        $name     = Input::get('name');
+        $args     = explode(',', Input::get('inputs'));
+        $result   = $this->compiler->type($language)->with($program, $args, $name)->executeProgram();
         return $result;
     }
 

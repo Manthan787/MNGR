@@ -528,6 +528,37 @@ legend small {
 	font-size: 13.5px;
 	color: #999999;
 }
+
+textarea.styled {
+	width: 99%;
+	height: 600px;
+	padding: 10px;
+	margin-right: 5px;
+	font-family: Tahoma, sans-serif;
+	outline: none;
+	color: white;
+	font-size: 19px;
+	line-height: 1.8;
+	overflow: scroll;
+	background: #464646;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
+.styled {
+	width: 99%;
+	height: 600px;
+	padding: 10px;
+	margin-right: 5px;
+	font-family: Tahoma, sans-serif;
+	outline: none;
+	color: white;
+	overflow: scroll;
+	background: #464646;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
 label, input, button, select, textarea {
 	font-size: 13px;
 	font-weight: normal;
@@ -547,7 +578,7 @@ input, textarea, select, .uneditable-input {
 	height: 18px;
 	padding: 4px;
 	margin-bottom: 9px;
-	font-size: 19px;
+	font-size: 13px;
 	line-height: 18px;
 	color: #555555;
 	border: 1px solid #cccccc;

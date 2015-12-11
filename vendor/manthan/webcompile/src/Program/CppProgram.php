@@ -23,5 +23,4 @@ class CppProgram extends Program {
       return './a.out';
   }
 }
-
 ?>

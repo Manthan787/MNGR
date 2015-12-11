@@ -8,6 +8,7 @@ abstract class Program implements ProgramInterface {
     protected $args;
     protected $compiler;
     protected $content;
+    protected $name;
 
     abstract protected function getRunCommand();
     abstract public function create();
@@ -16,7 +17,7 @@ abstract class Program implements ProgramInterface {
     public function __construct($content, $args = array(), $name = '') {
         $this->content  = $content;
         $this->args     = $args;
-        $this->name     = $name;
+        $this->name     = $name;        
     }
 
     public function execute() {
@@ -58,21 +59,12 @@ abstract class Program implements ProgramInterface {
       if (is_resource($process)) {
           while ($s = fgets($pipes[1])) {
               $output[] = $s;
-              flush();
           }
       }
       fclose($pipes[1]);
-      $stderr = stream_get_contents($pipes[2]);
-      fclose($pipes[2]);
       proc_close($process);
 
-      if($this->hasError($stderr)) {
-          $this->setOutput($stderr);
-      }
-      else {
-          $this->setOutput($output);
-      }
-      return $this->output;
+      return $output;
     }
 
     protected function hasError($output) {
@@ -90,8 +82,6 @@ abstract class Program implements ProgramInterface {
         $this->output = $op;
       }
     }
-
 }
-
 
 ?>
