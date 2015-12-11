@@ -9,17 +9,17 @@ Compile Online
 <section ng-controller="CompilerController">
   <div class="row">
     <div class="span12">
-      <div class="control-group">
+      <div class="control-group" align="center">
           <label class="control-label">Select Programming Language</label>
-          <select name="language" ng-model="compiler.language" ng-change="clear()">
+          <select name="language" ng-model="compiler.language" ng-change="clear()" align="center">
               <option value="c">C</option>
               <option value="java">Java</option>
               <option value="cpp">C++</option>
           </select>
       </div>
-      <div class="control-group" ng-if="showNameBox()">
+      <div class="control-group" ng-if="showNameBox()" align="center" ng-cloak>
           <label class="control-label">File Name</label>
-          <input type="text" name="name" ng-model="compiler.name" placeholder="Demo.java">
+          <input type="text" name="name" ng-model="compiler.name" placeholder="Demo.java" autocomplete="off">
           <span class="alert-error" ng-if="error">File Name is required!</span>
       </div>
     </div>
