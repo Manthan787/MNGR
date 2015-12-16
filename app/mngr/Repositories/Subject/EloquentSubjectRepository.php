@@ -5,5 +5,5 @@ class EloquentSubjectRepository implements SubjectRepository{
 
 
 
-	
+
 }

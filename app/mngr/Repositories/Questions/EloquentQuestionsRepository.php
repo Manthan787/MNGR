@@ -8,7 +8,7 @@ class EloquentQuestionsRepository implements QuestionsRepository
 
 	/**
 	 * Question Property
-	 * 
+	 *
 	 */
 	protected $question;
 
@@ -16,18 +16,18 @@ class EloquentQuestionsRepository implements QuestionsRepository
 	{
 		$this->question = $question;
 	}
-	
+
 	public function getAll()
 	{
 		//Fetch All Questions With Their Options
 		return $this->question->with('options','answer')->get();
-	
-		
+
+
 	}
 
 	public function getById($id)
 	{
-			
+
 		if (! is_null($question = $this->findById($id)))
 		{
 			return $question;
@@ -43,7 +43,7 @@ class EloquentQuestionsRepository implements QuestionsRepository
 
 	public function add(array $input)
 	{
-		
+
 	}
 
     public function delete($id)

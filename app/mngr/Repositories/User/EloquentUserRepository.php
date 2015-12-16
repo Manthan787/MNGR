@@ -3,10 +3,10 @@ use User;
 use mngr\Exceptions\FireInTheHoleException;
 
 class EloquentUserRepository implements UserRepository{
-    
+
    protected $user;
-    
-    
+
+
     public function __construct(User $user)
     {
         $this->user=$user;
@@ -14,7 +14,7 @@ class EloquentUserRepository implements UserRepository{
     public function create(array $input){
 
         try
-        {     
+        {
                     $user = $this->user->create([
                     'firstname' => $input['firstname'],
                     'lastname'  => $input['lastname'],
@@ -40,15 +40,15 @@ class EloquentUserRepository implements UserRepository{
             throw new FireInTheHoleException("Looks like there was an error while adding the user. Please Try Again.");
         }
     }
-    
+
     public function update(array $input){
-        
+
         echo "Updating the user";
     }
-    
+
     public function delete($id){
         echo "deleting user";
-        
+
     }
-    
+
 }
