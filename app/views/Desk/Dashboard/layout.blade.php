@@ -12,7 +12,6 @@
     <link href="{{URL::asset("studentApp/css/font-awesome.css")}}" rel="stylesheet">
     <link href="{{URL::asset("studentApp/css/style.css")}}" rel="stylesheet">
     <link href="{{URL::asset("studentApp/css/pages/dashboard.css")}}" rel="stylesheet">
-    @yield('extra-css')
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
