@@ -14,8 +14,7 @@ class AttendanceController extends BaseController {
 
   protected $messenger;
 
-  public function __construct(SMSNotifier $notifier, MessengerInterface $messenger)
-  {
+  public function __construct(SMSNotifier $notifier, MessengerInterface $messenger) {
       $this->notifier  = $notifier;  // For Messages processed by Manthan\Nuncio
       $this->messenger = $messenger; // For Quick Messages
   }

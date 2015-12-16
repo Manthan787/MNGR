@@ -73,7 +73,7 @@ Online Study
             </div>
         </div>
         <div class="span9">
-            <div class="widget unselectable">
+            <div class="widget">
                 <div class="widget-header">
                    <h3>@{{topics[pointer].topic}}</h3>
                 </div>
