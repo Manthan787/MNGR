@@ -37,11 +37,11 @@
         function loadDefaultCode() {
             var language = $scope.compiler.language;
             if(language == "c")
-              $scope.compiler.program = '#include<stdio.h>\n\nvoid main()\n{\n\n\n}';
+              $scope.compiler.program = '#include<stdio.h>\n\nint main()\n{\n\n\n}';
             else if (language =="java")
               $scope.compiler.program = 'import java.util.*;\n\n class Demo {\n   public static void main(String[] args)\n  {\n\n\n  }\n}';
-            else
-              $scope.compiler.program = '#include<stdio.h>\n\nvoid main()\n{\n\n\n}';
+            else if(language == "cpp")
+              $scope.compiler.program = '#include<iostream>\nusing namespace std;\n\nint main()\n{\n\n\n}';
 
         }
     })

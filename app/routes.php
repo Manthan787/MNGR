@@ -1,14 +1,4 @@
 <?php
-Route::get('/c', function() {
-    return View::make('Desk.Compiler.compiler');
-});
-Route::post('/c', function() {
-    $compiler = new Manthan\Webcompile\WebcompileMaker();
-    $args = explode(',', Input::get('inputs'));
-    $response = $compiler->type('c')->with(Input::get('program'), $args)->executeProgram();
-    return $response;
-});
-
 // Landing Page
 Route::get('/', 'Landing\Controller\Page@index');
 Route::get('/about', 'Landing\Controller\Page@about');

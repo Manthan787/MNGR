@@ -15,8 +15,12 @@ class CppProgram extends Program {
   }
 
   public function destroy() {
-      unlink($this->file->getFileName());
-      unlink('a.out');
+      if(file_exists($this->file->getFileName())) {
+        unlink($this->file->getFileName());
+      }
+      if(file_exists('a.out')) {
+        unlink('a.out');
+      }
   }
 
   protected function getRunCommand() {

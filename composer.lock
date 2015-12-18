@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a9a8768b3a946915c46e64297dc07943",
-    "content-hash": "2602dc3bfd91d9d26f03ecde07c51439",
+    "hash": "9c3753c6435930356d7c9e96ac3e8c00",
+    "content-hash": "2790af7e1517faa5efe7a93aab9a2b06",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1032,16 +1032,16 @@
         },
         {
             "name": "manthan/webcompile",
-            "version": "0.3",
+            "version": "v0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Manthan787/Webcompile.git",
-                "reference": "8e054eb5e247ca2647b06def9e4310efb16d2d7c"
+                "reference": "11a5063844645ba939645d612a814b49e9b196f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Manthan787/Webcompile/zipball/8e054eb5e247ca2647b06def9e4310efb16d2d7c",
-                "reference": "8e054eb5e247ca2647b06def9e4310efb16d2d7c",
+                "url": "https://api.github.com/repos/Manthan787/Webcompile/zipball/11a5063844645ba939645d612a814b49e9b196f8",
+                "reference": "11a5063844645ba939645d612a814b49e9b196f8",
                 "shasum": ""
             },
             "require": {
@@ -1064,7 +1064,7 @@
                 }
             ],
             "description": "Allows you to compile C, C++, Java programs on your browser!",
-            "time": "2015-12-11 11:19:17"
+            "time": "2015-12-18 10:15:06"
         },
         {
             "name": "monolog/monolog",

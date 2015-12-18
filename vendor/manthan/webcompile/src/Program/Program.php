@@ -17,7 +17,7 @@ abstract class Program implements ProgramInterface {
     public function __construct($content, $args = array(), $name = '') {
         $this->content  = $content;
         $this->args     = $args;
-        $this->name     = $name;        
+        $this->name     = $name;
     }
 
     public function execute() {

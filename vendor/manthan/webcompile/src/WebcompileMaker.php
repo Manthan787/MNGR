@@ -14,7 +14,7 @@ class WebcompileMaker {
     }
 
     public function with($content, $args = array(), $name = '') {
-        filter_var($name, FILTER_SANITIZE_STRING);        
+        filter_var($name, FILTER_SANITIZE_STRING);
         $this->program = ProgramFactory::create($this->language, $content, $args, $name);
         $this->program->create();
         return $this;
