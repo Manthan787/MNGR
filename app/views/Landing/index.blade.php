@@ -137,7 +137,7 @@
 
 			</div>
 			<div class="col-sm-4">
-				<p><a href="courses-details-right-sidebar.html"><img src="Landing/images/popularcourse.jpg" alt="" class="img-responsive" /></a></p>
+				<p><img src="Landing/images/popularcourse.jpg" alt="" class="img-responsive" /></p>
 			</div>
 			<div class="col-sm-4">
 

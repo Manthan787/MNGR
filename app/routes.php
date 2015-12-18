@@ -17,25 +17,23 @@ Route::group(['before' => 'hasAccessToAdminPanel'], function(){
     Route::post('api/auth/changePassword', 'Admin\AuthController@changePassword');
     Route::get('api/auth/logout','Admin\AuthController@logout');
 });
-
-
-Route::get('/admin/login', 'Admin\AuthController@getLogin');
-
-Route::post("/upload", function(){
-    $file = Input::file('upload');
-    if($file)
-    {
-        $filename = $file->getClientOriginalName();
-        $destination = public_path().'/Uploads';
-        $status = $file->move($destination, $filename);
-        if($status)
-        {
-            return "http://ameecomputer.in/Uploads/".$filename;
-        }
-
-    }
-
-});
+// Route::get('/admin/login', 'Admin\AuthController@getLogin');
+//
+// Route::post("/upload", function(){
+//     $file = Input::file('upload');
+//     if($file)
+//     {
+//         $filename = $file->getClientOriginalName();
+//         $destination = public_path().'/Uploads';
+//         $status = $file->move($destination, $filename);
+//         if($status)
+//         {
+//             return "http://ameecomputer.in/Uploads/".$filename;
+//         }
+//
+//     }
+//
+// });
 
 Route::get('/stats', 'Admin\DashboardController@getStats');
 Route::group(['before'=>'teacher'], function() {
