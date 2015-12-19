@@ -17,7 +17,7 @@ Route::group(['before' => 'hasAccessToAdminPanel'], function(){
     Route::post('api/auth/changePassword', 'Admin\AuthController@changePassword');
     Route::get('api/auth/logout','Admin\AuthController@logout');
 });
-// Route::get('/admin/login', 'Admin\AuthController@getLogin');
+Route::get('/admin/login', 'Admin\AuthController@getLogin');
 //
 // Route::post("/upload", function(){
 //     $file = Input::file('upload');
