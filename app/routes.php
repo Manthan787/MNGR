@@ -5,7 +5,6 @@ Route::get('/about', 'Landing\Controller\Page@about');
 Route::get('/contact', 'Landing\Controller\Page@contact');
 Route::post('/contact', 'Landing\Controller\Page@postContact');
 
-
 // ACHARYA ADMIN PANEL
 Route::group(['before' => 'hasAccessToAdminPanel'], function(){
     Route::get('/admin', function()
@@ -18,7 +17,7 @@ Route::group(['before' => 'hasAccessToAdminPanel'], function(){
     Route::get('api/auth/logout','Admin\AuthController@logout');
 });
 Route::get('/admin/login', 'Admin\AuthController@getLogin');
-//
+
 // Route::post("/upload", function(){
 //     $file = Input::file('upload');
 //     if($file)
