@@ -1,5 +1,5 @@
 <?php
-
+$debug = $_ENV['DEBUG'];
 return array(
 
 	/*
@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => $_ENV['DEBUG'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,7 +122,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
     'mngr\Repositories\BackendServiceProvider',
     'mngr\Services\Forms\FormServiceProvider',
-    'mngr\Services\Questionnaire\QuestionnaireServiceProvider',    
+    'mngr\Services\Questionnaire\QuestionnaireServiceProvider',
     'mngr\Services\Mail\NotifierServiceProvider',
 		'mngr\Services\SMS\PlivoServiceProvider',
 		'mngr\Services\SMS\NotifierServiceProvider',

@@ -1,4 +1,6 @@
 <?php
+$email = $_ENV['EMAIL'];
+$password = $_ENV['PASSWORD'];
 
 return array(
 
@@ -28,7 +30,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => '173.194.65.108',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +56,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'manthant15@gmail.com', 'name' => 'MNGR'),
+	'from' => array('address' => $email, 'name' => 'Acharya'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +82,7 @@ return array(
 	|
 	*/
 
-	'username' => 'manthant15@gmail.com',
+	'username' => $email,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +95,7 @@ return array(
 	|
 	*/
 
-	'password' => 'Manthanwolfcamp15',
+	'password' => $password,
 
 	/*
 	|--------------------------------------------------------------------------
