@@ -32,6 +32,13 @@
 							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 					}
 				})
+				.when('/Questions/:id', {
+					templateUrl:'app/partials/Questions/editQuestion.html',
+					controller : 'EditQuestionController',
+		      data: {
+							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+					}
+				})
         .when('/Materials/add', {
             templateUrl:'app/partials/Materials/addMaterial.html',
             controller:'AddMaterialController',

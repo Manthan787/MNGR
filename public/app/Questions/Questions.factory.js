@@ -33,8 +33,6 @@
             });
         }
 
-
-
         Question.prototype.delete = function () {
             var question = this;
 
@@ -42,6 +40,15 @@
                 return response.data.msg;
             });
         };
+
+				Question.prototype.edit = function() {
+						var question = this;
+
+						return $http.post('api/Questions/' + question.id + '/edit').then(function(response) {
+								console.log(response);
+								return response.data.msg;
+						})
+				}
         return Question;
     });
 })();

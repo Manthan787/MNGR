@@ -7,8 +7,8 @@
 		$scope.error = '';
 		$scope.success = '';
 		$scope.fetchedQuestion;
-        $scope.loading = true;
-        loadQuestions();
+    $scope.loading = true;
+    loadQuestions();
 		$scope.fetchQuestion = function(id){
 			var fetchQuestionPromise = Question.get(id);
 			fetchQuestionPromise.then(function(q){
@@ -52,10 +52,21 @@
         }
 	});
 
-    app.controller("AddQuestionsController", function($scope){
+  app.controller("AddQuestionsController", function($scope){
         $scope.editEnabled = false;
 
-    });
+  });
+
+	app.controller("EditQuestionController", function($scope, Question, $routeParams) {
+
+			Question.get($routeParams.id).then(function(question) {
+					$scope.question = question;
+					console.log($scope.question);
+			})
+
+
+	})
+
 	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce){
         init_editor()
         $scope.newQuestion = new Question();

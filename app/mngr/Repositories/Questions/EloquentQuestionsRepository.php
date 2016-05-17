@@ -38,7 +38,7 @@ class EloquentQuestionsRepository implements QuestionsRepository
 
 	public function findById($id)
 	{
-		return $this->question->with('options')->find($id);
+		return $this->question->with('options', 'answer')->find($id);
 	}
 
 	public function add(array $input)
