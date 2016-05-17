@@ -1,5 +1,5 @@
 <?php
-$debug = $_ENV['DEBUG'];
+
 return array(
 
 	/*
