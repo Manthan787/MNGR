@@ -1,22 +1,26 @@
 <?php
-use Auth;
-use GuzzleHttp\Client;
+
 class QuestionTest extends TestCase {
 
     public function setUp() {
       parent::setUp();
-      Auth::loginUsingId(1);
+      Route::enableFilters();
     }
 
     public function testAccessWithoutLogin() {
-      $client = new Client();
-      try {
-        $response = $client->request('GET', 'http://localhost:8000/api/Questions/all');
-      }
-      catch(GuzzleHttp\Exception\ClientException $e) {
-        $this->assertEquals(401, $e->getResponse()->getStatusCode());
-      }
+      Auth::logout();
+      $response = $this->call('GET', 'http://localhost:8000/api/Questions/all');
+      $data = $this->parseJson($response);
+      $this->assertEquals('You need to login to access this page!', $data->msg);
+    }
 
+    public function testAccessWithLogin() {
+        $user = User::find(1);
+        Auth::login($user);
+
+        $response = $this->call('GET', 'http://localhost:8000/api/Questions/all');
+        $data = $this->parseJson($response);
+        $this->assertInternalType('array', $data);
     }
 
 }
