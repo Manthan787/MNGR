@@ -181,6 +181,7 @@
         <script src="app/AppController.js"> </script>
         <script src="app/Questions/Questions.js"></script>
         <script src="app/Questions/Questions.factory.js"></script>
+        <script src="app/Questions/Editor.js"></script>
         <script src="app/Materials/Materials.js"></script>
         <script src="app/Students/Students.js"></script>
         <script src="app/Students/Students.factory.js"></script>

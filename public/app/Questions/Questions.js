@@ -57,19 +57,39 @@
 
   });
 
-	app.controller("EditQuestionController", function($scope, Question, $routeParams) {
+	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor) {
 
 			Question.get($routeParams.id).then(function(question) {
 					$scope.question = question;
 					console.log($scope.question);
 			})
 
+			var setup = function(editor) {
+								editor.on('keyup', function(e) {
+										var elm = document.getElementById('EditForm')
+										var scope = angular.element(elm).scope()
+										scope.$apply(function() {
+												$scope.question.question = editor.getContent()
+										})
+								})
+						}
+		 Editor.init(setup)
 
 	})
 
-	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce){
-        init_editor()
+	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce, Editor){
         $scope.newQuestion = new Question();
+				var setup = function(editor) {
+									editor.on('keyup', function(e) {
+											var elm = document.getElementById('AddForm')
+											var scope = angular.element(elm).scope()
+											scope.$apply(function() {
+													$scope.newQuestion.question = editor.getContent()
+											})
+									})
+							}
+				Editor.init(setup)
+
         var counter = 4;
         $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
         $scope.streams = [];
