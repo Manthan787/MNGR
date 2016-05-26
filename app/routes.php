@@ -1,5 +1,8 @@
 <?php
 // Landing Page
+Route::get('/a', function() {
+  return Answer::find(1);
+});
 Route::get('/', 'Landing\Controller\Page@index');
 Route::get('/about', 'Landing\Controller\Page@about');
 Route::get('/contact', 'Landing\Controller\Page@contact');

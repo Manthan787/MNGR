@@ -219,7 +219,6 @@
                 $scope.getChapters($scope.selectedSubject);
                 init_editor()
                 $scope.loading = false;
-
             });
             $scope.loading = true;
             $http.get('api/Subjects/all').then(function(response){

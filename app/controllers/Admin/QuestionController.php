@@ -55,12 +55,12 @@ class QuestionController extends BaseController
 				$o->option = $option['option'];
 				$o->question_id = $question->id;
 				$o->save();
-                if($option['answer']) {
-                    $answer = new Answer;
-                    $answer->option_id = $o->id;
-                    $answer->question_id = $question->id;
-                    $answer->save();
-                }
+        if($option['answer']) {
+            $answer = new Answer;
+            $answer->option_id = $o->id;
+            $answer->question_id = $question->id;
+            $answer->save();
+        }
 			}
 		}
 		catch (Exception $e){
@@ -72,47 +72,39 @@ class QuestionController extends BaseController
 
     public function editQuestion($id)
     {
-        try {
             $theQuestion = $this->question->getById($id);
-            return $theQuestion;
             $theQuestion->question = Input::get('question');
             $theQuestion->chapter_id = Input::get('chapter_id');
             $theQuestion->save();
 
+						$input_answer = Input::get('answer');
+						$answer = Answer::find($input_answer['id']);
+						$answer->option_id = $input_answer['option_id'];
+						$answer->save();
+
             $options = Input::get('options');
-            try{
-                $index = 0;
-                $currentOptionCount = count($theQuestion->options);
-                foreach($options as $option)
+
+            $index = 0;
+            $currentOptionCount = count($theQuestion->options);
+            foreach($options as $option)
+            {
+                if($index < $currentOptionCount)
                 {
-                    if($index < $currentOptionCount)
-                    {
-                        $o = $theQuestion->options[$index];
-                        $o->option = $option['option'];
-                        $o->answer = $option['answer'];
-                        $o->save();
-                        $index++;
-                    }
-                    else
-                    {
-                        $o = new Option();
-                        $o->option = $option['option'];
-                        $o->question_id = $theQuestion->id;
-                        $o->answer = $option['answer'];
-                        $o->save();
-                    }
+                    $o = $theQuestion->options[$index];
+                    $o->option = $option['option'];
+                    $o->save();
+                    $index++;
                 }
-            }
-            catch (Exception $e){
-                return Response::json($e->getLine(),400);
+                else
+                {
+                    $o = new Option();
+                    $o->option = $option['option'];
+                    $o->question_id = $theQuestion->id;
+                    $o->save();
+                }
             }
 
             return Response::json(['msg'=>'Question Successfully Edited!'], 200);
-
-        }
-        catch(QuestionNotFoundException $e) {
-            return Response::json(['msg'=>'The Question You are trying to edit does not exist'],404);
-        }
 
     }
 

@@ -11,7 +11,7 @@
                         </ul>
                     </section>
 
-                    <form  class="form-horizontal" id="AddForm" ng-controller="AddQuestionFormController" ng-submit="addQuestion()" novalidate>                      
+                    <form  class="form-horizontal" id="AddForm" ng-controller="AddQuestionFormController" ng-submit="addQuestion()" novalidate>
                         <div class="box">
                             <div class="box-title">
                                 <h3>Select Chapter</h3>
@@ -37,7 +37,7 @@
                                     <div class="form-group" ng-if="hasSubjects">
                                         <label class="col-sm-1 col-offset-3 control-label">Subject</label>
                                         <div class="col-sm-10">
-                                            <select type="text" class="form-control" ng-options="subject.name for subject in subjects" ng-model="selectedSubject" ng-change="getChapters(selectedSubject)">
+                                            <select type="text" class="form-control" ng-options="subject.id as subject.name for subject in subjects" ng-model="selectedSubject" ng-change="getChapters(selectedSubject)">
                                                 <option value="">Select Subject</option>
                                             </select>
                                         </div>

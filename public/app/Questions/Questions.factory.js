@@ -42,9 +42,9 @@
         };
 
 				Question.prototype.edit = function() {
-						var question = this;
-
-						return $http.post('api/Questions/' + question.id + '/edit').then(function(response) {
+						var question = this;						
+						console.log(question)
+						return $http.post('api/Questions/' + question.id + '/edit', question).then(function(response) {
 								console.log(response);
 								return response.data.msg;
 						})

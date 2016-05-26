@@ -27,14 +27,14 @@
 				})
 				.when('/Questions/add', {
 					templateUrl:'app/partials/Questions/addQuestion.html',
-					controller : 'AddQuestionsController',
+					controller : 'QuestionsController',
 		      data: {
 							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 					}
 				})
 				.when('/Questions/:id', {
 					templateUrl:'app/partials/Questions/editQuestion.html',
-					controller : 'EditQuestionController',
+					controller : 'QuestionsController',
 		      data: {
 							authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
 					}
