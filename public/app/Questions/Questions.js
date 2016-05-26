@@ -50,8 +50,57 @@
         }
 	});
 
-  app.controller("QuestionsController", function($scope, $http){
+  app.controller("QuestionsController", function($scope, $http, Standard, FormHelper){
 		$scope.chapters = null
+
+		var resetStates = function() {
+				$scope.hasStreams = false;
+				$scope.hasSubjects = false;
+				$scope.subjectsError = false;
+				$scope.hasChapters = false;
+		}
+
+
+		$scope.loadStds = function() {
+			Standard.getAll().then(function(standards){
+					$scope.standards = standards;
+					$scope.loading = false;
+			});
+		}
+
+		$scope.getStreams = function(selectedStandard) {
+				$scope.loading = true;
+				resetStates();
+				console.log(selectedStandard)
+				$scope.streams = FormHelper.loadStreams(selectedStandard);
+				if($scope.streams)
+				{
+						$scope.hasStreams = true;
+				}
+				else
+				{
+						$scope.hasStreams = false;
+						$scope.subjects = FormHelper.getSubjectsByStd(selectedStandard.id, $scope.standards);
+						$scope.hasSubjects = true;
+				}
+				$scope.loading = false;
+		};
+
+		$scope.getSubjects = function(stream) {
+				$scope.loading = true;
+				FormHelper.getSubjectsByStream(stream.id).then(function (subjects) {
+						$scope.subjects = subjects;
+						if ($scope.subjects[0] != undefined) {
+								$scope.hasSubjects = true;
+								$scope.subjectsError = false;
+						}
+						else {
+								$scope.hasSubjects = false;
+								$scope.subjectsError = true;
+						}
+						$scope.loading = false;
+				});
+		};
 
 		$scope.getChapters = function(subject) {
 				$scope.loading = true;
@@ -114,66 +163,23 @@
 	})
 
 	app.controller('AddQuestionFormController',function($scope, Question, Standard, FormHelper, $http, $sce, Editor){
-        $scope.newQuestion = new Question();
-				var setup = function(editor) {
-									editor.on('keyup', function(e) {
-											var elm = document.getElementById('AddForm')
-											var scope = angular.element(elm).scope()
-											scope.$apply(function() {
-													$scope.newQuestion.question = editor.getContent()
-											})
-									})
-							}
-				Editor.init(setup)
+			$scope.$parent.loadStds();
+      $scope.newQuestion = new Question();
+			var setup = function(editor) {
+								editor.on('keyup', function(e) {
+										var elm = document.getElementById('AddForm')
+										var scope = angular.element(elm).scope()
+										scope.$apply(function() {
+												$scope.newQuestion.question = editor.getContent()
+										})
+								})
+						}
+			Editor.init(setup)
 
-        var counter = 4;
-        $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
-        $scope.streams = [];
-        $scope.loading = true;
-        var resetStates = function() {
-            $scope.$parent.hasStreams = false;
-            $scope.$parent.hasSubjects = false;
-            $scope.$parent.subjectsError = false;
-            $scope.$parent.hasChapters = false;
-        }
+      var counter = 4;
+      $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
+      $scope.loading = true;
 
-        Standard.getAll().then(function(standards){
-            $scope.standards = standards;
-            $scope.loading = false;
-        });
-
-        $scope.getStreams = function() {
-            $scope.loading = true;
-            resetStates();
-            $scope.streams = FormHelper.loadStreams($scope.selectedStandard);
-            if($scope.streams)
-            {
-                $scope.$parent.hasStreams = true;
-            }
-            else
-            {
-                $scope.$parent.hasStreams = false;
-                $scope.$parent.subjects = FormHelper.getSubjectsByStd($scope.selectedStandard.id, $scope.standards);
-                $scope.$parent.hasSubjects = true;
-            }
-            $scope.loading = false;
-        };
-
-        $scope.getSubjects = function(stream) {
-            $scope.loading = true;
-            FormHelper.getSubjectsByStream(stream.id).then(function (subjects) {
-                $scope.subjects = subjects;
-                if ($scope.subjects[0] != undefined) {
-                    $scope.$parent.hasSubjects = true;
-                    $scope.$parent.subjectsError = false;
-                }
-                else {
-                    $scope.$parent.hasSubjects = false;
-                    $scope.$parent.subjectsError = true;
-                }
-                $scope.loading = false;
-            });
-        };
 
 			$scope.newOption = function(){
 				counter++;
@@ -187,44 +193,44 @@
 				counter--;
 			}
 
-		$scope.addQuestion = function(){
-            $scope.loading = true;
-						var addQuestionPromise = $scope.newQuestion.add();
-						addQuestionPromise.then(function(msg){
-                console.log(msg);
-                $scope.$parent.success = msg;
-								reset();
-                $scope.loading = false;
-			}, function(response){
-				console.log(response);
-			});
-		}
+			$scope.addQuestion = function(){
+	            $scope.loading = true;
+							var addQuestionPromise = $scope.newQuestion.add();
+							addQuestionPromise.then(function(msg){
+	                console.log(msg);
+	                $scope.$parent.success = msg;
+									reset();
+	                $scope.loading = false;
+				}, function(response){
+					console.log(response);
+				});
+			}
 
-		var reset = function(){
-			counter =  4;
-            var prevChapter = $scope.newQuestion.chapter_id;
-						$scope.newQuestion = new Question();
-            $scope.newQuestion.chapter_id = prevChapter;
-            $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
-		    		tinymce.get('question').setContent('');
-		};
+			var reset = function(){
+				counter =  4;
+	            var prevChapter = $scope.newQuestion.chapter_id;
+							$scope.newQuestion = new Question();
+	            $scope.newQuestion.chapter_id = prevChapter;
+	            $scope.newQuestion.options = [{id: 1, option: "", answer:0},{id: 2, option: "", answer:0},{id: 3, option: "", answer:0},{id: 4, option: "", answer:0}];
+			    		tinymce.get('question').setContent('');
+			};
 
-        $scope.selectAnswer = function(option) {
-            option.answer = 1;
-            for(var i = 0; i<$scope.newQuestion.options.length; i++)
-            {
-                var currentOption = $scope.newQuestion.options[i];
-                if(currentOption.answer == 1 && currentOption.id != option.id)
-                {
-                    currentOption.answer = 0;
-                }
-            }
+      $scope.selectAnswer = function(option) {
+          option.answer = 1;
+          for(var i = 0; i<$scope.newQuestion.options.length; i++)
+          {
+              var currentOption = $scope.newQuestion.options[i];
+              if(currentOption.answer == 1 && currentOption.id != option.id)
+              {
+                  currentOption.answer = 0;
+              }
+          }
 
-        }
+      }
 
-        $scope.promptNoChapterError = function() {
-            $scope.$parent.error = "Please select a chapter first to enable adding question.";
-        }
+      $scope.promptNoChapterError = function() {
+          $scope.$parent.error = "Please select a chapter first to enable adding question.";
+      }
 
 	});
 
