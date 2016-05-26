@@ -174,7 +174,7 @@
 
             $scope.getMaterials = function(chapterID) {
                   $scope.loading = true;
-                  $http.get('api/Chapters/'+chapterID+'/material')
+                  $http.get('api/Chapters/'+chapterID+'/materials')
                   .then(function(response) {
                       $scope.materials = response.data;
                       if($scope.materials.length === 0) {

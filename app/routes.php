@@ -43,7 +43,8 @@ Route::group(['before'=>'teacher'], function() {
     Route::post('api/Chapters/add', 'Admin\ChapterController@postChapter');
     Route::get('api/Chapters/{id}/delete', 'Admin\ChapterController@getDelete');
     Route::post('api/Chapters/{id}/edit', 'Admin\ChapterController@postEdit');
-    Route::get('api/Chapters/{id}/material', 'Admin\ChapterController@getMaterial');
+    Route::get('api/Chapters/{id}/materials', 'Admin\ChapterController@getMaterials');
+    Route::get('api/Chapters/{id}/questions', 'Admin\ChapterController@getQuestions');
 });
 
 Route::group(['before' => 'admin'], function() {
@@ -75,6 +76,7 @@ Route::group(['before'=>'teacher'],function(){
   Route::post('api/Questions/{id}/edit', 'Admin\QuestionController@editQuestion');
 	Route::get('api/Questions/{id}','Admin\QuestionController@getById');
   Route::get('api/Questions/{id}/delete','Admin\QuestionController@delete');
+
 
   #Subjects
   Route::get('api/Subjects/all', 'Admin\SubjectController@all');

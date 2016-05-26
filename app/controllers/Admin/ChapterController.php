@@ -43,13 +43,20 @@ class ChapterController extends BaseController{
 
     }
 
-    public function getMaterial($chapterID) {
+    public function getMaterials($chapterID) {
         $chapter = Chapter::find($chapterID);
         if($chapter) {
           return $chapter->material;
         }
         else {
           return Response::json(['msg' => 'Invalid Chapter Selected!'], 404);
+        }
+    }
+
+    public function getQuestions($chapterID) {
+        $chapter = Chapter::find($chapterID);
+        if($chapter) {
+            return $chapter->questions;
         }
     }
 }

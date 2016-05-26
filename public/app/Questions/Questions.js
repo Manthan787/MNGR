@@ -116,6 +116,12 @@
 
   });
 
+	app.controller("SearchController", function($scope, $http) {
+			$scope.fetchQuestions = function(selectedChapter) {
+				
+			}
+	})
+
 	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor, $http) {
 			$scope.loading = true
 			Question.get($routeParams.id).then(function(question) {
