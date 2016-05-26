@@ -1,16 +1,15 @@
 <div class="rightside">
+  <div class="page-head">
+    <h1>
+        <i class="fa fa-plus"> Search Questions</i>
+        <small>Add new Questions to your chapters, so that you can create automatically generated tests for your students!</small>
+    </h1>
+  </div>
 <div class="content">
   <div class="row">
       <div class="container">
           <feedback></feedback>
           <loading></loading>
-          <section>
-              <ul class="nav nav-tabs">
-                  <li><a href="#Questions/all">All Questions</a></li>
-                  <li class="active"><a href="#Questions/add">Add Questions</a></li>
-              </ul>
-          </section>
-
           <form  class="form-horizontal" id="AddForm" ng-controller="AddQuestionFormController" ng-submit="addQuestion()" novalidate>
               <div class="box">
                   <div class="box-title">
