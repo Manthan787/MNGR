@@ -1,0 +1,10 @@
+<div class="col-md-12">
+    <div class="custom-box-material palette-white">
+        <div class="controls">
+            <button class="btn btn-danger btn-circle btn-outline" ng-click="delete(question)"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+        <a href="#/Questions/{{question.id}}">
+          <h3 ng-bind-html="question.question"></h3>
+        </a>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 
 	var app = angular.module('Questions');
 
-	app.factory('Question', function($http) {
+	app.factory('Question', function($http, $sce) {
 
         var Question = function (data) {
 
@@ -30,7 +30,9 @@
             return $http.get('api/Questions/all').then(function (response) {
                 var Questions = [];
                 for (var i = 0; i < response.data.length; i++) {
-                    Questions.push(new Question(response.data[i]));
+										q = new Question(response.data[i]);
+										$sce.trustAsHtml(q.questions);
+                    Questions.push(q);
                 }
 
                 return Questions;
@@ -55,8 +57,7 @@
 				Question.prototype.edit = function() {
 						var question = this;
 						console.log(question)
-						return $http.post('api/Questions/' + question.id + '/edit', question).then(function(response) {
-								console.log(response);
+						return $http.post('api/Questions/' + question.id + '/edit', question).then(function(response) {								
 								return response.data.msg;
 						})
 				}

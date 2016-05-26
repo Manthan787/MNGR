@@ -17,7 +17,7 @@
 								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher, USER_ROLES.accountant]
 						}
         })
-        .when('/Questions/all', {
+        .when('/Questions/search', {
 						templateUrl:'app/partials/Questions/allQuestions.html',
 						controller : 'QuestionsController',
 						data: {

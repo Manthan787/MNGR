@@ -1,54 +1,12 @@
 (function(){
 
 	var app = angular.module('Questions',['Utils']);
-
-	app.controller('QuestionsController',function($scope, Question, $location, $sce){
-		$scope.questions = [];
-		$scope.fetchedQuestion;
-    $scope.loading = true;
-    loadQuestions();
-		$scope.fetchQuestion = function(id){
-			var fetchQuestionPromise = Question.get(id);
-			fetchQuestionPromise.then(function(q){
-				$scope.fetchedQuestion = q;
-			});
-		};
-		 function loadQuestions() {
-            var promise = Question.getAll();
-            promise.then(function (q) {
-                if (q.length === 0) {
-                    $scope.error = "There is nothing to display! Try adding some questions and check back later!";
-                }
-                else {
-                    $scope.questions = q;
-                    trust($scope.questions);
-                }
-                $scope.loading = false;
-            }, function (response) {
-
-                $scope.error = response.data.msg;
-                $scope.loading = false;
-            });
-        };
-
-        function trust(questions)
-        {
-            for(var i = 0; i<questions.length; i++)
-            {
-                questions[i].question = $sce.trustAsHtml(questions[i].question);
-            }
-        }
-        $scope.delete = function(question) {
-						$scope.success = 'Here it is!';
-						$scope.error = 'cannot delete!';
-            // $scope.loading = true;
-            // question.delete().then(function(msg){
-            //     $scope.success = msg;
-            //     loadQuestions();
-            //     $scope.loading = false;
-            // });
-        }
-	});
+	app.directive("questionCard", function() {
+			return {
+				restrict : 'E',
+				templateUrl: 'app/partials/Questions/Directives/question-card.html'
+			}
+	})
 
   app.controller("QuestionsController", function($scope, $http, Standard, FormHelper){
 		$scope.chapters = null
@@ -71,7 +29,6 @@
 		$scope.getStreams = function(selectedStandard) {
 				$scope.loading = true;
 				resetStates();
-				console.log(selectedStandard)
 				$scope.streams = FormHelper.loadStreams(selectedStandard);
 				if($scope.streams)
 				{
@@ -104,7 +61,6 @@
 
 		$scope.getChapters = function(subject) {
 				$scope.loading = true;
-				console.log(subject)
 				$http.get("api/Subjects/"+subject+"/Chapters").then(function(response){
 						$scope.chapters = response.data;
 						if($scope.chapters[0] != undefined) {
@@ -116,9 +72,24 @@
 
   });
 
-	app.controller("SearchController", function($scope, $http) {
+	app.controller("SearchQuestionController", function($scope, $http, Question) {
+			$scope.$parent.loadStds();
+			var currentChapterID;
 			$scope.fetchQuestions = function(selectedChapter) {
-				
+				currentChapterID = selectedChapter
+				Question.getByChapterID(selectedChapter).then(function(response) {
+						$scope.questions = response
+				})
+			}
+
+			$scope.delete = function(question) {
+				var ans = confirm("Are you sure you want to delete this question?");
+				if (ans == true) {
+					question.delete().then(function(response) {
+							$scope.success = response
+							$scope.fetchQuestions(currentChapterID)
+					})
+				}
 			}
 	})
 
@@ -158,7 +129,6 @@
 		 })
 
 		 $scope.selectAnswer =  function(option) {
-			 console.log(option)
 			 $scope.question.answer.option_id = parseInt(option.id)
 		 }
 		 $scope.editQuestion = function() {
@@ -203,7 +173,6 @@
 	            $scope.loading = true;
 							var addQuestionPromise = $scope.newQuestion.add();
 							addQuestionPromise.then(function(msg){
-	                console.log(msg);
 	                $scope.$parent.success = msg;
 									reset();
 	                $scope.loading = false;
