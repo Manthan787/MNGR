@@ -1,7 +1,7 @@
 <?php
 // Landing Page
 Route::get('/a', function() {
-  return Answer::find(1);
+  return Year::currentYear();
 });
 Route::get('/', 'Landing\Controller\Page@index');
 Route::get('/about', 'Landing\Controller\Page@about');
@@ -182,7 +182,8 @@ Route::post('/api/Standards/delete', function(){
 Route::get('api/Standards/{id}/Students', function($id) {
     if($std = Standard::find($id))
     {
-      return $std->students()->with(['batches', 'stream'])->get();
+      $currentYear = Year::currentYear();
+      return $std->students()->with(['batches', 'stream'])->where('year_id', $currentYear->id)->get();
     }
 });
 
