@@ -95,18 +95,10 @@
 
 	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor, $http) {
 			$scope.loading = true
+
 			Question.get($routeParams.id).then(function(question) {
 					$scope.question = question;
 					Editor.init(setup)
-					function setup(editor) {
-							editor.on('keyup', function(e) {
-									var elm = document.getElementById('EditForm')
-									var scope = angular.element(elm).scope()
-									scope.$apply(function() {
-											$scope.question.question = editor.getContent()
-									})
-							})
-					}
 			})
 
 		 $http.get('api/Chapters/all').then(function(response) {
@@ -133,6 +125,20 @@
 		 }
 		 $scope.editQuestion = function() {
 			 	$scope.question.edit()
+		 }
+
+		 function setup(editor) {
+				 editor.on('keyup', function(e) {
+						 var elm = document.getElementById('EditForm')
+						 var scope = angular.element(elm).scope()
+						 scope.$apply(function() {
+								 $scope.question.question = editor.getContent()
+						 })
+				 })
+
+				 editor.on('LoadContent', function() {
+						 tinymce.activeEditor.setContent($scope.question.question)
+				 })
 		 }
 
 
