@@ -134,6 +134,9 @@
 			})
 
 
+		 $scope.back = function() {
+			 $window.history.back()
+		 }
 
 		 $scope.selectAnswer =  function(option) {
 			 $scope.question.answer.option_id = parseInt(option.id)

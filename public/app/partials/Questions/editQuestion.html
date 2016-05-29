@@ -5,12 +5,21 @@
         <small>Make changes to your Questions!</small>
       </h1>
     </div>
-    <div class="content">
+    <div class="content" ng-controller="EditQuestionController">
+        <div class="row">
+          <div class="container">
+            <button ng-click="back()" class="btn btn-info">
+              <i class="glyphicon glyphicon-arrow-left"></i>
+               Back to Question List
+            </a>
+          </div>
+        </div>
         <div class="row">
             <div class="container">
                 <feedback></feedback>
                 <loading></loading>
-                <form  class="form-horizontal" id="EditForm" ng-controller="EditQuestionController"ng-submit="editQuestion()" novalidate>
+                <br/>
+                <form  class="form-horizontal" id="EditForm" ng-submit="editQuestion()" novalidate>
                     <div class="box">
                         <div class="box-title">
                             <h3>Select Chapter</h3>

@@ -1,8 +1,5 @@
 <?php
 // Landing Page
-Route::get('/a', function() {
-  return Year::currentYear();
-});
 Route::get('/', 'Landing\Controller\Page@index');
 Route::get('/about', 'Landing\Controller\Page@about');
 Route::get('/contact', 'Landing\Controller\Page@contact');
@@ -199,7 +196,6 @@ Route::post('/api/Standards/{id}/Streams/add', function($id){
 			$s->save();
 		}
 		return Response::json(['msg' => 'Successfully Added Stream(s) to this standard'],200);
-
 
 	}
 
