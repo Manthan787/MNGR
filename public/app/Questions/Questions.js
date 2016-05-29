@@ -10,6 +10,9 @@
 
   app.controller("QuestionsController", function($scope, $http, Standard, FormHelper){
 		$scope.chapters = null
+		$scope.loading = false
+		$scope.success = ''
+		$scope.error = ''
 
 		var resetStates = function() {
 				$scope.hasStreams = false;
@@ -78,7 +81,6 @@
 			$scope.fetchQuestions = function(selectedChapter) {
 				$window.location.href = "/admin#/Questions/search/chapter/" + selectedChapter
 			}
-
 	})
 
 	app.controller("QuestionViewer", function($scope, $http, Question, $routeParams) {
@@ -105,10 +107,10 @@
 
 	})
 
-	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor, $http) {
-			$scope.loading = true
+	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor, $http, $window) {
 
 			Question.get($routeParams.id).then(function(question) {
+					$scope.$parent.loading = true
 					$scope.question = question;
 					Editor.init(setup)
 					$http.get('api/Chapters/all').then(function(response) {
@@ -126,7 +128,7 @@
 		 								$scope.selectedSubject = subject
 		 						}
 		 					})
-		 					$scope.loading = false
+		 					$scope.$parent.loading = false
 		 			 })
 		 		 })
 			})
@@ -137,7 +139,9 @@
 			 $scope.question.answer.option_id = parseInt(option.id)
 		 }
 		 $scope.editQuestion = function() {
-			 	$scope.question.edit()
+			 	$scope.question.edit().then(function() {
+						$window.history.back()
+				})
 		 }
 
 		 function setup(editor) {
