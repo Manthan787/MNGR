@@ -25,6 +25,14 @@
 						}
 
 				})
+				.when('/Questions/search/chapter/:id', {
+						templateUrl:'app/partials/Questions/viewQuestions.html',
+						controller : 'QuestionViewer',
+						data: {
+								authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher]
+						}
+
+				})
 				.when('/Questions/add', {
 					templateUrl:'app/partials/Questions/addQuestion.html',
 					controller : 'QuestionsController',

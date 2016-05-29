@@ -72,25 +72,37 @@
 
   });
 
-	app.controller("SearchQuestionController", function($scope, $http, Question) {
+	app.controller("SearchQuestionController", function($scope, $http, $window) {
 			$scope.$parent.loadStds();
 			var currentChapterID;
 			$scope.fetchQuestions = function(selectedChapter) {
-				currentChapterID = selectedChapter
-				Question.getByChapterID(selectedChapter).then(function(response) {
-						$scope.questions = response
-				})
+				$window.location.href = "/admin#/Questions/search/chapter/" + selectedChapter
 			}
 
-			$scope.delete = function(question) {
-				var ans = confirm("Are you sure you want to delete this question?");
-				if (ans == true) {
-					question.delete().then(function(response) {
-							$scope.success = response
-							$scope.fetchQuestions(currentChapterID)
-					})
-				}
+	})
+
+	app.controller("QuestionViewer", function($scope, $http, Question, $routeParams) {
+		var selectedChapter = $routeParams.id
+		fetchQuestions(selectedChapter)
+
+		$scope.delete = function(question) {
+			var ans = confirm("Are you sure you want to delete this question?");
+			if (ans == true) {
+				question.delete().then(function(response) {
+						$scope.success = response
+						fetchQuestions(selectedChapter)
+				})
 			}
+		}
+
+		function fetchQuestions(chapter) {
+			$scope.loading = true
+			Question.getByChapterID(chapter).then(function(response) {
+					$scope.questions = response
+					$scope.loading = false
+			})
+		}
+
 	})
 
 	app.controller("EditQuestionController", function($scope, Question, $routeParams, Editor, $http) {
@@ -99,26 +111,27 @@
 			Question.get($routeParams.id).then(function(question) {
 					$scope.question = question;
 					Editor.init(setup)
+					$http.get('api/Chapters/all').then(function(response) {
+		 			 angular.forEach(response.data, function(chapter) {
+		 				 	if(chapter.id == $scope.question.chapter_id) {
+		 							selectedSubjectID = chapter.subject_id
+		 					}
+		 			 })
+
+		 			 $http.get('api/Subjects/all').then(function(response) {
+		 				 	$scope.subjects = response.data
+		 					angular.forEach($scope.subjects, function(subject) {
+		 						if(subject.id == selectedSubjectID) {
+		 								$scope.$parent.chapters = subject.chapters
+		 								$scope.selectedSubject = subject
+		 						}
+		 					})
+		 					$scope.loading = false
+		 			 })
+		 		 })
 			})
 
-		 $http.get('api/Chapters/all').then(function(response) {
-			 angular.forEach(response.data, function(chapter) {
-				 	if(chapter.id == $scope.question.chapter_id) {
-							selectedSubjectID = chapter.subject_id
-					}
-			 })
 
-			 $http.get('api/Subjects/all').then(function(response) {
-				 	$scope.subjects = response.data
-					angular.forEach($scope.subjects, function(subject) {
-						if(subject.id == selectedSubjectID) {
-								$scope.$parent.chapters = subject.chapters
-								$scope.selectedSubject = subject
-						}
-					})
-					$scope.loading = false
-			 })
-		 })
 
 		 $scope.selectAnswer =  function(option) {
 			 $scope.question.answer.option_id = parseInt(option.id)
