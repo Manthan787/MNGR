@@ -93,8 +93,9 @@
                     <i class="fa fa-angle-right pull-right"></i>
             </a>
             <ul class="sub-menu">
-                <li><a href="#Questions/search"><i class="fa fa-search"></i>Search Questions</a></li>
-                <li><a href="#Questions/add"><i class="fa fa-plus"></i>Add Questions</a></li>
+              <li><a href="#Questions/recent"><i class="fa fa-clock-o"></i>Recently Added</a></li>
+              <li><a href="#Questions/add"><i class="fa fa-plus"></i>Add Questions</a></li>
+              <li><a href="#Questions/search"><i class="fa fa-search"></i>Search Questions</a></li>
             </ul>
         </li>
         <li class="sub-nav">

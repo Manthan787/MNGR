@@ -13,7 +13,20 @@
             return $http.get('api/Questions/' + id).then(function (response) {
                 return new Question(response.data);
             });
-        };
+        }
+
+				Question.recent = function () {
+            return $http.get('api/Questions/recent').then(function (response) {
+							console.log(response)
+							var Questions = [];
+							for (var i = 0; i < response.data.length; i++) {
+									Questions.push(new Question(response.data[i]));
+							}
+
+							return Questions;
+            });
+        }
+
 
 				Question.getByChapterID = function(chapterID) {
 						return $http.get('api/Chapters/'+chapterID+'/questions').then(function(response) {
@@ -57,7 +70,7 @@
 				Question.prototype.edit = function() {
 						var question = this;
 						console.log(question)
-						return $http.post('api/Questions/' + question.id + '/edit', question).then(function(response) {								
+						return $http.post('api/Questions/' + question.id + '/edit', question).then(function(response) {
 								return response.data.msg;
 						})
 				}

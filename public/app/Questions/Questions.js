@@ -75,6 +75,12 @@
 
   });
 
+	app.controller('RecentQuestions', function($scope, Question) {
+			Question.recent().then(function(response) {
+					$scope.questions = response
+			})
+	})
+
 	app.controller("SearchQuestionController", function($scope, $http, $window) {
 			$scope.$parent.loadStds();
 			var currentChapterID;

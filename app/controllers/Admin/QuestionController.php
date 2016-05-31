@@ -25,6 +25,11 @@ class QuestionController extends BaseController
 		return Response::json($allQuestions, 200);
 	}
 
+	public function getRecent()
+	{
+		return Question::orderBy('created_at', 'DESC')->get()->take(10);
+	}
+
 	public function getById($id)
 	{
 		try

@@ -1,0 +1,23 @@
+<div class="rightside">
+  <div class="page-head">
+    <h1>
+        <i class="fa fa-edit"> Recently Added Questions</i>
+        <small>Viewing 10 most recently added questions! </small>
+    </h1>
+  </div>
+<div class="content">
+  <div class="row">
+      <div class="container">
+          <feedback></feedback>
+          <loading></loading>
+          <a href="admin#/Questions/search/" class="btn btn-info">
+            <i class="glyphicon glyphicon-search"></i>
+             Search Questions
+          </a>
+            <div class="row" ng-repeat = "question in questions">
+                <question-card></question-card>
+            </div>
+      </div>
+  </div>
+</div>
+</div>

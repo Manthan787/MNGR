@@ -69,6 +69,7 @@ Route::group(['before'=>'teacher'],function(){
 
 	#Questions
 	Route::get('api/Questions/all','Admin\QuestionController@getAll');
+  Route::get('api/Questions/recent','Admin\QuestionController@getRecent');
 	Route::post('api/Questions/add','Admin\QuestionController@postQuestion');
   Route::post('api/Questions/{id}/edit', 'Admin\QuestionController@editQuestion');
 	Route::get('api/Questions/{id}','Admin\QuestionController@getById');
